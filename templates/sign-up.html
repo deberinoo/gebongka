@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<!-- navbar -->
+<div class="navbar">
+	<div class="left">
+		<a href="" class="link link-back"><i class="icon ion-ios-arrow-back"></i></a>
+	</div>
+	<div class="title">
+		Sign Up
+	</div>
+	<div class="right">
+		
+	</div>
+</div>
+<!-- end navbar -->
+
+<!-- pages wrapper -->
+<div class="pages-wrapper">
+
+	<!-- separator -->
+	<div class="separator-large"></div>
+	<!-- end separator -->
+	
+	<!-- sign up -->
+	<div class="sign-up">
+		<div class="container">
+			<form class="form-fill">
+				<div class="form-wrapper">
+					<div class="input-wrap">
+						<input type="text" placeholder="Name">
+					</div>
+					<div class="input-wrap">
+						<input type="email" placeholder="Email">
+					</div>
+					<div class="input-wrap">
+						<input type="password" placeholder="Password">
+					</div>
+					<div class="input-wrap">
+						<input type="password" placeholder="Confirm Password">
+					</div>
+				</div>
+				<div class="button-default">
+					<button class="button">Sign Up</button>
+				</div>
+			</form>
+
+			<!-- separator -->
+			<div class="separator-medium"></div>
+			<!-- end separator -->
+
+			<div class="link-sign-up text-center text-small">
+				<p>Have an account?<a href="sign-in" class="color-theme ml-2">Sign In</a></p>
+			</div>
+
+			<!-- separator -->
+			<div class="separator-large"></div>
+			<!-- end separator -->
+
+			<div class="sign-with">
+				<ul>
+					<li>
+						<a href="#"><i class="icon ion-logo-facebook mr-2"></i>Facebook</a>
+					</li>
+					<li>
+						<a href="#"><i class="icon ion-logo-google mr-2"></i>Google</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!-- end sign up -->
+
+</div>
+<!-- end pages wrapper -->
+
+{% endblock %}

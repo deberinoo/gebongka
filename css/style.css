@@ -60,9 +60,17 @@ Table of Content:
 
 /* variable */
 
+/* font-face */
+@font-face {
+    font-family: Inter;
+    src: ('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+  }
+
+  
+
 /* general */
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Inter', sans-serif;
     color: #888;
     font-size: 14px;
     font-weight: 400;
@@ -76,7 +84,7 @@ h4,
 h5,
 h6 {
     line-height: 110%;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Inter', sans-serif;
     margin: 0;
     font-weight: 500;
     color: #333;
@@ -255,8 +263,8 @@ textarea {
 
 /* switch or toggle */
 .custom-control-input:checked ~ .custom-control-label::before {
-    background: #fe2775;
-    border-color: #fe2775;
+    background: #ef6351;
+    border-color: #ef6351;
 }
 
 .custom-control-input:checked ~ .custom-control-label::after {
@@ -483,7 +491,7 @@ textarea {
     text-align: center;
     background: #ffeff5;
     font-size: 24px;
-    color: #fe2775;
+    color: #ef6351;
     margin-right: 15px;
     float: left;
 }
@@ -524,7 +532,7 @@ textarea {
 
 .made-by i {
     margin: 0 3px;
-    color: #fe2775;
+    color: #ef6351;
 }
 
 /* social media icon */
@@ -571,11 +579,11 @@ textarea {
 
 /* background color & color */
 .bg-theme {
-    background: #fe2775 !important;
+    background: #ef6351 !important;
 }
 
 .color-theme {
-    color: #fe2775 !important;
+    color: #ef6351 !important;
 }
 
 .color-white {
@@ -606,7 +614,7 @@ textarea {
 
 .bg-secondary {
     background: #ffeff5 !important;
-    color: #fe2775 !important;
+    color: #ef6351 !important;
 }
 
 .bg-lightblue {
@@ -832,7 +840,7 @@ textarea {
     font-weight: 900;
     margin-top: 10px;
     margin-bottom: 10px;
-    color: #fe2775;
+    color: #ef6351;
 }
 
 .pricing-list ul li i {
@@ -920,7 +928,7 @@ textarea {
 
 .navbar .title.title-home {
     font-size: 19px;
-    color: #fe2775;
+    color: #ef6351;
     font-weight: 700;
 }
 
@@ -951,7 +959,7 @@ textarea {
 }
 
 .navbar-highlight {
-    background: #fe2775;
+    background: #ef6351;
 }
 
 .navbar-highlight .link {
@@ -1085,11 +1093,11 @@ textarea {
 }
 
 .toolbar-link.toolbar-link-active {
-    color: #fe2775;
+    color: #ef6351;
 }
 
 .toolbar-link:hover {
-    color: #fe2775;
+    color: #ef6351;
 }
 
 .toolbar-variant {
@@ -1120,7 +1128,7 @@ textarea {
     line-height: 34px;
     border-radius: 8px;
     text-align: center;
-    color: #fe2775;
+    color: #ef6351;
     background: #ffeff5;
     display: inline-block;
 }
@@ -1282,7 +1290,7 @@ textarea {
 }
 
 .list-pricing .list-item .list-media .ion-ios-checkmark {
-    background: #fe2775;
+    background: #ef6351;
     color: #fff;
 }
 
@@ -1292,7 +1300,7 @@ textarea {
 }
 
 .list-pricing .list-item .list-media .ion-ios-arrow-dropright-circle {
-    background: #fe2775;
+    background: #ef6351;
     color: #fff;
 }
 
@@ -1303,7 +1311,7 @@ textarea {
     color: #fff;
     padding-left: 15px;
     padding-right: 15px;
-    background: #fe2775;
+    background: #ef6351;
     font-size: 15px;
     font-weight: 500;
     line-height: 50px;
@@ -1457,7 +1465,7 @@ a.button-outline:hover {
 
 .card-date {
     margin-top: 10px;
-    color: #fe2775;
+    color: #ef6351;
     font-weight: 500;
     font-size: 13px;
 }
@@ -1467,7 +1475,7 @@ a.button-outline:hover {
 }
 
 .card-highlight {
-    background: #fe2775;
+    background: #ef6351;
     border: 0;
 }
 
@@ -1647,7 +1655,7 @@ a.button-outline:hover {
 }
 
 .swiper-container-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet {
-    background: #fe2775;
+    background: #ef6351;
 }
 
 .swiper-style {
@@ -1751,7 +1759,7 @@ margin-bottom: -35px;
 
 */
 .swiper-button-prev {
-    color: #fe2775;
+    color: #ef6351;
     left: 30px;
 }
 
@@ -1761,7 +1769,7 @@ margin-bottom: -35px;
 }
 
 .swiper-button-next {
-    color: #fe2775;
+    color: #ef6351;
     right: 30px;
 }
 
@@ -1785,7 +1793,7 @@ margin-bottom: -35px;
 
 .testi-message {
     text-align: center;
-    background: #fe2775;
+    background: #ef6351;
     color: #fff;
     padding: 15px;
     border-radius: 18px;
@@ -1799,7 +1807,7 @@ margin-bottom: -35px;
 .testi-img img {
     width: 60px;
     border-radius: 50%;
-    border: 3px solid #fe2775;
+    border: 3px solid #ef6351;
     margin: auto;
     margin-bottom: 10px;
 }
@@ -1821,12 +1829,12 @@ margin-bottom: -35px;
     display: block;
     border: 0;
     background: #ffeff5;
-    color: #fe2775;
+    color: #ef6351;
     font-size: 16px;
 }
 
 .page-item.active .page-link {
-    background: #fe2775;
+    background: #ef6351;
 }
 
 .page-item .icon-nav i {
@@ -1847,7 +1855,7 @@ margin-bottom: -35px;
 }
 
 .pagination-outline .page-item.active .page-link {
-    border-color: #fe2775;
+    border-color: #ef6351;
 }
 
 .pagination-style .page-item-nav {
@@ -1856,9 +1864,9 @@ margin-bottom: -35px;
 
 .pagination-style .page-item-nav .btn-nav {
     width: 80px;
-    background: #fe2775;
+    background: #ef6351;
     color: #fff;
-    border-color: #fe2775;
+    border-color: #ef6351;
 }
 
 .pagination-style .page-link {
@@ -1867,7 +1875,7 @@ margin-bottom: -35px;
 }
 
 .pagination-style .page-item.active .page-link {
-    border-color: #fe2775;
+    border-color: #ef6351;
 }
 
 .pagination-cicrle .page-link {
@@ -1898,7 +1906,7 @@ margin-bottom: -35px;
 
 .modal-icon-title i {
     font-size: 32px;
-    color: #fe2775;
+    color: #ef6351;
     line-height: 1;
     margin-bottom: 10px;
     display: inline-block;
@@ -1916,8 +1924,8 @@ margin-bottom: -35px;
 }
 
 .filter-tag span.active {
-    background: #fe2775;
-    border-color: #fe2775;
+    background: #ef6351;
+    border-color: #ef6351;
     color: #fff;
 }
 
@@ -1927,7 +1935,7 @@ margin-bottom: -35px;
 }
 
 .notification-modal i {
-    color: #fe2775;
+    color: #ef6351;
     font-size: 36px;
     float: left;
     margin-right: 15px;
@@ -1992,7 +2000,7 @@ margin-bottom: -35px;
 }
 
 .incoming-modal .img span {
-    background: #fe2775;
+    background: #ef6351;
     position: absolute;
     top: 30%;
     transform: translateY(-50%);
@@ -2058,8 +2066,8 @@ margin-bottom: -35px;
 }
 
 .nav-link.active {
-    border-bottom: 3px solid #fe2775;
-    color: #fe2775;
+    border-bottom: 3px solid #ef6351;
+    color: #ef6351;
 }
 
 .nav-default {
@@ -2081,7 +2089,7 @@ margin-bottom: -35px;
 }
 
 .nav-separate .nav-link.active {
-    background: #fe2775;
+    background: #ef6351;
     color: #fff;
     border: 0;
 }
@@ -2094,11 +2102,11 @@ margin-bottom: -35px;
 }
 
 .nav-outline .nav-link {
-    color: #fe2775;
+    color: #ef6351;
 }
 
 .nav-outline .nav-link.active {
-    background: #fe2775;
+    background: #ef6351;
     color: #fff;
     border: 0;
 }
@@ -2177,7 +2185,7 @@ margin-bottom: -35px;
     border-radius: 50%;
     flex-shrink: 0;
     margin-right: 15px;
-    border: 2px solid #fe2775;
+    border: 2px solid #ef6351;
 }
 
 .timeline-divider::after {
@@ -2187,7 +2195,7 @@ margin-bottom: -35px;
     left: 50%;
     width: 2px;
     height: 100vh;
-    background: #fe2775;
+    background: #ef6351;
     z-index: -1;
     transform: translateX(-50%);
 }
@@ -2240,7 +2248,7 @@ margin-bottom: -35px;
 
 .forum-category {
     width: auto;
-    background: #fe2775;
+    background: #ef6351;
     display: inline-block;
     border-radius: 3px;
     padding: 3px 10px;
@@ -2345,7 +2353,7 @@ margin-bottom: -35px;
 
 .icon-title i {
     font-size: 80px;
-    color: #fe2775;
+    color: #ef6351;
     margin-bottom: 15px;
 }
 
@@ -2383,8 +2391,8 @@ margin-bottom: -35px;
 }
 
 .search-tag span.active {
-    background: #fe2775;
-    border-color: #fe2775;
+    background: #ef6351;
+    border-color: #ef6351;
     color: #fff;
 }
 
@@ -2501,7 +2509,7 @@ margin-bottom: -35px;
     position: absolute;
     top: 10px;
     right: 10px;
-    color: #fe2775;
+    color: #ef6351;
 }
 
 .chat-info-seen.unseen i {
@@ -2510,7 +2518,7 @@ margin-bottom: -35px;
 
 .chat-emoji i {
     font-size: 34px;
-    color: #fe2775;
+    color: #ef6351;
 }
 
 .chat-form {
@@ -2531,7 +2539,7 @@ margin-bottom: -35px;
 
 .icon-rocket i {
     font-size: 150px;
-    color: #fe2775;
+    color: #ef6351;
     transform: rotate(-45deg);
     display: inline-block;
 }
@@ -2543,7 +2551,7 @@ margin-bottom: -35px;
 
 .contact-info .content i {
     font-size: 22px;
-    color: #fe2775;
+    color: #ef6351;
     margin-right: 10px;
     display: flex;
 }

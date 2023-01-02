@@ -2,7 +2,7 @@ from flask import Flask, render_template
 
 app = Flask(__name__)
 
-# ----- routes -----
+# ----- general routes -----
 
 @app.route('/')
 def index():
@@ -15,6 +15,28 @@ def about_us():
 @app.route('/apps')
 def apps():
     return render_template('apps.html')
+
+@app.route('/features')
+def features():
+    return render_template('features.html')
+
+@app.route('/pages')
+def pages():
+    return render_template('pages.html')
+
+# ----- authentication routes -----
+
+@app.route('/sign-in')
+def sign_in():
+    return render_template('auth/sign-in.html')
+
+@app.route('/sign-up')
+def sign_up():
+    return render_template('auth/sign-up.html')
+
+@app.route('/reset-password')
+def reset_password():
+    return render_template('auth/reset-password.html')
 
 
 if __name__ == "__main__":

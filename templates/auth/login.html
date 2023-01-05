@@ -8,7 +8,7 @@
 		<a href="" class="link link-back"><i class="icon ion-ios-arrow-back"></i></a>
 	</div>
 	<div class="title">
-		Sign Up
+		Login
 	</div>
 	<div class="right">
 		
@@ -23,35 +23,38 @@
 	<div class="separator-large"></div>
 	<!-- end separator -->
 	
-	<!-- sign up -->
-	<div class="sign-up">
+	<!-- login -->
+	<div class="sign in">
 		<div class="container">
-			<form class="form-fill">
+			<form class="form-fill" method="POST" action="">
 				<div class="form-wrapper">
+					{{ form.hidden_tag() }}
 					<div class="input-wrap">
-						<input type="text" placeholder="Name">
+						{{ form.username }}
 					</div>
 					<div class="input-wrap">
-						<input type="email" placeholder="Email">
-					</div>
-					<div class="input-wrap">
-						<input type="password" placeholder="Password">
-					</div>
-					<div class="input-wrap">
-						<input type="password" placeholder="Confirm Password">
+						{{ form.password }}
 					</div>
 				</div>
 				<div class="button-default">
-					<button class="button">Sign Up</button>
+					{{ form.submit(class_="button") }}
 				</div>
 			</form>
-
+			
 			<!-- separator -->
 			<div class="separator-medium"></div>
 			<!-- end separator -->
 
+			<div class="link-forgot text-center text-small">
+				<a href="reset-password" class="color-theme">Forgot Password?</a>
+			</div>
+
+			<!-- separator -->
+			<div class="separator-small"></div>
+			<!-- end separator -->
+
 			<div class="link-sign-up text-center text-small">
-				<p>Have an account?<a href="sign-in" class="color-theme ml-2">Sign In</a></p>
+				<p>Don't have an account?<a href="{{ url_for('register') }}" class="color-theme ml-2">Register</a></p>
 			</div>
 
 			<!-- separator -->
@@ -70,7 +73,7 @@
 			</div>
 		</div>
 	</div>
-	<!-- end sign up -->
+	<!-- end login -->
 
 </div>
 <!-- end pages wrapper -->

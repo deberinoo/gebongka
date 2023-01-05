@@ -8,7 +8,7 @@
 		<a href="" class="link link-back"><i class="icon ion-ios-arrow-back"></i></a>
 	</div>
 	<div class="title">
-		Register
+		Login
 	</div>
 	<div class="right">
 		
@@ -23,8 +23,8 @@
 	<div class="separator-large"></div>
 	<!-- end separator -->
 	
-	<!-- register -->
-	<div class="sign-up">
+	<!-- login -->
+	<div class="sign in">
 		<div class="container">
 			<form class="form-fill" method="POST" action="">
 				<div class="form-wrapper">
@@ -40,13 +40,21 @@
 					{{ form.submit(class_="button") }}
 				</div>
 			</form>
-
+			
 			<!-- separator -->
 			<div class="separator-medium"></div>
 			<!-- end separator -->
 
+			<div class="link-forgot text-center text-small">
+				<a href="reset-password" class="color-theme">Forgot Password?</a>
+			</div>
+
+			<!-- separator -->
+			<div class="separator-small"></div>
+			<!-- end separator -->
+
 			<div class="link-sign-up text-center text-small">
-				<p>Have an account?<a href="{{ url_for('register') }}" class="color-theme ml-2">Login</a></p>
+				<p>Don't have an account?<a href="{{ url_for('auth.register') }}" class="color-theme ml-2">Register</a></p>
 			</div>
 
 			<!-- separator -->
@@ -65,7 +73,7 @@
 			</div>
 		</div>
 	</div>
-	<!-- end register -->
+	<!-- end login -->
 
 </div>
 <!-- end pages wrapper -->

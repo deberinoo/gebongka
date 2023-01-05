@@ -1353,7 +1353,7 @@ textarea {
 
 /* button default */
 .button {
-    background: #8998ff;
+    background: #8998ff !important;
     border-radius: 4px;
     padding: 0 12px;
     line-height: 38px;

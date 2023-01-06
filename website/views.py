@@ -5,6 +5,10 @@ views = Blueprint('views', __name__)
 
 # ----- general routes -----
 
+@views.app_errorhandler(404)
+def handle_404(err):
+    return render_template("page-not-found.html")
+
 @views.route('/')
 def index():
     return render_template("index.html")

@@ -45,3 +45,7 @@ def register():
         return redirect(url_for('views.profile'))
     
     return render_template('auth/register.html', form=form)
+
+@auth.route('/reset-password')
+def reset_password():
+    return render_template('auth/reset-password.html')

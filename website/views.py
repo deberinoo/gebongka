@@ -30,5 +30,6 @@ def pages():
     return render_template("pages.html")    
 
 @views.route('/profile')
+@login_required
 def profile():
     return render_template("profile.html")

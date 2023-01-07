@@ -121,7 +121,7 @@
 				</a>
 			</li>
 			<li>
-				<a href="#" class="list-item">
+				<a href="{{ url_for('auth.logout') }}" class="list-item">
 					<div class="list-media">
 						<i class="icon ion-ios-power bg-red"></i>
 					</div>
@@ -145,7 +145,11 @@
 <div class="page-wrapper">
 
 	<div class="section-title title-large">
-		<h3>Hi, name!</h3>
+		{% if current_user.is_authenticated %}
+		<h3>Hi, {{ current_user.username }}!</h3>
+		{% else %}
+		
+		{% endif %}
 	</div>
 
 	<!-- intro app -->

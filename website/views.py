@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, request
 from flask_login import login_required, current_user
 
 from flask import request
@@ -45,24 +45,42 @@ def pages():
 def profile():
     return render_template("profile.html")
 
-@views.route('/predictImage', methods=['POST'])
-def predict_image():
-    model = load_model("website/Erika_Model.h5")
+# routes
+@views.route("/skinCancer", methods=['GET', 'POST'])
+def main():
+	return render_template("skinCancer.html")
 
-    # Load image from file
-    filestream = request.files["file"].read()
-    imgbytes = np.fromstring(filestream, np.uint8)
-    img = cv2.imdecode(imgbytes, cv2.IMREAD_COLOR)
 
-    # Process the image
-    img = cv2.resize(img, (224, 224))
-    img = keras.applications.vgg16.preprocess_input(img)
-    img = img.reshape(1, 224, 224, 3)
+@views.route("/submit", methods = ['GET', 'POST'])
+def get_output():
+	if request.method == 'POST':
+		img = request.files['my_image']
 
-    # Predict and return result
-    prediction = skin.make_predictions(img, model)
-    result = skin.Check_Highest_prediction(prediction)
+		img_path = "website/static/" + img.filename	
+		img.save(img_path)
 
-    return jsonify({"result" : [
-        result
-    ]})
+		p = skin.predict_label(img_path)
+
+	return render_template("skinCancer.html", prediction = p, img_path = "/static/" + img.filename)
+
+# @views.route('/predictImage', methods=['POST'])
+# def predict_image():
+#     model = load_model("website/Erika_Model.h5")
+
+#     # Load image from file
+#     filestream = request.files["file"].read()
+#     imgbytes = np.fromstring(filestream, np.uint8)
+#     img = cv2.imdecode(imgbytes, cv2.IMREAD_COLOR)
+
+#     # Process the image
+#     img = cv2.resize(img, (224, 224))
+#     img = keras.applications.vgg16.preprocess_input(img)
+#     img = img.reshape(1, 224, 224, 3)
+
+#     # Predict and return result
+#     prediction = skin.make_predictions(img, model)
+#     result = skin.Check_Highest_prediction(prediction)
+
+#     return jsonify({"result" : [
+#         result
+#     ]})

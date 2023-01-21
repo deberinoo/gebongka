@@ -34,10 +34,156 @@
 	{% endwith %}
 	<!-- end flash messaging -->
 
+	<!-- navbar -->
+	<div class="navbar navbar-home">
+		<div class="left">
+			<a href="#menu" class="link menu-link"><i class="icon ion-ios-menu"></i></a>
+		</div>
+	</div>
+	<!-- end navbar -->
+
+	<!-- sidebar -->
+	<div class="side-overlay"></div>
+	<div id="menu" class="panel sidebar" role="navigation">
+		<img src="static/images/brand.png" height="130" width="270">
+		<!-- separator -->
+		<div class="separator-large"></div>
+		<!-- end separator -->
+
+		<div class="list-view list-separate-two list-colored">
+			<ul>
+				<li>
+					<a href="/" class="list-item">
+						<div class="list-media">
+							<i class="fa-solid fa-house-chimney bg-blue"></i>
+						</div>
+						<div class="list-label">
+							<div class="list-title">Home</div>
+							<div class="list-after"><i class="icon ion-ios-arrow-forward"></i></div>
+						</div>
+					</a>
+				</li>
+				<li>
+					<a href="features" class="list-item">
+						<div class="list-media">
+							<i class="icon ion-ios-keypad bg-red"></i>
+						</div>
+						<div class="list-label">
+							<div class="list-title">Features</div>
+							<div class="list-after"><i class="icon ion-ios-arrow-forward"></i></div>
+						</div>
+					</a>
+				</li>
+				{% if current_user.is_authenticated %}
+
+				{% else %}
+				<li>
+					<a href="{{ url_for('auth.login') }}" class="list-item">
+						<div class="list-media">
+							<i class="icon ion-ios-log-in bg-purple"></i>
+						</div>
+						<div class="list-label">
+							<div class="list-title">Sign In</div>
+							<div class="list-after"><i class="icon ion-ios-arrow-forward"></i></div>
+						</div>
+					</a>
+				</li>
+				{% endif %}
+				<li>
+					<a href="settings" class="list-item">
+						<div class="list-media">
+							<i class="icon ion-ios-settings bg-orange"></i>
+						</div>
+						<div class="list-label">
+							<div class="list-title">Settings</div>
+							<div class="list-after"><i class="icon ion-ios-arrow-forward"></i></div>
+						</div>
+					</a>
+				</li>
+			</ul>
+		</div>
+
+		<!-- separator -->
+		<div class="separator-large"></div>
+		<!-- end separator -->
+
+		<div class="list-view list-separate-two list-colored">
+			<ul>
+				<li>
+					<a href="about-us" class="list-item">
+						<div class="list-media">
+							<i class="icon ion-ios-information-circle bg-lime"></i>
+						</div>
+						<div class="list-label">
+							<div class="list-title">About</div>
+							<div class="list-after"><i class="icon ion-ios-arrow-forward"></i></div>
+						</div>
+					</a>
+				</li>
+				<li>
+					<a href="privacy" class="list-item">
+						<div class="list-media">
+							<i class="icon ion-ios-lock bg-blue"></i>
+						</div>
+						<div class="list-label">
+							<div class="list-title">Privacy</div>
+							<div class="list-after"><i class="icon ion-ios-arrow-forward"></i></div>
+						</div>
+					</a>
+				</li>
+				{% if current_user.is_authenticated %}
+				<li>
+					<a href="{{ url_for('auth.logout') }}" class="list-item">
+						<div class="list-media">
+							<i class="icon ion-ios-power bg-red"></i>
+						</div>
+						<div class="list-label">
+							<div class="list-title">Logout</div>
+							<div class="list-after"><i class="icon ion-ios-arrow-forward"></i></div>
+						</div>
+					</a>
+				</li>
+				{% else %}
+
+				{% endif %}
+			</ul>
+		</div>
+
+		<!-- separator -->
+		<div class="separator-large"></div>
+		<!-- end separator -->
+
+	</div>
+	<!-- end sidebar -->
+
 	<!-- main content -->
     {% block body %}	
     {% endblock %}
 	<!-- end main content -->
+
+	<!-- toolbar bottom -->
+	<div class="toolbar">
+		<div class="container">
+			<ul class="toolbar-bottom toolbar-wrap">
+				<li class="toolbar-item">
+					<a href="/" class="toolbar-link toolbar-link-active">
+						<i class="icon ion-ios-home"></i>
+					</a>
+				</li>
+				<li class="toolbar-item">
+					<a href="features" class="toolbar-link">
+						<i class="icon ion-ios-keypad"></i>
+					</a>
+				</li>
+				<li class="toolbar-item">
+					<a href="profile" class="toolbar-link">
+						<i class="icon ion-md-person"></i>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<!-- end toolbar bottom -->
 
 	<script src="static/js/jquery-3.4.1.min.js"></script>
 	<script src="static/js/jquery.big-slide.js"></script>
@@ -45,6 +191,7 @@
 	<script src="static/js/fakeLoader.js"></script>
 	<script src="static/js/swiper.min.js"></script>
 	<script src="static/js/main.js"></script>
+	<script src="https://kit.fontawesome.com/eb393893ff.js" crossorigin="anonymous"></script>
 
 </body>
 </html>

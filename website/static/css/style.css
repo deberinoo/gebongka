@@ -263,8 +263,8 @@ textarea {
 
 /* switch or toggle */
 .custom-control-input:checked ~ .custom-control-label::before {
-    background: #ef6351;
-    border-color: #ef6351;
+    background: #8b9aff;
+    border-color: #8b9aff;
 }
 
 .custom-control-input:checked ~ .custom-control-label::after {
@@ -491,7 +491,7 @@ textarea {
     text-align: center;
     background: #ffeff5;
     font-size: 24px;
-    color: #ef6351;
+    color: #8b9aff;
     margin-right: 15px;
     float: left;
 }
@@ -578,12 +578,16 @@ textarea {
 }
 
 /* background color & color */
+.bg-grey {
+   background: #ced4da !important;
+}
+
 .bg-theme {
-    background: #ef6351 !important;
+    background: #8b9aff !important;
 }
 
 .color-theme {
-    color: #ef6351 !important;
+    color: #8b9aff !important;
 }
 
 .color-white {
@@ -614,7 +618,7 @@ textarea {
 
 .bg-secondary {
     background: #ffeff5 !important;
-    color: #ef6351 !important;
+    color: #8b9aff !important;
 }
 
 .bg-lightblue {
@@ -840,7 +844,7 @@ textarea {
     font-weight: 900;
     margin-top: 10px;
     margin-bottom: 10px;
-    color: #ef6351;
+    color: #8b9aff;
 }
 
 .pricing-list ul li i {
@@ -928,7 +932,7 @@ textarea {
 
 .navbar .title.title-home {
     font-size: 19px;
-    color: #ef6351;
+    color: #8b9aff;
     font-weight: 700;
 }
 
@@ -959,7 +963,7 @@ textarea {
 }
 
 .navbar-highlight {
-    background: #ef6351;
+    background: #8b9aff;
 }
 
 .navbar-highlight .link {
@@ -1093,11 +1097,11 @@ textarea {
 }
 
 .toolbar-link.toolbar-link-active {
-    color: #ef6351;
+    color: #8b9aff;
 }
 
 .toolbar-link:hover {
-    color: #ef6351;
+    color: #8b9aff;
 }
 
 .toolbar-variant {
@@ -1128,7 +1132,7 @@ textarea {
     line-height: 34px;
     border-radius: 8px;
     text-align: center;
-    color: #ef6351;
+    color: #8b9aff;
     background: #ffeff5;
     display: inline-block;
 }
@@ -1290,7 +1294,7 @@ textarea {
 }
 
 .list-pricing .list-item .list-media .ion-ios-checkmark {
-    background: #ef6351;
+    background: #8b9aff;
     color: #fff;
 }
 
@@ -1300,7 +1304,7 @@ textarea {
 }
 
 .list-pricing .list-item .list-media .ion-ios-arrow-dropright-circle {
-    background: #ef6351;
+    background: #8b9aff;
     color: #fff;
 }
 
@@ -1311,7 +1315,7 @@ textarea {
     color: #fff;
     padding-left: 15px;
     padding-right: 15px;
-    background: #ef6351;
+    background: #8b9aff;
     font-size: 15px;
     font-weight: 500;
     line-height: 50px;
@@ -1465,7 +1469,7 @@ a.button-outline:hover {
 
 .card-date {
     margin-top: 10px;
-    color: #ef6351;
+    color: #8b9aff;
     font-weight: 500;
     font-size: 13px;
 }
@@ -1475,7 +1479,7 @@ a.button-outline:hover {
 }
 
 .card-highlight {
-    background: #ef6351;
+    background: #8b9aff;
     border: 0;
 }
 
@@ -1655,7 +1659,7 @@ a.button-outline:hover {
 }
 
 .swiper-container-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet {
-    background: #ef6351;
+    background: #8b9aff;
 }
 
 .swiper-style {
@@ -1759,7 +1763,7 @@ margin-bottom: -35px;
 
 */
 .swiper-button-prev {
-    color: #ef6351;
+    color: #8b9aff;
     left: 30px;
 }
 
@@ -1769,7 +1773,7 @@ margin-bottom: -35px;
 }
 
 .swiper-button-next {
-    color: #ef6351;
+    color: #8b9aff;
     right: 30px;
 }
 
@@ -1793,7 +1797,7 @@ margin-bottom: -35px;
 
 .testi-message {
     text-align: center;
-    background: #ef6351;
+    background: #8b9aff;
     color: #fff;
     padding: 15px;
     border-radius: 18px;
@@ -1807,7 +1811,7 @@ margin-bottom: -35px;
 .testi-img img {
     width: 60px;
     border-radius: 50%;
-    border: 3px solid #ef6351;
+    border: 3px solid #8b9aff;
     margin: auto;
     margin-bottom: 10px;
 }
@@ -1829,12 +1833,12 @@ margin-bottom: -35px;
     display: block;
     border: 0;
     background: #ffeff5;
-    color: #ef6351;
+    color: #8b9aff;
     font-size: 16px;
 }
 
 .page-item.active .page-link {
-    background: #ef6351;
+    background: #8b9aff;
 }
 
 .page-item .icon-nav i {
@@ -1855,7 +1859,7 @@ margin-bottom: -35px;
 }
 
 .pagination-outline .page-item.active .page-link {
-    border-color: #ef6351;
+    border-color: #8b9aff;
 }
 
 .pagination-style .page-item-nav {
@@ -1864,9 +1868,9 @@ margin-bottom: -35px;
 
 .pagination-style .page-item-nav .btn-nav {
     width: 80px;
-    background: #ef6351;
+    background: #8b9aff;
     color: #fff;
-    border-color: #ef6351;
+    border-color: #8b9aff;
 }
 
 .pagination-style .page-link {
@@ -1875,7 +1879,7 @@ margin-bottom: -35px;
 }
 
 .pagination-style .page-item.active .page-link {
-    border-color: #ef6351;
+    border-color: #8b9aff;
 }
 
 .pagination-cicrle .page-link {
@@ -1906,7 +1910,7 @@ margin-bottom: -35px;
 
 .modal-icon-title i {
     font-size: 32px;
-    color: #ef6351;
+    color: #8b9aff;
     line-height: 1;
     margin-bottom: 10px;
     display: inline-block;
@@ -1924,8 +1928,8 @@ margin-bottom: -35px;
 }
 
 .filter-tag span.active {
-    background: #ef6351;
-    border-color: #ef6351;
+    background: #8b9aff;
+    border-color: #8b9aff;
     color: #fff;
 }
 
@@ -1935,7 +1939,7 @@ margin-bottom: -35px;
 }
 
 .notification-modal i {
-    color: #ef6351;
+    color: #8b9aff;
     font-size: 36px;
     float: left;
     margin-right: 15px;
@@ -2000,7 +2004,7 @@ margin-bottom: -35px;
 }
 
 .incoming-modal .img span {
-    background: #ef6351;
+    background: #8b9aff;
     position: absolute;
     top: 30%;
     transform: translateY(-50%);
@@ -2066,8 +2070,8 @@ margin-bottom: -35px;
 }
 
 .nav-link.active {
-    border-bottom: 3px solid #ef6351;
-    color: #ef6351;
+    border-bottom: 3px solid #8b9aff;
+    color: #8b9aff;
 }
 
 .nav-default {
@@ -2089,7 +2093,7 @@ margin-bottom: -35px;
 }
 
 .nav-separate .nav-link.active {
-    background: #ef6351;
+    background: #8b9aff;
     color: #fff;
     border: 0;
 }
@@ -2102,11 +2106,11 @@ margin-bottom: -35px;
 }
 
 .nav-outline .nav-link {
-    color: #ef6351;
+    color: #8b9aff;
 }
 
 .nav-outline .nav-link.active {
-    background: #ef6351;
+    background: #8b9aff;
     color: #fff;
     border: 0;
 }
@@ -2185,7 +2189,7 @@ margin-bottom: -35px;
     border-radius: 50%;
     flex-shrink: 0;
     margin-right: 15px;
-    border: 2px solid #ef6351;
+    border: 2px solid #8b9aff;
 }
 
 .timeline-divider::after {
@@ -2195,7 +2199,7 @@ margin-bottom: -35px;
     left: 50%;
     width: 2px;
     height: 100vh;
-    background: #ef6351;
+    background: #8b9aff;
     z-index: -1;
     transform: translateX(-50%);
 }
@@ -2248,7 +2252,7 @@ margin-bottom: -35px;
 
 .forum-category {
     width: auto;
-    background: #ef6351;
+    background: #8b9aff;
     display: inline-block;
     border-radius: 3px;
     padding: 3px 10px;
@@ -2353,7 +2357,7 @@ margin-bottom: -35px;
 
 .icon-title i {
     font-size: 80px;
-    color: #ef6351;
+    color: #8b9aff;
     margin-bottom: 15px;
 }
 
@@ -2391,8 +2395,8 @@ margin-bottom: -35px;
 }
 
 .search-tag span.active {
-    background: #ef6351;
-    border-color: #ef6351;
+    background: #8b9aff;
+    border-color: #8b9aff;
     color: #fff;
 }
 
@@ -2509,7 +2513,7 @@ margin-bottom: -35px;
     position: absolute;
     top: 10px;
     right: 10px;
-    color: #ef6351;
+    color: #8b9aff;
 }
 
 .chat-info-seen.unseen i {
@@ -2518,7 +2522,7 @@ margin-bottom: -35px;
 
 .chat-emoji i {
     font-size: 34px;
-    color: #ef6351;
+    color: #8b9aff;
 }
 
 .chat-form {
@@ -2539,7 +2543,7 @@ margin-bottom: -35px;
 
 .icon-rocket i {
     font-size: 150px;
-    color: #ef6351;
+    color: #8b9aff;
     transform: rotate(-45deg);
     display: inline-block;
 }
@@ -2551,7 +2555,7 @@ margin-bottom: -35px;
 
 .contact-info .content i {
     font-size: 22px;
-    color: #ef6351;
+    color: #8b9aff;
     margin-right: 10px;
     display: flex;
 }

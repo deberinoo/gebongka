@@ -2,6 +2,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from os import path
+import mysql.connector
 
 db = SQLAlchemy()
 DB_NAME = "database.db"
@@ -9,7 +10,10 @@ DB_NAME = "database.db"
 
 def create_app():
     app = Flask(__name__)
+    # old SQLite db
     app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{DB_NAME}"
+    # new mySQL db
+    #app.config['SQLALCHEMY_DATABASE_URI'] = "mysql://admin:gebongkalol@gebongka.c0yrjbkoofev.ap-southeast-1.rds.amazonaws.com/gebongka"
     app.config['SECRET_KEY'] = 'secretkey'
     db.init_app(app)
 

@@ -52,6 +52,22 @@ def get_output():
 
 	return render_template("skinCancer.html", prediction = p, img_path = "/static/" + img.filename)
 
+@views.route("/burnSkin", methods=['GET', 'POST'])
+def main():
+	return render_template("burnSkin.html")
+
+# @views.route("/submit", methods = ['GET', 'POST'])
+# def get_output():
+# 	if request.method == 'POST':
+# 		img = request.files['my_image']
+
+# 		img_path = "website/static/" + img.filename	
+# 		img.save(img_path)
+
+# 		p = skin.predict_label(img_path)
+
+# 	return render_template("burnSkin.html", prediction = p, img_path = "/static/" + img.filename)
+
 # @views.route('/predictImage', methods=['POST'])
 # def predict_image():
 #     model = load_model("website/Erika_Model.h5")

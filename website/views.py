@@ -11,6 +11,7 @@ from keras.models import load_model
 from PIL import Image as im
 
 from .skin import skin
+from .food import food
 
 views = Blueprint('views', __name__)
 
@@ -52,9 +53,27 @@ def get_output():
 
 	return render_template("skinCancer.html", prediction = p, img_path = "/static/" + img.filename)
 
-@views.route("/burnSkin", methods=['GET', 'POST'])
-def main():
-	return render_template("burnSkin.html")
+@views.route("/foodNutrition", methods=['GET', 'POST'])
+def foodMain():
+	return render_template("foodNutrition.html")
+
+
+@views.route("/submitFoodNutrition", methods = ['GET', 'POST'])
+def get_food_output():
+	if request.method == 'POST':
+		img = request.files['my_image']
+
+		img_path = "website/static/" + img.filename	
+		img.save(img_path)
+
+		p = food.predict_label(img_path)
+
+	return render_template("foodNutrition.html", prediction = p, img_path = "/static/" + img.filename)
+
+# @views.route("/burnSkin", methods=['GET', 'POST'])
+# def main():
+# 	return render_template("burnSkin.html")
+
 
 # @views.route("/submit", methods = ['GET', 'POST'])
 # def get_output():

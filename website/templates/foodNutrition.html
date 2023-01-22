@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<!-- navbar -->
+<div class="navbar">
+	<div class="left">
+		<a href="" class="link link-back"><i class="icon ion-ios-arrow-back"></i></a>
+	</div>
+	<div class="title">
+		
+	</div>
+	<div class="right">
+		
+	</div>
+</div>
+<!-- end navbar -->
+
+<div class="page-wrapper">
+
+	<!-- intro app -->
+	<div class="intro-app">
+		<div class="container">
+			<div class="intro-content">
+				<img src="static/images/intro.jpg" alt="image-demo">
+				<div class="caption">
+					<h4 class="text-white mb-1">Food Nutrition Detection</h4>
+				</div>
+			</div>
+		</div>
+	</div>
+
+  <!-- separator -->
+	<div class="separator-large"></div>
+	<!-- end separator -->
+
+  <div class="container">
+    <div class="row">      
+      <div class="col-12">
+        <form action="/submitFoodNutrition" method="post" enctype="multipart/form-data">
+          <div class="form-group">
+            <label class="control-label col-4" for="pwd">Upload Your Image :</label>
+            <div class="col">
+              <div class="row">
+                <input type="file" class="form-control" name="my_image" id="pwd" style="width: 375px;">
+                <button type="submit" class="btn btn-success">Submit</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="row d-flex justify-content-center">
+      <div class="img">
+        {% if prediction %}
+        <img src="../{{img_path}}" alt="image-upload" style="width: 300px; height: 200px;">
+        {% else %}
+        <img src="static/images/FileUploadIllustration.png" alt="image-upload" style="width: 300px; height: 200px;">
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+</div>
+
+{% if prediction %}
+<div class="row d-flex justify-content-center">
+  <h1>Nutrition Information</h1>
+</div>
+<br> 
+
+<div class="carousel-slider">
+  <div class="swiper-container swiper-navigation">
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">
+        <div class="cards">
+          <div class="container">
+            <div class="card card-image card-outline">
+            {% if prediction == "Macaroni and Cheese" %}
+              <div class="card-body">
+                <h5 class="card-title">Macaroni and Cheese</h5>
+                <br>
+                <h5 class="card-title card-title-small">Serving</h5>
+                <p class="card-text">
+                  1 cup
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Fats(g)</h5>
+                <p class="card-text">
+                  16
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Protein(g)</h5>
+                <p class="card-text">
+                  9.7
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Sodium(mg)</h5>
+                <p class="card-text">
+                  669
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Cholesterol(mg)</h5>
+                <p class="card-text">
+                  5.9
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Carbohydrates(g)</h5>
+                <p class="card-text">
+                  47
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Sugars(g)</h5>
+                <p class="card-text">
+                  8.5
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Calories</h5>
+                <p class="card-text">
+                  376
+                </p>
+              </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+{% endblock %}

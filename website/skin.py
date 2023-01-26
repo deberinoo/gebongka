@@ -18,7 +18,7 @@ class skin:
 		model = load_model('website/model/Erika_Model.h5')
 
 		print("Call make_prediction_function()")
-		model.make_predict_function()
+		#model.make_predict_function()
 
 		print("Image Path part 2: ", img_path)
 

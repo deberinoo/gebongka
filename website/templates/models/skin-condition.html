@@ -2,44 +2,30 @@
 
 {% block body %}
 
-<!-- navbar -->
-<div class="navbar">
-	<div class="left">
-		<a href="" class="link link-back"><i class="icon ion-ios-arrow-back"></i></a>
-	</div>
-	<div class="title">
-		
-	</div>
-	<div class="right">
-		
-	</div>
-</div>
-<!-- end navbar -->
-
 <div class="page-wrapper">
 
-	<!-- intro app -->
-	<div class="intro-app">
-		<div class="container">
-			<div class="intro-content">
-				<img src="static/images/intro.jpg" alt="image-demo">
-				<div class="caption">
-					<h4 class="text-white mb-1">Skin Condition Identifier</h4>
-				</div>
-			</div>
-		</div>
-	</div>
+  <!-- intro app -->
+  <div class="intro-app">
+    <div class="container">
+      <div class="intro-content">
+        <img src="static/images/intro.jpg" alt="image-demo">
+        <div class="caption">
+          <h4 class="text-white mb-1">Skin Condition Identifier</h4>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- separator -->
-	<div class="separator-large"></div>
-	<!-- end separator -->
+  <div class="separator-large"></div>
+  <!-- end separator -->
 
   <div class="container">
-    <div class="row">      
+    <div class="row">
       <div class="col-12">
-        <form action="/submit" method="post" enctype="multipart/form-data">
+        <form action="/submit-skin" method="post" enctype="multipart/form-data">
           <div class="form-group">
-            <label class="control-label col-4" for="pwd">Upload Your Image :</label>
+            <label class="control-label col-4" for="pwd">Upload Your Image:</label>
             <div class="col">
               <div class="row">
                 <input type="file" class="form-control" name="my_image" id="pwd" style="width: 375px;">
@@ -55,7 +41,7 @@
         {% if prediction %}
         <img src="../{{img_path}}" alt="image-upload">
         {% else %}
-        <img src="static/images/FileUploadIllustration.png" alt="image-upload" style="width: 300px; height: 200px;">
+        <img src="static/images/file-upload.png" alt="image-upload" style="width: 300px; height: 300px;">
         {% endif %}
       </div>
     </div>
@@ -66,7 +52,7 @@
 <div class="row d-flex justify-content-center">
   <h1>Top 3 Results</h1>
 </div>
-<br> 
+<br>
 
 <div class="carousel-slider">
   <div class="swiper-container swiper-navigation">
@@ -84,7 +70,8 @@
                 <h5 class="card-title card-title-small">What is it?</h5>
                 <p class="card-text">
                   Actinic keratosis (AK) is the most common precancer that forms on skin damaged by chronic exposure
-                  to ultraviolet (UV) rays from the sun and/or indoor tanning. Solar keratosis is another name for the condition
+                  to ultraviolet (UV) rays from the sun and/or indoor tanning. Solar keratosis is another name for the
+                  condition
                 </p>
                 <br>
                 <h5 class="card-title card-title-small">What causes it to appear?</h5>
@@ -94,9 +81,11 @@
                 <br>
                 <h5 class="card-title card-title-small">Level of danger</h5>
                 <p class="card-text">
-                  AK sometimes disappears on its own but might return after more sun exposure. Only about 10% of AK will eventually
-                  become cancerous. Unfortunately, there's no way to tell which AKs will become dangerous, so monitoring 
-                  and treating any that crop up is the only way to be sure. Left untreated, the risk of AK turning into skin cancer 
+                  AK sometimes disappears on its own but might return after more sun exposure. Only about 10% of AK will
+                  eventually
+                  become cancerous. Unfortunately, there's no way to tell which AKs will become dangerous, so monitoring
+                  and treating any that crop up is the only way to be sure. Left untreated, the risk of AK turning into
+                  skin cancer
                   is 5-10%.
                 </p>
                 <br>
@@ -144,30 +133,35 @@
                 <br>
                 <h5 class="card-title card-title-small">What is it?</h5>
                 <p class="card-text">
-                  A type of cell within the skin that produces new skin cells as old ones die off. 
+                  A type of cell within the skin that produces new skin cells as old ones die off.
                   Appears as a slightly transparent bump on the skin, though it can take other forms.
                 </p>
                 <br>
                 <h5 class="card-title card-title-small">What causes it to appear?</h5>
                 <p class="card-text">
-                  Basal cell carcinoma occurs most often on areas of the skin that are exposed to the sun, such as your head and neck.
-                  They are caused by long-term exposure to ultraviolet (UV) radiation from sunlight. It usually 
+                  Basal cell carcinoma occurs most often on areas of the skin that are exposed to the sun, such as your
+                  head and neck.
+                  They are caused by long-term exposure to ultraviolet (UV) radiation from sunlight. It usually
                   develops on sun-exposed parts of your body, especially your head and neck. It can also develop
                   on parts of your body usually protected from the sun, such as the genitals.
                 </p>
                 <br>
                 <h5 class="card-title card-title-small">Level of danger</h5>
                 <p class="card-text">
-                  Basal cell carcinoma rarely spread beyond the original tumor site. But these lesions can grow and become disfiguring and dangerous.
-                  Untreated cells can become locally invasive, grow wide and deep into the skin and destroy skin, tissue and bone. The longer you
+                  Basal cell carcinoma rarely spread beyond the original tumor site. But these lesions can grow and
+                  become disfiguring and dangerous.
+                  Untreated cells can become locally invasive, grow wide and deep into the skin and destroy skin, tissue
+                  and bone. The longer you
                   wait to get treatment, the more likely it will recur and sometimes repeatedly.
                 </p>
                 <br>
                 <h5 class="card-title card-title-small">Symptoms/side-effects</h5>
                 <p class="card-text">
                   1. A shiny, skin-colored bump that's translucent. <br>
-                  &nbsp;- Bump can look pearly on white or pink on white skin, Brown or glossy on brown and black skin. <br>
-                  &nbsp;- Tiny blood vessls might be visible, though they may be difficult to see on brown and black skin. <br>
+                  &nbsp;- Bump can look pearly on white or pink on white skin, Brown or glossy on brown and black skin.
+                  <br>
+                  &nbsp;- Tiny blood vessls might be visible, though they may be difficult to see on brown and black
+                  skin. <br>
                   &nbsp;- THe bump may bleed and scab over. <br>
                   2. A brown, black or blue lesion <br>
                   &nbsp;- Or a lesion with dark spots with a slightly raised, translucent border <br>
@@ -213,7 +207,7 @@
                 <p class="card-text">
                   A non-cancerous skin growth. It may look like a small, firm bump, similar to a mole.
                   Unlike other dermatofibromas, cellular dermatofibromas often attach to your deepest layer of skin.
-                  Often appear on your legs. 
+                  Often appear on your legs.
                 </p>
                 <br>
                 <h5 class="card-title card-title-small">What causes it to appear?</h5>
@@ -224,8 +218,10 @@
                 <br>
                 <h5 class="card-title card-title-small">Level of danger</h5>
                 <p class="card-text">
-                  As it is a non-cancerous skin growth, they usually don't need treatment. In about 1 in 10 people, cellular 
-                  dermatofibromas cause necrosis in the tumor. Mecrosis is tissure or cell death in a certain area of your body.
+                  As it is a non-cancerous skin growth, they usually don't need treatment. In about 1 in 10 people,
+                  cellular
+                  dermatofibromas cause necrosis in the tumor. Mecrosis is tissure or cell death in a certain area of
+                  your body.
                 </p>
                 <br>
                 <h5 class="card-title card-title-small">Symptoms/side-effects</h5>
@@ -234,7 +230,8 @@
                   2. Usually less than 1 cm in diameter<br>
                   3. They may be flesh-colored, brown or reddish-brown. <br>
                   4. Form on your arms or legs. Feel firm to the touch and can be itchy, tender or painful<br>
-                  5. They're shaped like a dimple - the center of the lesion falls in, and the edges of the lesion pucker around it<br>
+                  5. They're shaped like a dimple - the center of the lesion falls in, and the edges of the lesion
+                  pucker around it<br>
                 </p>
                 <br>
                 <h5 class="card-title card-title-small">Risk factors</h5>
@@ -246,9 +243,11 @@
                 <br>
                 <h5 class="card-title card-title-small">Prevention</h5>
                 <p class="card-text">
-                  There isn't a known way to prevent it. Fortunately, they aren't cancerous. If you get one, it rarely causes
+                  There isn't a known way to prevent it. Fortunately, they aren't cancerous. If you get one, it rarely
+                  causes
                   discomfort or harmful symptoms.
-                </p>              </div>
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -263,22 +262,25 @@
                 <br>
                 <h5 class="card-title card-title-small">What is it?</h5>
                 <p class="card-text">
-                  Melanoma is the most serious type of skin cancer, develops in the cells (melanocytes) 
+                  Melanoma is the most serious type of skin cancer, develops in the cells (melanocytes)
                   that produce melanin - the pigment that gives your skin its color. Melanoma can also
                   form in your eyes, and, rarely, inside your body, sucha s in your nose or throat.
                 </p>
                 <br>
                 <h5 class="card-title card-title-small">What causes it to appear?</h5>
                 <p class="card-text">
-                  The exact causes of all melanomas isn't clear, but exposure to Ultraviolet (UV) radiation from sunlight 
-                  tanning lamps and beds increases your risk of developing melanoma. Limiting your exposure to UV radiation
+                  The exact causes of all melanomas isn't clear, but exposure to Ultraviolet (UV) radiation from
+                  sunlight
+                  tanning lamps and beds increases your risk of developing melanoma. Limiting your exposure to UV
+                  radiation
                   can help reduce your risk of melanoma.
                 </p>
                 <br>
                 <h5 class="card-title card-title-small">Level of danger</h5>
                 <p class="card-text">
-                  The risk of melanoma seems to be increasing in people under 40, especially women. Knowing the warning 
-                  signs of skin cancer can help ensure that cancerous changes are detected and treated before the cancer has spread. 
+                  The risk of melanoma seems to be increasing in people under 40, especially women. Knowing the warning
+                  signs of skin cancer can help ensure that cancerous changes are detected and treated before the cancer
+                  has spread.
                   Melanoma can be treated successfully if it is detected early.
                 </p>
                 <br>
@@ -317,8 +319,9 @@
                   2. Wear sunscreen year-round <br>
                   3. Wear protective clothing <br>
                   4. Avoid tanning lamps and beds <br>
-                  5. Become familiar with your skin so that you'll notice changes 
-                </p>              </div>
+                  5. Become familiar with your skin so that you'll notice changes
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -333,30 +336,31 @@
                 <br>
                 <h5 class="card-title card-title-small">What is it?</h5>
                 <p class="card-text">
-                  A specific type of nevus (mole) that looks different from a common mole. 
-                  Dysplastic nevi are mostly flat and often larger than common moles and have borders that are irregular.
+                  A specific type of nevus (mole) that looks different from a common mole.
+                  Dysplastic nevi are mostly flat and often larger than common moles and have borders that are
+                  irregular.
                   A dysplastic nevus can contain different colors, which can range from pink to dark brown.
                 </p>
                 <br>
                 <h5 class="card-title card-title-small">What causes it to appear?</h5>
                 <p class="card-text">
-                  A dysplastic nevus may occur anywhere on the body, but it is usually seen in areas exposed 
+                  A dysplastic nevus may occur anywhere on the body, but it is usually seen in areas exposed
                   to the sun, such as on the back. A dysplastic nevus may also appear in areas not exposed to the sun,
-                   such as the breasts and areas below the waist
+                  such as the breasts and areas below the waist
                 </p>
                 <br>
                 <h5 class="card-title card-title-small">Level of danger</h5>
                 <p class="card-text">
-                  Parts of the mole may be raised above the skin surface. A dysplastic nevus may develop into melanoma 
+                  Parts of the mole may be raised above the skin surface. A dysplastic nevus may develop into melanoma
                   (a type of skin cancer), and the more dysplastic nevi a person has, the higher the risk of melanoma.
                 </p>
                 <br>
                 <h5 class="card-title card-title-small">Symptoms/side-effects</h5>
                 <p class="card-text">
-                  A dysplastic nevus may be bigger than a common mole, and its color, 
-                  surface, and border may be different. It is usually more than 5 millimeters wide (1, 3). 
-                  A dysplastic nevus can have a mixture of several colors, from pink to dark brown. It is usually flat, 
-                  with a smooth, slightly scaly, or pebbly surface, and it has an irregular edge that may fade into the 
+                  A dysplastic nevus may be bigger than a common mole, and its color,
+                  surface, and border may be different. It is usually more than 5 millimeters wide (1, 3).
+                  A dysplastic nevus can have a mixture of several colors, from pink to dark brown. It is usually flat,
+                  with a smooth, slightly scaly, or pebbly surface, and it has an irregular edge that may fade into the
                   surrounding skin.<br>
                   1. The color changes<br>
                   2. It gets smaller or bigger. <br>
@@ -372,16 +376,17 @@
                   1. Having many small modles or several large ones<br>
                   2. Skin that burns easily<br>
                   3. People who have fair pale skin that burns easily in the sun <br>
-                  4. Blue or gray eyes, red or blonde hair or many freckles 
+                  4. Blue or gray eyes, red or blonde hair or many freckles
                 </p>
                 <br>
                 <h5 class="card-title card-title-small">Prevention</h5>
                 <p class="card-text">
-                  Everyone should protect their skin from the sun and stay away from sunlamps 
-                  and tanning booths, but for people who have dysplastic nevi, it is even more 
-                  important to protect the skin and avoid getting a suntan or sunburn. In addition, 
+                  Everyone should protect their skin from the sun and stay away from sunlamps
+                  and tanning booths, but for people who have dysplastic nevi, it is even more
+                  important to protect the skin and avoid getting a suntan or sunburn. In addition,
                   many doctors recommend that people with nevus check their skin once a month
-                </p>              </div>
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -392,63 +397,65 @@
             <div class="card card-image card-outline">
               <div class="card-body">
                 <h5 class="card-title">Vascular Lesion</h5>
-                <<div class="card-date"><i class="icon ion-ios-calendar"></i> Feb 12</div>
-                <br>
-                <h5 class="card-title card-title-small">What is it?</h5>
-                <p class="card-text">
-                  Vascular lesions are relatively common abnormalities of the skin and underlying tissues, 
-                  more commonly known as birthmarks. There are three major categories of vascular lesions: 
-                  Hemangiomas, Vascular Malformations, and Pyogenic Granulomas. While these birthmarks can 
-                  look similar at times, they each vary in terms of origin and necessary treatment.
-                </p>
-                <br>
-                <h5 class="card-title card-title-small">What causes it to appear?</h5>
-                <p class="card-text">
-                  They’re the result of blood vessel growth underneath the surface of the skin, and they 
-                  usually appear shortly after birth. Lesions may appear in a number of forms: wounds, 
-                  sores, ulcers, and tumors. 
-                </p>
-                <br>
-                <h5 class="card-title card-title-small">Level of danger</h5>
-                <p class="card-text">
-                  You don’t have to worry about them most of the time. They’re usually benign and require 
-                  no treatment from a doctor. Vascular lesions can be a serious problem when they spread 
-                  in certain areas of your body, and this can result in a number of medical complications. 
-                </p>
-                <br>
-                <h5 class="card-title card-title-small">Symptoms/side-effects</h5>
-                <p class="card-text">
-                  They may present with a skin deformity, pulsatile mass, bleeding, ulceration, or secondary 
-                  symptoms including arterial steal, venous congestion, and high output cardiac failure. 
-                  These lesions demonstrate high flow on ultrasound; it can be difficult to identify 
-                  the arterial origin or venous drainage of these lesions
-                </p>
-                <br>
-                <h5 class="card-title card-title-small">Risk factors</h5>
-                <p class="card-text">
-                  1. Diabetes <br>
-                  2. Hyperlipidemia <br>
-                  3. Smoking <br>
-                  4. High blood pressure <br>
-                  5. Obesity <br>
-                  6. Lack of exercise
-                </p>
-                <br>
-                <h5 class="card-title card-title-small">Prevention</h5>
-                <p class="card-text">
-                  Treatments for vascular malformations focus on minimizing symptoms and 
-                  reducing potential complications. Malformations that don’t cause problems may 
-                  not need treatment and can just be observed over time.<br><br>
-                  Treatments depend on the affected blood vessels. They often involve closing off 
-                  or surgically removing affected blood vessels. Most malformations can be treated 
-                  using minimally invasive techniques.
-                </p>              </div>
+                <<div class="card-date"><i class="icon ion-ios-calendar"></i> Feb 12
+              </div>
+              <br>
+              <h5 class="card-title card-title-small">What is it?</h5>
+              <p class="card-text">
+                Vascular lesions are relatively common abnormalities of the skin and underlying tissues,
+                more commonly known as birthmarks. There are three major categories of vascular lesions:
+                Hemangiomas, Vascular Malformations, and Pyogenic Granulomas. While these birthmarks can
+                look similar at times, they each vary in terms of origin and necessary treatment.
+              </p>
+              <br>
+              <h5 class="card-title card-title-small">What causes it to appear?</h5>
+              <p class="card-text">
+                They’re the result of blood vessel growth underneath the surface of the skin, and they
+                usually appear shortly after birth. Lesions may appear in a number of forms: wounds,
+                sores, ulcers, and tumors.
+              </p>
+              <br>
+              <h5 class="card-title card-title-small">Level of danger</h5>
+              <p class="card-text">
+                You don’t have to worry about them most of the time. They’re usually benign and require
+                no treatment from a doctor. Vascular lesions can be a serious problem when they spread
+                in certain areas of your body, and this can result in a number of medical complications.
+              </p>
+              <br>
+              <h5 class="card-title card-title-small">Symptoms/side-effects</h5>
+              <p class="card-text">
+                They may present with a skin deformity, pulsatile mass, bleeding, ulceration, or secondary
+                symptoms including arterial steal, venous congestion, and high output cardiac failure.
+                These lesions demonstrate high flow on ultrasound; it can be difficult to identify
+                the arterial origin or venous drainage of these lesions
+              </p>
+              <br>
+              <h5 class="card-title card-title-small">Risk factors</h5>
+              <p class="card-text">
+                1. Diabetes <br>
+                2. Hyperlipidemia <br>
+                3. Smoking <br>
+                4. High blood pressure <br>
+                5. Obesity <br>
+                6. Lack of exercise
+              </p>
+              <br>
+              <h5 class="card-title card-title-small">Prevention</h5>
+              <p class="card-text">
+                Treatments for vascular malformations focus on minimizing symptoms and
+                reducing potential complications. Malformations that don’t cause problems may
+                not need treatment and can just be observed over time.<br><br>
+                Treatments depend on the affected blood vessels. They often involve closing off
+                or surgically removing affected blood vessels. Most malformations can be treated
+                using minimally invasive techniques.
+              </p>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
 </div>
 
 {% endif %}
@@ -457,8 +464,8 @@
 <div class="separator-large"></div>
 
 {% if prediction %}
-  <img src="../{{img_path}}" height="400px" width="400px">
-	<h2> Your Prediction   : <i> {{prediction}} </i></h2>
+<img src="../{{img_path}}" height="400px" width="400px">
+<h2> Your Prediction : <i> {{prediction}} </i></h2>
 
 {% endif %}
 

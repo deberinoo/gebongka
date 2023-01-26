@@ -1,14 +1,6 @@
 from flask import Blueprint, render_template, request
 from flask_login import login_required, current_user
-
 from flask import request
-from flask import jsonify
-import numpy as np
-import pandas as pd
-import cv2
-from tensorflow import keras
-from keras.models import load_model
-from PIL import Image as im
 
 from .ml_models import skin, burn, chatbot, food
 
@@ -39,7 +31,7 @@ def profile():
 def skin_condition():
 	return render_template("models/skin-condition.html")
 
-@views.route("/submit", methods = ['GET', 'POST'])
+@views.route("/submit-skin", methods = ['GET', 'POST'])
 def predict_skin_condition():
 	if request.method == 'POST':
 		img = request.files['my_image']

@@ -12,13 +12,13 @@ def process_image(img_path):
     i = preprocess_input(i)
     return i
 
-class skin:
+class skinGerald:
     def predict_label(img_path):
         model = load_model('website/model/Erika_Model.h5')
         model.make_predict_function()
 
         p = model.predict(process_image(img_path))
-        predsresult = skin.Check_Highest_Prediction(p)
+        predsresult = skinGerald.Check_Highest_Prediction(p)
 
         print(p)
         print("result", predsresult)

@@ -16,7 +16,7 @@ from .skin import skin
 import random
 import string
 
-from .ml_models import skin, burn, chatbot, food
+from .ml_models import skinGerald, burn, chatbot, food
 
 views = Blueprint('views', __name__)
 
@@ -46,8 +46,9 @@ def skin_condition():
 
 @views.route("/submit-skin", methods = ['GET', 'POST'])
 def predict_skin_condition():
-	return render_template("models/skin-condition.html", prediction = p, img_path = "/static/" + img.filename)
-	
+	#return render_template("models/skin-condition.html", prediction = p, img_path = "/static/" + img.filename)
+	render_template("models/skin-condition.html")
+
 # Erika's Part =====================================================
 
 # Load skinCancer html
@@ -56,14 +57,10 @@ def predict_skin_condition():
 def main():
 	return render_template("skinCancer.html")
 
-@views.route("/skin-condition", methods=['GET', 'POST'])
-def skin_condition():
-	return render_template("models/skin-condition.html")
 # GET/POST method for prediction
-@views.route("/submit-skin", methods = ['GET', 'POST'])
+@views.route("/submit", methods = ['GET', 'POST'])
 
-def predict_skin_condition():
-
+def get_output():
 	# When submitting
 	if request.method == 'POST':
 		print("Skin Cancer prediction ongoing ================ ")

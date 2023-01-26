@@ -1,47 +1,57 @@
+# Import tensorflow libraries and other related libraries
+import tensorflow as tf
 from tensorflow import keras
+import keras.layers as layers
 from keras.models import load_model
 import keras.utils as image
 import numpy as np
 from keras.applications.imagenet_utils import preprocess_input
-
+import os
+import h5py
 
 class skin:
 
 	def predict_label(img_path):
-		dic = {0 : 'Actinic Keratosis', 1 : 'basal cell carcinoma', 2 : 'dermatofibroma', 3: 'melanoma', 4: 'nevus', 5:'vascular lesion'}
+		classlist = ['Actinic Keratosis','basal cell carcinoma','dermatofibroma','melanoma','nevus','vascular lesion']
 
+		
 		model = load_model('website/model/Erika_Model.h5')
 
+		print("Call make_prediction_function()")
 		model.make_predict_function()
 
+		print("Image Path part 2: ", img_path)
+
 		i = image.load_img(img_path, target_size=(128,128))
-		i = image.img_to_array(i)/255.0
+		i = image.img_to_array(i)
 		i = i.reshape(1, 128,128,3)
 		i = preprocess_input(i)
 		p = model.predict(i)
-		print(p)
-		predsresult = Check_Highest_Prediction(p)
-		print("result", predsresult)
-		return predsresult
+		print("Original Array: ", p)
+		top1,top2,top3 = Check_Highest_Prediction(p)
+		print("top1: ", classlist[top1])
+		print("top2: ", classlist[top2])
+		print("top3: ", classlist[top3])
+		return classlist[top1],classlist[top2],classlist[top3]
 
 def Check_Highest_Prediction(prediction_array):
-		Highest_value = -10000 # get the highest prediction from the array
-		classname = ""
-		classindex = 0
-		for arrayvalue in prediction_array[0]: # validate each of the value
-			classindex+=1
-			if arrayvalue > Highest_value:
-				Highest_value = arrayvalue
-				if classindex == 1:
-					classname = "actinic keratosis"
-				elif classindex == 2:
-					classname = "basal cell carcinoma"
-				elif classindex == 3:
-					classname = "dermatofibroma"
-				elif classindex == 4:
-					classname = "melanoma"
-				elif classindex == 5:
-					classname = "nevus"
-				else:
-					classname = "vascular lesion"
-		return classname
+	print("Put into dic")
+	predictecdic = put_into_dic(prediction_array[0])
+
+	top1 = list(dict(predictecdic).keys())[0]
+	top2 = list(dict(predictecdic).keys())[1]
+	top3 = list(dict(predictecdic).keys())[2]
+
+	return top1,top2,top3
+
+def put_into_dic(prediction_array):
+	mydict={}
+	for index, i in enumerate(prediction_array):
+		print(i)
+		mydict[index]=f"{i}"
+		
+	sorteddic = sorted(mydict.items(), key=lambda x:x[1])
+	##print("DICT", mydict)
+	print("DICTSORT", sorteddic)
+
+	return sorteddic

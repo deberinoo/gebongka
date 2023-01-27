@@ -908,10 +908,6 @@ textarea {
     height: 1px;
 }
 
-.navbar.navbar-home {
-    height: 60px;
-}
-
 .navbar.navbar-home::after {
     display: none;
 }

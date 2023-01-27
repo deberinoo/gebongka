@@ -1,22 +1,7 @@
-# Import flask
 from flask import Blueprint, render_template, request
-from flask_login import login_required, current_user
-from flask import request
-from flask import jsonify
-# Import tensorflow and other related libraries
-import numpy as np
-import pandas as pd
-import cv2
-from tensorflow import keras
-from keras.models import load_model
-from PIL import Image as im
-# Import class from diifferent .py files
-from .skin import skin
-# Import Other libraries
-import random
-import string
+from flask_login import login_required
 
-from .ml_models import skinGerald, burn, chatbot, food
+from .ml_models import skin, burn, chatbot, food
 
 views = Blueprint('views', __name__)
 
@@ -40,27 +25,17 @@ def profile():
     return render_template("profile.html")
 # ----- model routes -----
 
-@views.route("/skin-condition", methods=['GET', 'POST'])
-def skin_condition():
-	return render_template("models/skin-condition.html")
-
-@views.route("/submit-skin", methods = ['GET', 'POST'])
-def predict_skin_condition():
-	#return render_template("models/skin-condition.html", prediction = p, img_path = "/static/" + img.filename)
-	render_template("models/skin-condition.html")
-
 # Erika's Part =====================================================
 
 # Load skinCancer html
 # HTML is where user submits their image and receive the prediction from the model
-@views.route("/skinCancer", methods=['GET', 'POST'])
-def main():
-	return render_template("skinCancer.html")
+@views.route("/skin-condition", methods=['GET', 'POST'])
+def skin_condition():
+	return render_template("models/skin-condition.html")
 
 # GET/POST method for prediction
-@views.route("/submit", methods = ['GET', 'POST'])
-
-def get_output():
+@views.route("/submit-skin", methods = ['GET', 'POST'])
+def submit_skin():
 	# When submitting
 	if request.method == 'POST':
 		print("Skin Cancer prediction ongoing ================ ")
@@ -83,9 +58,15 @@ def get_output():
 		print("- Model prediction completed. Displaying results now -")
 		print("Skin Cancer prediction Completed ================ ")
 
-	return render_template("skinCancer.html", prediction1 = top1, prediction2 = top2, prediction3 = top3, img_path = "/static/" + img.filename)
+	return render_template("models/skin-condition.html", prediction1 = top1, prediction2 = top2, prediction3 = top3, img_path = "/static/" + img.filename)
 
-# End of Erika's Part ===============================================
+# Deborah's Part =====================================================
+
+@views.route("/chatbot-diagnosis", methods=['GET', 'POST'])
+def chatbot_diagnosis():
+	return render_template("models/chatbot-diagnosis.html")
+
+# Linfeng's Part ===============================================
 
 @views.route("/nutrition-analyser", methods=['GET', 'POST'])
 def nutrition_analyser():

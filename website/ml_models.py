@@ -7,44 +7,50 @@ import numpy as np
 
 def process_image(img_path):
     i = image.load_img(img_path, target_size=(128,128))
-    i = image.img_to_array(i)/255.0
+    i = image.img_to_array(i)
     i = i.reshape(1, 128,128,3)
     i = preprocess_input(i)
     return i
 
-class skinGerald:
+class skin:
+    def Check_Highest_Prediction(prediction_array):
+        print("Put into dic")
+        predictecdic = skin.put_into_dic(prediction_array[0])
+
+        top1 = list(dict(predictecdic).keys())[0]
+        top2 = list(dict(predictecdic).keys())[1]
+        top3 = list(dict(predictecdic).keys())[2]
+
+        return top1,top2,top3
+        
     def predict_label(img_path):
+        classlist = ['Actinic Keratosis','basal cell carcinoma','dermatofibroma','melanoma','nevus','vascular lesion']
         model = load_model('website/model/Erika_Model.h5')
-        model.make_predict_function()
+
+        print("Call make_prediction_function()")
+        #model.make_predict_function()
+
+        print("Image Path part 2: ", img_path)
 
         p = model.predict(process_image(img_path))
-        predsresult = skinGerald.Check_Highest_Prediction(p)
+        print("Original Array: ", p)
+        top1,top2,top3 = skin.Check_Highest_Prediction(p)
+        print("top1: ", classlist[top1])
+        print("top2: ", classlist[top2])
+        print("top3: ", classlist[top3])
+        return classlist[top1],classlist[top2],classlist[top3]
 
-        print(p)
-        print("result", predsresult)
-        return predsresult
+    def put_into_dic(prediction_array):
+        mydict={}
+        for index, i in enumerate(prediction_array):
+            print(i)
+            mydict[index]=f"{i}"
+		
+        sorteddic = sorted(mydict.items(), key=lambda x:x[1])
+        ##print("DICT", mydict)
+        print("DICTSORT", sorteddic)
 
-    def Check_Highest_Prediction(prediction_array):
-        Highest_value = -10000 # get the highest prediction from the array
-        classname = ""
-        classindex = 0
-        for arrayvalue in prediction_array[0]: # validate each of the value
-            classindex+=1
-            if arrayvalue > Highest_value:
-                Highest_value = arrayvalue
-                if classindex == 1:
-                    classname = "actinic keratosis"
-                elif classindex == 2:
-                    classname = "basal cell carcinoma"
-                elif classindex == 3:
-                    classname = "dermatofibroma"
-                elif classindex == 4:
-                    classname = "melanoma"
-                elif classindex == 5:
-                    classname = "nevus"
-                else:
-                    classname = "vascular lesion"
-        return classname
+        return sorteddic
 
 class burn:
     def predict_label(img_path):

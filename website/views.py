@@ -1,5 +1,10 @@
 from flask import Blueprint, render_template, request
-from flask_login import login_required
+from flask_login import login_user, login_required, logout_user, current_user
+from flask_bcrypt import Bcrypt
+
+from .forms import LoginForm, RegisterForm
+from .models import Users
+from . import db
 
 from .ml_models import skin, burn, chatbot, food, process_image
 
@@ -21,10 +26,6 @@ def index():
 def features():
     return render_template("features.html")
 
-@views.route('/profile')
-@login_required
-def profile():
-    return render_template("profile.html")
 # ----- model routes -----
 
 # Erika's Part =====================================================
@@ -37,6 +38,7 @@ def skin_condition():
 
 # GET/POST method for prediction
 @views.route("/submit-skin", methods = ['GET', 'POST'])
+@login_required
 def submit_skin():
 	# When submitting
 	if request.method == 'POST':
@@ -78,6 +80,10 @@ def submit_skin():
 		#top1,top2,top3 = skin.predict_label(img_path)
 		print("- Model prediction completed. Displaying results now -")
 		print("Skin Cancer prediction Completed ================ ")
+
+		# Creation of save history
+		savehistory = skin.create_history(img.filename,splittedresults[0],splittedresults[1],splittedresults[2], current_user.username)
+		print("Save history results: ", savehistory)
 
 	return render_template("models/skin-condition.html", prediction1 = splittedresults[0], prediction2 = splittedresults[1], prediction3 = splittedresults[2], img_path = "/static/" + img.filename)
 

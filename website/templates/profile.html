@@ -77,87 +77,33 @@
 
 				<div class="list-view list-separate-two list-colored">
 					<ul style="height:200px; overflow:hidden; overflow-y:scroll;">
-						<li class="list-item">
-							<div class="list-media">
-								<i class="icon ion-ios-arrow-down bg-blue"></i>
-							</div>
-							<div class="list-label">
-								<div class="list-title">Accordion</div>
-								<div class="list-after"><i class="icon ion-ios-arrow-forward"></i></div>
-							</div>
-						</li>
-						<li class="list-item">
-							<div class="list-media">
-								<i class="icon ion-ios-arrow-down bg-blue"></i>
-							</div>
-							<div class="list-label">
-								<div class="list-title">Accordion</div>
-								<div class="list-after"><i class="icon ion-ios-arrow-forward"></i></div>
-							</div>
-						</li>
-						<li class="list-item">
-							<div class="list-media">
-								<i class="icon ion-ios-arrow-down bg-blue"></i>
-							</div>
-							<div class="list-label">
-								<div class="list-title">Accordion</div>
-								<div class="list-after"><i class="icon ion-ios-arrow-forward"></i></div>
-							</div>
-						</li>
-						<li class="list-item">
-							<div class="list-media">
-								<i class="icon ion-ios-arrow-down bg-blue"></i>
-							</div>
-							<div class="list-label">
-								<div class="list-title">Accordion</div>
-								<div class="list-after"><i class="icon ion-ios-arrow-forward"></i></div>
-							</div>
-						</li>
-						<li class="list-item">
-							<div class="list-media">
-								<i class="icon ion-ios-arrow-down bg-blue"></i>
-							</div>
-							<div class="list-label">
-								<div class="list-title">Accordion</div>
-								<div class="list-after"><i class="icon ion-ios-arrow-forward"></i></div>
-							</div>
-						</li>
-						<li class="list-item">
-							<div class="list-media">
-								<i class="icon ion-ios-arrow-down bg-blue"></i>
-							</div>
-							<div class="list-label">
-								<div class="list-title">Accordion</div>
-								<div class="list-after"><i class="icon ion-ios-arrow-forward"></i></div>
-							</div>
-						</li>
-						<li class="list-item">
-							<div class="list-media">
-								<i class="icon ion-ios-arrow-down bg-blue"></i>
-							</div>
-							<div class="list-label">
-								<div class="list-title">Accordion</div>
-								<div class="list-after"><i class="icon ion-ios-arrow-forward"></i></div>
-							</div>
-						</li>
-						<li class="list-item">
-							<div class="list-media">
-								<i class="icon ion-ios-arrow-down bg-blue"></i>
-							</div>
-							<div class="list-label">
-								<div class="list-title">Accordion</div>
-								<div class="list-after"><i class="icon ion-ios-arrow-forward"></i></div>
-							</div>
-						</li>
-						<li class="list-item">
-							<div class="list-media">
-								<i class="icon ion-ios-arrow-down bg-blue"></i>
-							</div>
-							<div class="list-label">
-								<div class="list-title">Accordion</div>
-								<div class="list-after"><i class="icon ion-ios-arrow-forward"></i></div>
-							</div>
-						</li>
+						{% if SChistory %}
+							{%for item in SChistory|reverse%}
+							<li class="list-item">
+								<div class="list-media">
+									<i class="icon ion-ios-arrow-down bg-blue"></i>
+								</div>
+								<form action="/view-skin-history" method="post" enctype="multipart/form-data" style="width:1000px;">
+									<button style="all:unset; width:1000px;">
+										<div class="list-label">
+											<div class="list-title"><strong>Top 1: </strong>{{item.topone}}</div>
+											<div class="list-after"><i class="icon ion-ios-arrow-forward"></i></div>
+											<div class="col" hidden>
+												<input id="itemtopone" name="itemtopone" value="{{item.topone}}">
+												<input id="itemtoptwo" name="itemtoptwo" value="{{item.toptwo}}">
+												<input id="itemtopthree" name="itemtopthree" value="{{item.topthree}}">
+												<input id="itemimgpath" name="itemimgpath" value="{{item.imguploadpath}}">
+												<input id="itemdate" name="itemdate" value="{{item.dateprediction|truncate(10, True, '', 0)}}">
+											</div>
+											<div>
+												{{item.dateprediction|truncate(10, True, '', 0)}}
+											</div>
+										</div>
+									</button>
+								</form>
+							</li>
+							{% endfor %}
+						{% endif %}
 					</ul>
 				</div>
 

@@ -1,7 +1,9 @@
 from flask import Blueprint, render_template, request
 from flask_login import login_required
 
-from .ml_models import skin, burn, chatbot, food
+from .ml_models import skin, burn, chatbot, food, process_image
+
+import requests
 
 views = Blueprint('views', __name__)
 
@@ -52,13 +54,40 @@ def submit_skin():
 		print("Image Path: ", img_path)
 		img.save(img_path)
 		print("- Sucessfully Saved Image to static folder -")
-		
+
+		# Store the image in a temporary variable to be passed into the docker
+		# Depending on the number of image(s) you wish to pass. If you wish to 
+		# pass more than on image, {'upload_file':open(img1,'rb'),'upload_file':open(img2,'rb)}
+		# in docker, requesting files will return a immutablemultidict. use .getlist('upload_file') which will return the files in a list
+		files = {'upload_file':open(img_path,'rb')}
+		print("file: ", files)
+
 		print("Model is now predicting image....")
-		top1,top2,top3 = skin.predict_label(img_path)
+		print("Passing image to docker....")
+		# Request post with the url link to the docker and attach the file
+		dockerresults = requests.post("http://127.0.0.1:5000/skin-condition-model",files=files)
+		# Resuls will be a string
+		print("from docker",dockerresults.text)
+
+		# split the top 3 results into an array
+		splittedresults = dockerresults.text.split(";")
+
+		print("Top 1 is: ", splittedresults[0])
+		print("Top 2 is: ", splittedresults[1])
+		print("Top 3 is: ", splittedresults[2])
+		#top1,top2,top3 = skin.predict_label(img_path)
 		print("- Model prediction completed. Displaying results now -")
 		print("Skin Cancer prediction Completed ================ ")
 
-	return render_template("models/skin-condition.html", prediction1 = top1, prediction2 = top2, prediction3 = top3, img_path = "/static/" + img.filename)
+	return render_template("models/skin-condition.html", prediction1 = splittedresults[0], prediction2 = splittedresults[1], prediction3 = splittedresults[2], img_path = "/static/" + img.filename)
+
+@views.route("/RequestModel")
+def obtainskinConditionModel():
+	return render_template("save-history.html")
+
+@views.route("/history-skin-condition")
+def loadhistoryskincondition():
+	return render_template("history-skin-condition.html")
 
 # Deborah's Part =====================================================
 

@@ -17,11 +17,13 @@ def create_app():
 
     from .views import views
     from .auth import auth
+    from .past_history import past_history
 
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
+    app.register_blueprint(past_history, url_prefix='/')
 
-    from .models import Users
+    from .models import Users, SkinConditionHistory
 
     with app.app_context():
         db.create_all()

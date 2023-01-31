@@ -75,7 +75,7 @@ def submit_skin():
 		splittedresults = dockerresults.text.split(";")
 
 		print("Top 1 is: ", splittedresults[0])
-		print("Top 2 is: ", splittedresults[1])
+		print("Top 2 is: ", splittedresults[1]) 
 		print("Top 3 is: ", splittedresults[2])
 		#top1,top2,top3 = skin.predict_label(img_path)
 		print("- Model prediction completed. Displaying results now -")

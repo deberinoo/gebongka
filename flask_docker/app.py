@@ -1,15 +1,16 @@
-from flask import Flask,request
+from flask import Flask, request
 
+from transformers import AutoModelForTokenClassification, AutoTokenizer, pipeline
 from keras.applications.imagenet_utils import preprocess_input
 from keras.models import load_model
 import keras.utils as image
-import numpy as np
 from PIL import Image
 import os
 
 app = Flask(__name__)
 
-# functions
+# ----- model functions -----
+
 def process_image(img):
     i = image.load_img(img, target_size=(128,128))
     i = image.img_to_array(i)
@@ -53,10 +54,43 @@ class skin:
 
         return sorteddic
 
+class chatbot:
+    def load_classifier():
+        label_names = ['B-COUGH', 'I-COUGH', 'B-BREATHLESSNESS', 'I-BREATHLESSNESS', 'B-DIZZINESS', 'I-DIZZINESS', 'B-HEADACHE', 'I-HEADACHE', 'B-CHILLS', 'I-CHILLS', 'B-CHEST_PAIN', 'I-CHEST_PAIN', 'B-BACK_PAIN', 'I-BACK_PAIN', 'B-MUSCLE_PAIN', 'I-MUSCLE_PAIN', 'B-JOINT_PAIN', 'I-JOINT_PAIN', 'B-NECK_PAIN', 'I-NECK_PAIN', 'B-STOMACH_PAIN', 'I-STOMACH_PAIN', 'O']
+        id2label = { i: label for i, label in enumerate(label_names) }
+        label2id = {v: k for k, v in id2label.items()}
+
+        model = AutoModelForTokenClassification.from_pretrained(
+            "",
+            num_labels=23,
+            id2label=id2label,
+            label2id=label2id,
+            ignore_mismatched_sizes=True
+        )
+        tokenizer = AutoTokenizer.from_pretrained("samrawal/bert-base-uncased_clinical-ner")
+
+        # instantiates a pipeline, which uses the model for inference
+
+        token_classifier = pipeline(
+            "token-classification", model=model, 
+            tokenizer=tokenizer,
+            aggregation_strategy="first",
+            device=0
+        )
+        
+        return token_classifier
+    
+    def predict_diagnosis(text):
+        token_classifier = chatbot.load_classifier()
+        return token_classifier(text)
+
+# ----- model routes -----
 
 @app.route("/")
 def hello_world():
     return 'Flask Dockerized'
+
+# Erika's Part =====================================================
 
 @app.route("/skin-condition-model", methods=["GET","POST"])
 def returnskinconditionmodel():
@@ -93,6 +127,15 @@ def returnskinconditionmodel():
         return results
     
     return "Error"
+
+# Deborah's Part =====================================================
+
+@app.route("/submit-diagnosis", methods = ['GET', 'POST'])
+def diagnose_symptoms():
+	if request.method == 'POST':
+		symptom_text = request.form['symptom']
+		result = chatbot.predict_diagnosis(symptom_text)
+	return result
 
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0')

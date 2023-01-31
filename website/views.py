@@ -1,12 +1,7 @@
 from flask import Blueprint, render_template, request
-from flask_login import login_user, login_required, logout_user, current_user
-from flask_bcrypt import Bcrypt
+from flask_login import login_required, current_user
 
-from .forms import LoginForm, RegisterForm
-from .models import Users
-from . import db
-
-from .ml_models import skin, burn, chatbot, food, process_image
+from .ml_models import skin, chatbot, food
 
 import requests
 
@@ -104,10 +99,12 @@ def chatbot_diagnosis():
 @views.route("/submit-diagnosis", methods = ['GET', 'POST'])
 def diagnose_symptoms():
 	if request.method == 'POST':
-		symptom_text = request.form['symptom']
-		print(symptom_text)
-		print(chatbot.predict_diagnosis(symptom_text))
-	return render_template("models/chatbot-diagnosis.html")
+		symptom = request.form['symptom']
+		result = chatbot.predict_diagnosis(symptom)[0]['entity_group']
+		result = result.replace("_", " ").capitalize()
+		print(result)
+
+	return render_template("models/chatbot-diagnosis.html", symptom=symptom, result=result)
 
 # Linfeng's Part ===============================================
 

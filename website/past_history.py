@@ -1,9 +1,8 @@
-from flask import Flask, Blueprint, render_template, flash, redirect, url_for, request
-from flask_login import login_user, login_required, logout_user, current_user
+from flask import Flask, Blueprint, render_template, request
+from flask_login import login_required, current_user
 from flask_bcrypt import Bcrypt
 
 from .models import SkinConditionHistory
-from . import db
 
 past_history = Blueprint("past_history", __name__)
 

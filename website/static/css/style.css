@@ -212,6 +212,8 @@ textarea {
 
 .form-fill input {
     background: #eee;
+    outline: none;
+    margin: 0 10px;
 }
 
 .form-fill .custom-select {
@@ -2534,6 +2536,13 @@ margin-bottom: -35px;
     padding: 15px;
     padding-top: 4px;
     background: #fff;
+}
+
+.fabutton {
+    background: none;
+    padding: 0px;
+    border: none;
+    outline: none;
 }
 
 /* coming soon */

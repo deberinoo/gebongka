@@ -5,6 +5,16 @@ from keras.models import load_model
 import keras.utils as image
 import numpy as np
 
+from flask import Flask, Blueprint, render_template, flash, redirect, url_for
+from flask_login import login_user, login_required, logout_user, current_user
+from flask_bcrypt import Bcrypt
+
+from .forms import LoginForm, RegisterForm
+from .models import Users, SkinConditionHistory
+from . import db
+
+from datetime import datetime
+
 def process_image(img_path):
     i = image.load_img(img_path, target_size=(128,128))
     i = image.img_to_array(i)
@@ -51,6 +61,12 @@ class skin:
         print("DICTSORT", sorteddic)
 
         return sorteddic
+
+    def create_history(img_path, top1, top2, top3,passuser):
+        new_skinhistory = SkinConditionHistory(username=passuser, topone = top1, toptwo = top2, topthree = top3, imguploadpath = img_path, dateprediction = str(datetime.now()))
+        db.session.add(new_skinhistory)
+        db.session.commit()
+
 
 class burn:
     def predict_label(img_path):

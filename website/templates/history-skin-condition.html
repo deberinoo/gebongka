@@ -24,7 +24,7 @@
 			<div class="intro-content">
 				<img src="static/images/intro.jpg" alt="image-demo">
 				<div class="caption">
-					<h4 class="text-white mb-1">Skin Condition Identifier</h4>
+					<h4 class="text-white mb-1">Prediction was made on {{passdate}}</h4>
 				</div>
 			</div>
 		</div>
@@ -35,34 +35,13 @@
 	<!-- end separator -->
 
   <div class="container">
-    <div class="row">      
-      <div class="col-12">
-        <form action="/submit-skin" method="post" enctype="multipart/form-data">
-          <div class="form-group">
-            <label class="control-label col-4" for="pwd">Upload Your Image:</label>
-            <div class="col">
-              <div class="row">
-                <input type="file" class="form-control" name="my_image" id="pwd" style="width: 375px;">
-                <button type="submit" class="btn btn-success">Submit</button>
-              </div>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
     <div class="row d-flex justify-content-center">
       <div class="img">
-        {% if prediction1 %}
-        <img src="../{{img_path}}" alt="image-upload">
-        {% else %}
-        <img src="static/images/file-upload.png" alt="image-upload" style="width: 300px; height: 300px;">
-        {% endif %}
+        <img src="static/{{passimgpath}}" alt="image-upload">
       </div>
     </div>
   </div>
-
 </div>
-{% if prediction1 %}
 <div class="row d-flex justify-content-center">
   <h1>Top 3 Results</h1>
 </div>
@@ -74,7 +53,7 @@
     <div class="swiper-button-next"></div>
     <div class="swiper-wrapper">
       <div class="swiper-slide">
-        {% if prediction1 == "Actinic Keratosis" %}
+        {% if passtopone == "Actinic Keratosis" %}
         <div class="cards">
           <div class="container">
             <div class="card card-image card-outline">
@@ -134,7 +113,7 @@
             </div>
           </div>
         </div>
-        {% elif prediction1 == "basal cell carcinoma"%}
+        {% elif passtopone == "basal cell carcinoma"%}
         <div class="cards">
           <div class="container">
             <div class="card card-image card-outline">
@@ -200,7 +179,7 @@
             </div>
           </div>
         </div>
-        {% elif prediction1 == "dermatofibroma"%}
+        {% elif passtopone == "dermatofibroma"%}
         <div class="cards">
           <div class="container">
             <div class="card card-image card-outline">
@@ -251,7 +230,7 @@
             </div>
           </div>
         </div>
-        {% elif prediction1 == "melanoma"%}
+        {% elif passtopone == "melanoma"%}
         <div class="cards">
           <div class="container">
             <div class="card card-image card-outline">
@@ -320,7 +299,7 @@
             </div>
           </div>
         </div>
-        {% elif prediction1 == "nevus"%}
+        {% elif passtopone == "nevus"%}
         <div class="cards">
           <div class="container">
             <div class="card card-image card-outline">
@@ -445,7 +424,7 @@
         {% endif %}
       </div>
       <div class="swiper-slide">
-        {% if prediction2 == "Actinic Keratosis" %}
+        {% if passtoptwo == "Actinic Keratosis" %}
         <div class="cards">
           <div class="container">
             <div class="card card-image card-outline">
@@ -505,7 +484,7 @@
             </div>
           </div>
         </div>
-        {% elif prediction2 == "basal cell carcinoma"%}
+        {% elif passtoptwo == "basal cell carcinoma"%}
         <div class="cards">
           <div class="container">
             <div class="card card-image card-outline">
@@ -571,7 +550,7 @@
             </div>
           </div>
         </div>
-        {% elif prediction2 == "dermatofibroma"%}
+        {% elif passtoptwo == "dermatofibroma"%}
         <div class="cards">
           <div class="container">
             <div class="card card-image card-outline">
@@ -622,7 +601,7 @@
             </div>
           </div>
         </div>
-        {% elif prediction2 == "melanoma"%}
+        {% elif passtoptwo == "melanoma"%}
         <div class="cards">
           <div class="container">
             <div class="card card-image card-outline">
@@ -691,7 +670,7 @@
             </div>
           </div>
         </div>
-        {% elif prediction2 == "nevus"%}
+        {% elif passtoptwo == "nevus"%}
         <div class="cards">
           <div class="container">
             <div class="card card-image card-outline">
@@ -816,7 +795,7 @@
         {% endif %}
       </div>
       <div class="swiper-slide">
-        {% if prediction3 == "Actinic Keratosis" %}
+        {% if passtopthree == "Actinic Keratosis" %}
         <div class="cards">
           <div class="container">
             <div class="card card-image card-outline">
@@ -876,7 +855,7 @@
             </div>
           </div>
         </div>
-        {% elif prediction3 == "basal cell carcinoma"%}
+        {% elif passtopthree == "basal cell carcinoma"%}
         <div class="cards">
           <div class="container">
             <div class="card card-image card-outline">
@@ -942,7 +921,7 @@
             </div>
           </div>
         </div>
-        {% elif prediction3 == "dermatofibroma"%}
+        {% elif passtopthree == "dermatofibroma"%}
         <div class="cards">
           <div class="container">
             <div class="card card-image card-outline">
@@ -993,7 +972,7 @@
             </div>
           </div>
         </div>
-        {% elif prediction3 == "melanoma"%}
+        {% elif passtopthree == "melanoma"%}
         <div class="cards">
           <div class="container">
             <div class="card card-image card-outline">
@@ -1062,7 +1041,7 @@
             </div>
           </div>
         </div>
-        {% elif prediction3 == "nevus"%}
+        {% elif passtopthree == "nevus"%}
         <div class="cards">
           <div class="container">
             <div class="card card-image card-outline">
@@ -1190,7 +1169,6 @@
   </div>
 </div>
 
-{% endif %}
 
 
 <div class="separator-large"></div>

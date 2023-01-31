@@ -6,177 +6,321 @@
 <!-- pages wrapper -->
 <div class="pages-wrapper">
 
-	<!-- separator -->
-	<div class="separator-large"></div>
-	<!-- end separator -->
-	
-	<!-- profile -->
-	<div class="profile">
-		<div class="container">
-			<div class="row">
-				<div class="col-4 align-self-center">
-					<div class="content statistic text-right">
-						<h5>500</h5>
-						<span class="text-small">Profile Posts</span>
-					</div>
-				</div>
-				<div class="col-4">
-					<div class="header-profile">
-						<div class="container">
-							<img src="static/images/square6.jpg" alt="image-demo">
-						</div>
-					</div>
-				</div>
-				<div class="col-4 align-self-center">
-					<div class="content statistic text-left">
-						<h5>48K</h5>
-						<span class="text-small">Followers</span>
-					</div>
-				</div>
-			</div>
+  <!-- separator -->
+  <div class="separator-large"></div>
+  <!-- end separator -->
+  
+  <!-- profile -->
+  <div class="profile">
+    <div class="container">
+      <div class="row">
+        <div class="col-4 align-self-center">
+        </div>
+        <div class="col-4">
+          <div class="header-profile">
+            <div class="container">
+              <img src="static/images/square6.jpg" alt="image-demo">
+            </div>
+          </div>
+        </div>
+        <div class="col-4 align-self-center">
+        </div>
+      </div>
 
-			<div class="profile-title text-center">
-				<h4>Kiran Graham</h4>
-				<span class="text-small">Advanced</span>
-			</div>
+      <div class="profile-title text-center">
+        <h4>{{current_user.username}}</h4>
+      </div>
 
-			<div class="profile-button">
-				<div class="row">
-					<div class="col-6">
-						<a href="#" class="button">Follow</a>
-					</div>
-					<div class="col-6">
-						<a href="#" class="button button-outline">Message</a>
-					</div>
-				</div>
-			</div>
+      <!-- separator -->
+      <div class="separator-large"></div>
+      <!-- end separator -->
 
-			<!-- separator -->
-			<div class="separator-large"></div>
-			<!-- end separator -->
+      <ul class="nav nav-fill nav-default" id="myTab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" id="ports-tab" data-toggle="tab" href="#ports" role="tab" aria-controls="ports" aria-selected="true">Past History</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="collection-tab" data-toggle="tab" href="#collection" role="tab" aria-controls="collection" aria-selected="false">Collection</a>
+        </li>
+      </ul>
 
-			<ul class="nav nav-fill nav-default" id="myTab" role="tablist">
-				<li class="nav-item">
-					<a class="nav-link active" id="ports-tab" data-toggle="tab" href="#ports" role="tab" aria-controls="ports" aria-selected="true">Posts</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" id="collection-tab" data-toggle="tab" href="#collection" role="tab" aria-controls="collection" aria-selected="false">Collection</a>
-				</li>
-			</ul>
+      <!-- separator -->
+      <div class="separator-large"></div>
+      <!-- end separator -->
 
-			<!-- separator -->
-			<div class="separator-large"></div>
-			<!-- end separator -->
-
-			<div class="tab-content">
-				<div class="tab-pane show active" id="ports" role="tabpanel" aria-labelledby="ports-tab">
-					<div class="row">
-						<div class="col-6">
-							<img src="static/images/vertical1.jpg" alt="image-demo">
-							<div class="img-caption">
-								<h5 class="mb-1">Watermelon Juice</h5>
-								<span class="text-small">Feb 05, 2020</span>
-							</div>
-						</div>
-						<div class="col-6">
-							<img src="static/images/vertical2.jpg" alt="image-demo">
-							<div class="img-caption">
-								<h5 class="mb-1">Red Apple</h5>
-								<span class="text-small">Feb 05, 2020</span>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-6">
-							<img src="static/images/vertical3.jpg" alt="image-demo">
-							<div class="img-caption">
-								<h5 class="mb-1">Banana slices</h5>
-								<span class="text-small">Feb 05, 2020</span>
-							</div>
-						</div>
-						<div class="col-6">
-							<img src="static/images/vertical4.jpg" alt="image-demo">
-							<div class="img-caption">
-								<h5 class="mb-1">Avocado Pattern</h5>
-								<span class="text-small">Feb 05, 2020</span>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-6">
-							<img src="static/images/vertical5.jpg" alt="image-demo">
-							<div class="img-caption">
-								<h5 class="mb-1">Pineapple</h5>
-								<span class="text-small">Feb 05, 2020</span>
-							</div>
-						</div>
-						<div class="col-6">
-							<img src="static/images/vertical6.jpg" alt="image-demo">
-							<div class="img-caption">
-								<h5 class="mb-1">Bananas</h5>
-								<span class="text-small">Feb 05, 2020</span>
+	  <div class="tab-content">
+		<div class="tab-pane show active" id="ports" role="tabpanel" aria-labelledby="ports-tab">
+			<!-- pages wrapper -->
+			<div class="pages-wrapper">
+				
+				<div class="intro-app">
+					<div class="container">
+						<div class="intro-content">
+							<img src="static/images/intro.jpg" alt="image-demo">
+							<div class="caption">
+								<h4 class="text-white mb-1">Your past history</h4>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="tab-pane" id="collection" role="tabpanel" aria-labelledby="collection-tab">
-					<div class="collection">
-						<a href="#">
-							<div class="row">
-								<div class="col-12">
-									<img src="static/images/horizontal8.jpg" alt="image-demo">
+
+				<!-- separator -->
+				<div class="separator-large"></div>
+				<!-- end separator -->
+
+				<!-- section title -->
+				<div class="section-title">
+					<h3><strong>Skin Condition Identifier</strong></h3>
+					<span class="section-subtitle">Here are your previous predictions...</span>
+				</div>
+				<!-- end section title -->
+
+				<div class="list-view list-separate-two list-colored">
+					<ul style="height:200px; overflow:hidden; overflow-y:scroll;">
+						{% if SChistory %}
+							{%for item in SChistory|reverse%}
+							<li class="list-item">
+								<div class="list-media">
+									<i class="icon ion-ios-arrow-down bg-blue"></i>
 								</div>
-							</div>
-							<div class="row">
-								<div class="col-4">
-									<img src="static/images/square12.jpg" alt="image-demo">
-								</div>
-								<div class="col-4">
-									<img src="static/images/square11.jpg" alt="image-demo">
-								</div>
-								<div class="col-4">
-									<img src="static/images/square10.jpg" alt="image-demo">
-								</div>
-							</div>
-							<div class="img-caption text-center">
-								<h5 class="mb-1">I Like Your Work</h5>
-								<span class="text-small">120 Photos</span>
-							</div>
-						</a>
-					</div>
-
-					<!-- separator -->
-					<div class="separator-large"></div>
-					<!-- end separator -->
-
-					<div class="collection">
-						<div class="row">
-							<div class="col-12">
-								<img src="static/images/horizontal9.jpg" alt="image-demo">
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-4">
-								<img src="static/images/square3.jpg" alt="image-demo">
-							</div>
-							<div class="col-4">
-								<img src="static/images/square4.jpg" alt="image-demo">
-							</div>
-							<div class="col-4">
-								<img src="static/images/square5.jpg" alt="image-demo">
-							</div>
-						</div>
-						<div class="img-caption text-center">
-							<h5 class="mb-1">healthy fruits</h5>
-							<span class="text-small">120 Photos</span>
-						</div>
-					</div>
+								<form action="/view-skin-history" method="post" enctype="multipart/form-data" style="width:1000px;">
+									<button style="all:unset; width:1000px;">
+										<div class="list-label">
+											<div class="list-title"><strong>Top 1: </strong>{{item.topone}}</div>
+											<div class="list-after"><i class="icon ion-ios-arrow-forward"></i></div>
+											<div class="col" hidden>
+												<input id="itemtopone" name="itemtopone" value="{{item.topone}}">
+												<input id="itemtoptwo" name="itemtoptwo" value="{{item.toptwo}}">
+												<input id="itemtopthree" name="itemtopthree" value="{{item.topthree}}">
+												<input id="itemimgpath" name="itemimgpath" value="{{item.imguploadpath}}">
+												<input id="itemdate" name="itemdate" value="{{item.dateprediction|truncate(10, True, '', 0)}}">
+											</div>
+											<div>
+												{{item.dateprediction|truncate(10, True, '', 0)}}
+											</div>
+										</div>
+									</button>
+								</form>
+							</li>
+							{% endfor %}
+						{% endif %}
+					</ul>
 				</div>
-			</div>
 
+				<!-- separator -->
+				<div class="separator-large"></div>
+				<!-- end separator -->
+
+				<!-- section title -->
+				<div class="section-title">
+					<h3><strong>Burn Grading</strong></h3>
+					<span class="section-subtitle">Here are your previous predictions...</span>
+				</div>
+				<!-- end section title -->
+
+				<div class="list-view list-separate-two list-colored">
+					<ul style="height:200px; overflow:hidden; overflow-y:scroll;">
+						<li class="list-item">
+							<div class="list-media">
+								<i class="icon ion-ios-star-half bg-red"></i>
+							</div>
+							<div class="list-label">
+								<div class="list-title">Badges</div>
+								<div class="list-after"><i class="icon ion-ios-arrow-forward"></i></div>
+							</div>
+						</li>
+						<li class="list-item">
+							<div class="list-media">
+								<i class="icon ion-ios-star-half bg-red"></i>
+							</div>
+							<div class="list-label">
+								<div class="list-title">Badges</div>
+								<div class="list-after"><i class="icon ion-ios-arrow-forward"></i></div>
+							</div>
+						</li>
+						<li class="list-item">
+							<div class="list-media">
+								<i class="icon ion-ios-star-half bg-red"></i>
+							</div>
+							<div class="list-label">
+								<div class="list-title">Badges</div>
+								<div class="list-after"><i class="icon ion-ios-arrow-forward"></i></div>
+							</div>
+						</li>
+						<li class="list-item">
+							<div class="list-media">
+								<i class="icon ion-ios-star-half bg-red"></i>
+							</div>
+							<div class="list-label">
+								<div class="list-title">Badges</div>
+								<div class="list-after"><i class="icon ion-ios-arrow-forward"></i></div>
+							</div>
+						</li>
+						<li class="list-item">
+							<div class="list-media">
+								<i class="icon ion-ios-star-half bg-red"></i>
+							</div>
+							<div class="list-label">
+								<div class="list-title">Badges</div>
+								<div class="list-after"><i class="icon ion-ios-arrow-forward"></i></div>
+							</div>
+						</li>
+					</ul>
+				</div>
+
+				<!-- separator -->
+				<div class="separator-large"></div>
+				<!-- end separator -->
+
+				<!-- section title -->
+				<div class="section-title">
+					<h3><strong>Chatbot Diagnosis</strong></h3>
+					<span class="section-subtitle">Here are your previous predictions...</span>
+				</div>
+				<!-- end section title -->
+
+				<div class="list-view list-separate-two list-colored">
+					<ul style="height:200px; overflow:hidden; overflow-y:scroll;">
+						<li class="list-item">
+							<div class="list-media">
+								<i class="icon ion-ios-switch bg-green"></i>
+							</div>
+							<div class="list-label">
+								<div class="list-title">Button</div>
+								<div class="list-after"><i class="icon ion-ios-arrow-forward"></i></div>
+							</div>
+						</li>
+						<li class="list-item">
+							<div class="list-media">
+								<i class="icon ion-ios-switch bg-green"></i>
+							</div>
+							<div class="list-label">
+								<div class="list-title">Button</div>
+								<div class="list-after"><i class="icon ion-ios-arrow-forward"></i></div>
+							</div>
+						</li>
+						<li class="list-item">
+							<div class="list-media">
+								<i class="icon ion-ios-switch bg-green"></i>
+							</div>
+							<div class="list-label">
+								<div class="list-title">Button</div>
+								<div class="list-after"><i class="icon ion-ios-arrow-forward"></i></div>
+							</div>
+						</li>
+						<li class="list-item">
+							<div class="list-media">
+								<i class="icon ion-ios-switch bg-green"></i>
+							</div>
+							<div class="list-label">
+								<div class="list-title">Button</div>
+								<div class="list-after"><i class="icon ion-ios-arrow-forward"></i></div>
+							</div>
+						</li>
+						<li class="list-item">
+							<div class="list-media">
+								<i class="icon ion-ios-switch bg-green"></i>
+							</div>
+							<div class="list-label">
+								<div class="list-title">Button</div>
+								<div class="list-after"><i class="icon ion-ios-arrow-forward"></i></div>
+							</div>
+						</li>
+						<li class="list-item">
+							<div class="list-media">
+								<i class="icon ion-ios-switch bg-green"></i>
+							</div>
+							<div class="list-label">
+								<div class="list-title">Button</div>
+								<div class="list-after"><i class="icon ion-ios-arrow-forward"></i></div>
+							</div>
+						</li>
+					</ul>
+				</div>
+
+				<!-- separator -->
+				<div class="separator-large"></div>
+				<!-- end separator -->
+
+				<!-- section title -->
+				<div class="section-title">
+					<h3><strong>Nutrition Analyser</strong></h3>
+					<span class="section-subtitle">Here are your previous predictions...</span>
+				</div>
+				<!-- end section title -->
+
+				<div class="list-view list-separate-two list-colored">
+					<ul style="height:200px; overflow:hidden; overflow-y:scroll;">
+						<li class="list-item">
+							<div class="list-media">
+								<i class="icon ion-ios-switch bg-yellow"></i>
+							</div>
+							<div class="list-label">
+								<div class="list-title">Button</div>
+								<div class="list-after"><i class="icon ion-ios-arrow-forward"></i></div>
+							</div>
+						</li>
+						<li class="list-item">
+							<div class="list-media">
+								<i class="icon ion-ios-switch bg-yellow"></i>
+							</div>
+							<div class="list-label">
+								<div class="list-title">Button</div>
+								<div class="list-after"><i class="icon ion-ios-arrow-forward"></i></div>
+							</div>
+						</li>
+						<li class="list-item">
+							<div class="list-media">
+								<i class="icon ion-ios-switch bg-yellow"></i>
+							</div>
+							<div class="list-label">
+								<div class="list-title">Button</div>
+								<div class="list-after"><i class="icon ion-ios-arrow-forward"></i></div>
+							</div>
+						</li>
+						<li class="list-item">
+							<div class="list-media">
+								<i class="icon ion-ios-switch bg-yellow"></i>
+							</div>
+							<div class="list-label">
+								<div class="list-title">Button</div>
+								<div class="list-after"><i class="icon ion-ios-arrow-forward"></i></div>
+							</div>
+						</li>
+						<li class="list-item">
+							<div class="list-media">
+								<i class="icon ion-ios-switch bg-yellow"></i>
+							</div>
+							<div class="list-label">
+								<div class="list-title">Button</div>
+								<div class="list-after"><i class="icon ion-ios-arrow-forward"></i></div>
+							</div>
+						</li>
+						<li class="list-item">
+							<div class="list-media">
+								<i class="icon ion-ios-switch bg-yellow"></i>
+							</div>
+							<div class="list-label">
+								<div class="list-title">Button</div>
+								<div class="list-after"><i class="icon ion-ios-arrow-forward"></i></div>
+							</div>
+						</li>
+					</ul>
+				</div>
+
+
+			</div>
+			<!-- end pages wrapper -->
+		</div>
+		<div class="tab-pane" id="collection" role="tabpanel" aria-labelledby="collection-tab">
+			<div class="collection">
+			</div>
 		</div>
 	</div>
-	<!-- end profile -->
+
+    </div>
+  </div>
+  <!-- end profile -->
 
 </div>
 <!-- end pages wrapper -->

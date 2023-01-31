@@ -23,6 +23,7 @@ def features():
 @login_required
 def profile():
     return render_template("profile.html")
+
 # ----- model routes -----
 
 # Erika's Part =====================================================
@@ -64,6 +65,14 @@ def submit_skin():
 
 @views.route("/chatbot-diagnosis", methods=['GET', 'POST'])
 def chatbot_diagnosis():
+	return render_template("models/chatbot-diagnosis.html")
+
+@views.route("/submit-diagnosis", methods = ['GET', 'POST'])
+def diagnose_symptoms():
+	if request.method == 'POST':
+		symptom_text = request.form['symptom']
+		print(symptom_text)
+		print(chatbot.predict_diagnosis(symptom_text))
 	return render_template("models/chatbot-diagnosis.html")
 
 # Linfeng's Part ===============================================

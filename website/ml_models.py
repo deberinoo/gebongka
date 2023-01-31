@@ -86,8 +86,8 @@ class chatbot:
         id2label = { i: label for i, label in enumerate(label_names) }
         label2id = {v: k for k, v in id2label.items()}
 
-        my_model = AutoModelForTokenClassification.from_pretrained(
-            "chatbot",
+        model = AutoModelForTokenClassification.from_pretrained(
+            "website/model/chatbot",
             num_labels=23,
             id2label=id2label,
             label2id=label2id,
@@ -98,7 +98,7 @@ class chatbot:
         # instantiates a pipeline, which uses the model for inference
 
         token_classifier = pipeline(
-            "token-classification", model=my_model, 
+            "token-classification", model=model, 
             tokenizer=tokenizer,
             aggregation_strategy="first",
             device=0
@@ -109,9 +109,10 @@ class chatbot:
     def predict_diagnosis(text):
         token_classifier = chatbot.load_classifier()
         return token_classifier(text)
-
+    
 class food:
     def predict_label(img_path):
+
         dic = {0 : 'Chicken Wings', 1: 'Fish and Chips', 2: 'French Fries', 3: 'French Toast', 4: 'Garlic Bread', 5: 'Macaroni and Cheese', 6: 'Pizza',  7: 'Pork Chop', 8: 'Spaghetti Carbonara', 9: 'Steak'}
 
         model = load_model('website/model/Food_Model.h5')

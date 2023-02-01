@@ -84,6 +84,39 @@ class chatbot:
         token_classifier = chatbot.load_classifier()
         return token_classifier(text)
 
+# Gerald's Part ============================================
+class burn:
+    def predict_label(img_path):
+        model = load_model('BurnModel.h5')
+        model.make_predict_function()
+
+        pr = model.predict(img_path)
+        predResult = burn.Return_Prediction(pr)
+
+        print(pr)
+        print("result", predResult)
+        return predResult
+
+    def Return_Prediction(pred_array):
+        HighestValue = -100
+        burnclass = ""
+        index = 0
+        
+        for arrayValue in pred_array[0]: 
+            print("THis is index ", index)
+            print("THis is Value ", arrayValue)
+            if arrayValue > HighestValue:
+                HighestValue = arrayValue
+                if index == 0:
+                    burnclass = "This is First degree burn"
+                elif index == 1:
+                    burnclass = "This is Second degree burn"  
+                else:
+                    burnclass = "This is Third degree burn"
+            index+=1
+        return burnclass
+
+
 # ----- model routes -----
 
 @app.route("/")
@@ -136,6 +169,39 @@ def diagnose_symptoms():
 		symptom_text = request.form['symptom']
 		result = chatbot.predict_diagnosis(symptom_text)
 	return result
+
+# Gerald's Part ========================================================
+@app.route("/burn-grading-model", methods=["GET","POST"])
+def returnBurnGradingModel():
+    print("Im about to fo to POST ")
+    # Use POST and GET method to process and pass results to gebongka
+    if request.method == "POST":
+        print("Burn Grading model prediction ongoing ================ ")
+
+        body = request.files
+        print("body:", body)
+        print("body list:", body.getlist("upload_file"))
+        print("body list file:", body.getlist("upload_file")[0])
+
+        imgfrombody2 = Image.open(body.getlist("upload_file")[0])
+        imgfrombody2.save("burn-grading.png")
+
+        print("Saving image to static folder....")
+        img_path = "burn-grading.png"
+        print("Image Path: ", img_path)
+        print("- Sucessfully Saved Image to static folder -")
+
+        topBurn = burn.predict_label(process_image(img_path))
+        print("- Model prediction completed. Displaying results now -")
+        print("Burn Grading Model prediction Completed ================ ")
+
+        # Delete image 
+        os.remove("burn-grading.png")
+
+        results = topBurn
+        return results
+    
+    return "Error"
 
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0')

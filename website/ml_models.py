@@ -67,7 +67,7 @@ class burn:
         model = load_model('website/model/BurnModel.h5')
         model.make_predict_function()
 
-        pr = model.predict(process_image(img_path))
+        pr = model.predict(img_path)
         predResult = burn.Return_Prediction(pr)
 
         print(pr)

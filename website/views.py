@@ -157,4 +157,4 @@ def grade_burn():
 
 		# print("This is P ", p)
 
-	return render_template("models/burn-grading.html", prediction = dockres, img_path = "/static/" + imgFileName)
+	return render_template("models/burn-grading.html", prediction = dockres.text, img_path = "/static/" + imgFileName)

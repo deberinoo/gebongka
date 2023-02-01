@@ -12,10 +12,12 @@ app = Flask(__name__)
 # ----- model functions -----
 
 def process_image(img):
+    print("This is process image part: ", img)
     i = image.load_img(img, target_size=(128,128))
     i = image.img_to_array(i)
     i = i.reshape(1, 128,128,3)
     i = preprocess_input(i)
+    print("Output I: ", i)
     return i
     
 class skin:
@@ -120,10 +122,11 @@ class chatbot:
 # Gerald's Part ============================================
 class burn:
     def predict_label(img_path):
+        print("This is Image path: ", img_path)
         model = load_model('BurnModel.h5')
-        model.make_predict_function()
 
         pr = model.predict(img_path)
+        print("This is Image path2: ", img_path)
         predResult = burn.Return_Prediction(pr)
 
         print(pr)
@@ -261,8 +264,10 @@ def returnBurnGradingModel():
         img_path = "burn-grading.png"
         print("Image Path: ", img_path)
         print("- Sucessfully Saved Image to static folder -")
+        print("BRUH")
 
         topBurn = burn.predict_label(process_image(img_path))
+        print("This is Top burn ", topBurn)
         print("- Model prediction completed. Displaying results now -")
         print("Burn Grading Model prediction Completed ================ ")
 

@@ -57,19 +57,21 @@ class burn:
         model = load_model('website/model/BurnModel.h5')
         model.make_predict_function()
 
-        p = model.predict(process_image(img_path))
-        predResult = burn.Return_Prediction(p)
+        pr = model.predict(process_image(img_path))
+        predResult = burn.Return_Prediction(pr)
 
-        print(p)
+        print(pr)
         print("result", predResult)
         return predResult
 
     def Return_Prediction(pred_array):
-        HighestValue = 0
+        HighestValue = -100
         burnclass = ""
         index = 0
+        
         for arrayValue in pred_array[0]: 
-            index+=1
+            print("THis is index ", index)
+            print("THis is Value ", arrayValue)
             if arrayValue > HighestValue:
                 HighestValue = arrayValue
                 if index == 0:
@@ -78,6 +80,7 @@ class burn:
                     burnclass = "This is Second degree burn"  
                 else:
                     burnclass = "This is Third degree burn"
+            index+=1
         return burnclass
 
 class chatbot:

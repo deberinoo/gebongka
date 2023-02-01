@@ -128,14 +128,12 @@ class chatbot:
 
 class food:
     def predict_label(img_path):
-        dic = {0 : 'Chicken Wings', 1: 'Fish and Chips', 2: 'French Fries', 3: 'French Toast', 4: 'Garlic Bread', 5: 'Macaroni and Cheese', 6: 'Pizza',  7: 'Pork Chop', 8: 'Spaghetti Carbonara', 9: 'Steak'}
+        classlist = ['Chicken Wings','Fish and Chips','French Fries','French Toast','Garlic Bread','Macaroni and Cheese','Pizza','Pork Chop','Spaghetti Carbonara','Steak']
 
         model = load_model('website/model/Food_Model.h5')
-        model.make_predict_function()
+        print("Call make_prediction_function()")
+        #model.make_predict_function()
 
         p = model.predict(process_image(img_path))
-
-        print(p)
-        print(p[0].max())
-        print(dic[np.argmax(p[0])])
-        return dic[np.argmax(p[0])]
+        print("Original Array: ", p)
+        return classlist[p]

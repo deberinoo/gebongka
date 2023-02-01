@@ -20,9 +20,35 @@
   <!-- end separator -->
 
   <div class="container">
+    <div class="row d-flex justify-content-center">
+      <div class="img">
+        <img src="{{url_for('views.video_feed')}}" height="300px" alt="video-demo">
+      </div>
+    </div>
+    <div class="row d-flex justify-content-center">
+    <form action="/submit-nutrition-capture" method="post" enctype="multipart/form-data" class="mr-5">
+      <div class="form-group">
+        <div class="col">
+          <div class="row">
+            <input type="submit" class="btn btn-warning" value="Capture" name="click"/>
+          </div>
+        </div>
+      </div>
+    </form>
+    <form action="/submit-nutrition-capture-predict" method="post" enctype="multipart/form-data" class="row d-flex justify-content-center">
+      <div class="form-group">
+        <div class="col">
+          <div class="row">
+            <input type="submit" class="btn btn-success" value="Submit"/>
+            <input type="hidden" class="btn btn-success" value="{{img_link}}" name="image_path"/>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
     <div class="row">
       <div class="col-12">
-        <form action="/submit-nutrition" method="post" enctype="multipart/form-data">
+        <form action="/submit-nutrition-upload" method="post" enctype="multipart/form-data">
           <div class="form-group">
             <label class="control-label col-4" for="pwd">Upload Your Image:</label>
             <div class="col">
@@ -56,8 +82,6 @@
 
 <div class="carousel-slider">
   <div class="swiper-container swiper-navigation">
-    <div class="swiper-button-prev"></div>
-    <div class="swiper-button-next"></div>
     <div class="swiper-wrapper">
       <div class="swiper-slide">
         <div class="cards">
@@ -105,6 +129,402 @@
                 <h5 class="card-title card-title-small">Calories</h5>
                 <p class="card-text">
                   376
+                </p>
+              </div>
+              {% elif prediction == "Chicken Wings" %}
+              <div class="card-body">
+                <h5 class="card-title">Chicken Wings</h5>
+                <br>
+                <h5 class="card-title card-title-small">Serving</h5>
+                <p class="card-text">
+                  1 piece
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Fats(g)</h5>
+                <p class="card-text">
+                  6.5
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Protein(g)</h5>
+                <p class="card-text">
+                  4.5
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Sodium(mg)</h5>
+                <p class="card-text">
+                  105
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Cholesterol(mg)</h5>
+                <p class="card-text">
+                  22
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Carbohydrates(g)</h5>
+                <p class="card-text">
+                  2.6
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Sugars(g)</h5>
+                <p class="card-text">
+                  0.1
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Calories</h5>
+                <p class="card-text">
+                  88
+                </p>
+              </div>
+              {% elif prediction == "Fish and Chips" %}
+              <div class="card-body">
+                <h5 class="card-title">Fish and Chips</h5>
+                <br>
+                <h5 class="card-title card-title-small">Serving</h5>
+                <p class="card-text">
+                  1 serving
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Fats(g)</h5>
+                <p class="card-text">
+                  26
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Protein(g)</h5>
+                <p class="card-text">
+                  43
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Sodium(mg)</h5>
+                <p class="card-text">
+                  1403
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Cholesterol(mg)</h5>
+                <p class="card-text">
+                  148
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Carbohydrates(g)</h5>
+                <p class="card-text">
+                  71
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Sugars(g)</h5>
+                <p class="card-text">
+                  2
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Calories</h5>
+                <p class="card-text">
+                  688
+                </p>
+              </div>
+              {% elif prediction == "French Fries" %}
+              <div class="card-body">
+                <h5 class="card-title">French Fries</h5>
+                <br>
+                <h5 class="card-title card-title-small">Serving</h5>
+                <p class="card-text">
+                  1 serving
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Fats(g)</h5>
+                <p class="card-text">
+                  17
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Protein(g)</h5>
+                <p class="card-text">
+                  4
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Sodium(mg)</h5>
+                <p class="card-text">
+                  246
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Cholesterol(mg)</h5>
+                <p class="card-text">
+                  0
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Carbohydrates(g)</h5>
+                <p class="card-text">
+                  48
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Sugars(g)</h5>
+                <p class="card-text">
+                  0.4
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Calories</h5>
+                <p class="card-text">
+                  365
+                </p>
+              </div>
+              {% elif prediction == "French Toast" %}
+              <div class="card-body">
+                <h5 class="card-title">French Toast</h5>
+                <br>
+                <h5 class="card-title card-title-small">Serving</h5>
+                <p class="card-text">
+                  1 cup
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Fats(g)</h5>
+                <p class="card-text">
+                  29
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Protein(g)</h5>
+                <p class="card-text">
+                  20
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Sodium(mg)</h5>
+                <p class="card-text">
+                  644
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Cholesterol(mg)</h5>
+                <p class="card-text">
+                  351
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Carbohydrates(g)</h5>
+                <p class="card-text">
+                  63
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Sugars(g)</h5>
+                <p class="card-text">
+                  11
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Calories</h5>
+                <p class="card-text">
+                  596
+                </p>
+              </div>
+              {% elif prediction == "Garlic Bread" %}
+              <div class="card-body">
+                <h5 class="card-title">Garlic Bread</h5>
+                <br>
+                <h5 class="card-title card-title-small">Serving</h5>
+                <p class="card-text">
+                  1 cup
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Fats(g)</h5>
+                <p class="card-text">
+                  38
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Protein(g)</h5>
+                <p class="card-text">
+                  19
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Sodium(mg)</h5>
+                <p class="card-text">
+                  1234
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Cholesterol(mg)</h5>
+                <p class="card-text">
+                  0
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Carbohydrates(g)</h5>
+                <p class="card-text">
+                  95
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Sugars(g)</h5>
+                <p class="card-text">
+                  8.4
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Calories</h5>
+                <p class="card-text">
+                  794
+                </p>
+              </div>
+              {% elif prediction == "Pizza" %}
+              <div class="card-body">
+                <h5 class="card-title">Pizza</h5>
+                <br>
+                <h5 class="card-title card-title-small">Serving</h5>
+                <p class="card-text">
+                  1 slice
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Fats(g)</h5>
+                <p class="card-text">
+                  10
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Protein(g)</h5>
+                <p class="card-text">
+                  12
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Sodium(mg)</h5>
+                <p class="card-text">
+                  640
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Cholesterol(mg)</h5>
+                <p class="card-text">
+                  18
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Carbohydrates(g)</h5>
+                <p class="card-text">
+                  36
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Sugars(g)</h5>
+                <p class="card-text">
+                  3.8
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Calories</h5>
+                <p class="card-text">
+                  285
+                </p>
+              </div>
+              {% elif prediction == "Pork Chop" %}
+              <div class="card-body">
+                <h5 class="card-title">Pork Chop</h5>
+                <br>
+                <h5 class="card-title card-title-small">Serving</h5>
+                <p class="card-text">
+                  1 serving
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Fats(g)</h5>
+                <p class="card-text">
+                  17
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Protein(g)</h5>
+                <p class="card-text">
+                  40
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Sodium(mg)</h5>
+                <p class="card-text">
+                  86
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Cholesterol(mg)</h5>
+                <p class="card-text">
+                  132
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Carbohydrates(g)</h5>
+                <p class="card-text">
+                  0
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Sugars(g)</h5>
+                <p class="card-text">
+                  0
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Calories</h5>
+                <p class="card-text">
+                  328
+                </p>
+              </div>
+              {% elif prediction == "Spaghetti Carbonara" %}
+              <div class="card-body">
+                <h5 class="card-title">Spaghetti Carbonara</h5>
+                <br>
+                <h5 class="card-title card-title-small">Serving</h5>
+                <p class="card-text">
+                  1 serving
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Fats(g)</h5>
+                <p class="card-text">
+                  33
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Protein(g)</h5>
+                <p class="card-text">
+                  44
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Sodium(mg)</h5>
+                <p class="card-text">
+                  965
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Cholesterol(mg)</h5>
+                <p class="card-text">
+                  186
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Carbohydrates(g)</h5>
+                <p class="card-text">
+                  133
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Sugars(g)</h5>
+                <p class="card-text">
+                  2.5
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Calories</h5>
+                <p class="card-text">
+                  1018
+                </p>
+              </div>
+              {% elif prediction == "Steak" %}
+              <div class="card-body">
+                <h5 class="card-title">Steak</h5>
+                <br>
+                <h5 class="card-title card-title-small">Serving</h5>
+                <p class="card-text">
+                  1 serving
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Fats(g)</h5>
+                <p class="card-text">
+                  41
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Protein(g)</h5>
+                <p class="card-text">
+                  58
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Sodium(mg)</h5>
+                <p class="card-text">
+                  115
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Cholesterol(mg)</h5>
+                <p class="card-text">
+                  214
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Carbohydrates(g)</h5>
+                <p class="card-text">
+                  0
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Sugars(g)</h5>
+                <p class="card-text">
+                  0
+                </p>
+                <br>
+                <h5 class="card-title card-title-small">Calories</h5>
+                <p class="card-text">
+                  614
                 </p>
               </div>
               {% endif %}

@@ -5,12 +5,7 @@ from keras.models import load_model
 import keras.utils as image
 import numpy as np
 
-from flask import Flask, Blueprint, render_template, flash, redirect, url_for
-from flask_login import login_user, login_required, logout_user, current_user
-from flask_bcrypt import Bcrypt
-
-from .forms import LoginForm, RegisterForm
-from .models import Users, SkinConditionHistory
+from .models import SkinConditionHistory
 from . import db
 
 from datetime import datetime
@@ -67,25 +62,26 @@ class skin:
         db.session.add(new_skinhistory)
         db.session.commit()
 
-
 class burn:
     def predict_label(img_path):
         model = load_model('website/model/BurnModel.h5')
         model.make_predict_function()
 
-        p = model.predict(process_image(img_path))
-        predResult = burn.Return_Prediction(p)
+        pr = model.predict(process_image(img_path))
+        predResult = burn.Return_Prediction(pr)
 
-        print(p)
+        print(pr)
         print("result", predResult)
         return predResult
 
     def Return_Prediction(pred_array):
-        HighestValue = 0
+        HighestValue = -100
         burnclass = ""
         index = 0
+        
         for arrayValue in pred_array[0]: 
-            index+=1
+            print("THis is index ", index)
+            print("THis is Value ", arrayValue)
             if arrayValue > HighestValue:
                 HighestValue = arrayValue
                 if index == 0:
@@ -94,6 +90,7 @@ class burn:
                     burnclass = "This is Second degree burn"  
                 else:
                     burnclass = "This is Third degree burn"
+            index+=1
         return burnclass
 
 class chatbot:
@@ -102,8 +99,8 @@ class chatbot:
         id2label = { i: label for i, label in enumerate(label_names) }
         label2id = {v: k for k, v in id2label.items()}
 
-        my_model = AutoModelForTokenClassification.from_pretrained(
-            "chatbot",
+        model = AutoModelForTokenClassification.from_pretrained(
+            "website/model/chatbot",
             num_labels=23,
             id2label=id2label,
             label2id=label2id,
@@ -114,7 +111,7 @@ class chatbot:
         # instantiates a pipeline, which uses the model for inference
 
         token_classifier = pipeline(
-            "token-classification", model=my_model, 
+            "token-classification", model=model, 
             tokenizer=tokenizer,
             aggregation_strategy="first",
             device=0
@@ -125,7 +122,7 @@ class chatbot:
     def predict_diagnosis(text):
         token_classifier = chatbot.load_classifier()
         return token_classifier(text)
-
+    
 class food:
     def predict_label(img_path):
         classlist = ['Chicken Wings','Fish and Chips','French Fries','French Toast','Garlic Bread','Macaroni and Cheese','Pizza','Pork Chop','Spaghetti Carbonara','Steak']

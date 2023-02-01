@@ -37,9 +37,9 @@
 			<!-- chat people -->
 			<div class="chat-people">
 				<div class="chat-item text-small">
-					<div class="chat-date"><span>10:05</span></div>
+					<div class="chat-date"><span id="time1"></span></div>
 					<div class="chat-text">
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique, autem.</p>
+						<p>Hello! What symptoms are you experiencing now?</p>
 					</div>
 					<div class="triangle angle-left"></div>
 				</div>
@@ -50,26 +50,14 @@
 			<div class="separator-large"></div>
 			<!-- end separator -->
 
+			{% if symptom %}
 			<!-- my chat -->
-			<div class="my-chat">
+			<div class="my-chat" id="user-chat">
 				<div class="chat-item text-small bg-my-chat">
-					<div class="chat-date"><span>10:08</span></div>
-					<div class="chat-info-seen"><i class="icon ion-ios-eye"></i></div>
+					<div class="chat-date"><span id="time2"></span></div>
+					<div class="chat-info-seen"></div>
 					<div class="chat-text">
-						<p>Lorem ipsum dolor sit amet, consectetur.</p>
-					</div>
-					<div class="triangle angle-right"></div>
-				</div>
-
-				<!-- separator -->
-				<div class="separator-small"></div>
-				<!-- end separator -->
-
-				<div class="chat-item text-small bg-my-chat">
-					<div class="chat-date"><span>10:09</span></div>
-					<div class="chat-info-seen"><i class="icon ion-ios-eye"></i></div>
-					<div class="chat-text">
-						<p>Lorem ipsum dolor sit amet, consectetur.</p>
+						<p id="user-text">{{ symptom }}</p>
 					</div>
 					<div class="triangle angle-right"></div>
 				</div>
@@ -81,30 +69,20 @@
 			<!-- end separator -->
 
 			<!-- chat people -->
-			<div class="chat-people">
-				<div class="chat-item chat-item-emoji text-small">
-					<div class="chat-date"><span>10:13</span></div>
-					<div class="chat-emoji">
-						<i class="icon ion-ios-thumbs-up"></i>
+			<div class="chat-people" id="chatbot-reply" style="visibility:hidden;">
+				<div class="chat-item text-small">
+					<div class="chat-date"><span id="time3"></span></div>
+					<div class="chat-text">
+						<p>I have detected that you are experiencing: {{ result }}</p>
 					</div>
 					<div class="triangle angle-left"></div>
 				</div>
-
-				<!-- separator -->
-				<div class="separator-small"></div>
-				<!-- end separator -->
-
-				<div class="chat-item text-small bg-my-chat">
-					<div class="chat-date"><span>10:05</span></div>
-					<div class="chat-info-seen unseen"><i class="icon ion-ios-eye"></i></div>
-					<div class="chat-text">
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique, autem.</p>
-					</div>
-					<div class="triangle angle-right"></div>
-				</div>
 			</div>
 			<!-- end chat people -->
+			
+			{% else %}
 
+			{% endif %}
 		</div>
 
 		<!-- separator -->
@@ -112,19 +90,15 @@
 		<!-- end separator -->
 
 		<div class="chat-form">
-			<form class="form-fill form-icon-inset">
+			<form action="/submit-diagnosis" method="post" class="form-fill form-icon-inset">
 				<div class="form-wrapper">
 					<div class="input-wrap">
-						<div class="input-file">
-							<label for="icon-upload" class="mb-0"><i class="icon ion-ios-camera"></i></label>
-							<input type="file" id="icon-upload">
+						<input class="pl-0 pr-0" type="text" name="symptom" placeholder="Type Message">
+						<div class="button-icon button-send">
+							<button type="submit" class="fabutton">
+								<i class="fa-solid fa-paper-plane"></i>
+							</button>
 						</div>
-						<input class="pl-0 pr-0" type="text" placeholder="Type Message">
-						<a href="#">
-							<div class="button-icon button-send">
-								<i class="icon ion-ios-paper-plane"></i>
-							</div>
-						</a>
 					</div>
 				</div>
 			</form>
@@ -136,4 +110,31 @@
 </div>
 <!-- end pages wrapper -->
 
+{% endblock %}
+
+{% block scripts %}
+<script>
+	window.onload = getTime;
+	
+	function getTime() {
+		var dt = new Date();
+		var current_time = dt.getHours() + ":" + dt.getMinutes()
+		document.getElementById('time1').innerHTML = current_time;
+		document.getElementById('time2').innerHTML = current_time;
+		document.getElementById('time3').innerHTML = current_time;
+	}
+
+	function setUserText() {
+		document.getElementById('user-text').innerHTML = document.getElementById("symptom").value;
+		console.log(document.getElementById('user-text').innerHTML);
+		console.log(document.getElementById('symptom').value);
+	}
+
+	const myTimeout = setTimeout(delayChatbotReply, 3000);
+
+	function delayChatbotReply() {
+		var reply = document.getElementById('chatbot-reply');
+		reply.style.visibility = 'visible';
+	}
+</script>
 {% endblock %}

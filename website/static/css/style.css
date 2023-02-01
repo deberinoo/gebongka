@@ -212,6 +212,8 @@ textarea {
 
 .form-fill input {
     background: #eee;
+    outline: none;
+    margin: 0 10px;
 }
 
 .form-fill .custom-select {
@@ -2526,6 +2528,7 @@ margin-bottom: -35px;
 }
 
 .chat-form {
+    margin-bottom: 30px;
     position: fixed;
     bottom: 0;
     left: 0;
@@ -2533,6 +2536,13 @@ margin-bottom: -35px;
     padding: 15px;
     padding-top: 4px;
     background: #fff;
+}
+
+.fabutton {
+    background: none;
+    padding: 0px;
+    border: none;
+    outline: none;
 }
 
 /* coming soon */

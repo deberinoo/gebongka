@@ -2,11 +2,7 @@ from flask import Blueprint, render_template, request, Response
 from flask_login import login_user, login_required, logout_user, current_user
 from flask_bcrypt import Bcrypt
 
-from .forms import LoginForm, RegisterForm
-from .models import Users
-from . import db
-
-from .ml_models import skin, burn, chatbot, food, process_image
+from .ml_models import skin, chatbot, food
 
 import requests
 import cv2
@@ -106,7 +102,7 @@ def submit_skin():
 		splittedresults = dockerresults.text.split(";")
 
 		print("Top 1 is: ", splittedresults[0])
-		print("Top 2 is: ", splittedresults[1])
+		print("Top 2 is: ", splittedresults[1]) 
 		print("Top 3 is: ", splittedresults[2])
 		#top1,top2,top3 = skin.predict_label(img_path)
 		print("- Model prediction completed. Displaying results now -")
@@ -131,6 +127,16 @@ def loadhistoryskincondition():
 @views.route("/chatbot-diagnosis", methods=['GET', 'POST'])
 def chatbot_diagnosis():
 	return render_template("models/chatbot-diagnosis.html")
+
+@views.route("/submit-diagnosis", methods = ['GET', 'POST'])
+def diagnose_symptoms():
+	if request.method == 'POST':
+		symptom = request.form['symptom']
+		result = chatbot.predict_diagnosis(symptom)[0]['entity_group']
+		result = result.replace("_", " ").capitalize()
+		print(result)
+
+	return render_template("models/chatbot-diagnosis.html", symptom=symptom, result=result)
 
 # Linfeng's Part ===============================================
 
@@ -237,19 +243,25 @@ def analyse_nutrition_upload():
 
 	return render_template("models/nutrition-analyser.html", prediction = dockerresults.text, img_path = "/static/" + img.filename)
 
-# @views.route("/burn-grading", methods=['GET', 'POST'])
-# def burn_grading():
-# 	return render_template("burn-grading.html")
 
+@views.route("/burn-grading", methods=['GET', 'POST'])
+def burn_grading():
+	return render_template("models/burn-grading.html")
 
-# @views.route("/submit-burn", methods = ['GET', 'POST'])
-# def grade_burn():
-# 	if request.method == 'POST':
-# 		img = request.files['my_image']
+@views.route("/submit-grading", methods = ['GET', 'POST'])
+def grade_burn():
 
-# 		img_path = "website/static/" + img.filename	
-# 		img.save(img_path)
+	p = ""
+	imgFileName = ""
+	if request.method == 'POST':
+		print("Part A")
+		img = request.files['my_image']
+		imgFileName = img.filename
+		img_path = "website/static/" + imgFileName
+		img.save(img_path)
+		print("This is image filename ", imgFileName)
+		p = burn.predict_label(img_path)
 
-# 		p = burn.predict_label(img_path)
+		print("This is P ", p)
 
-# 	return render_template("burn-grading.html", prediction = p, img_path = "/static/" + img.filename)
+	return render_template("models/burn-grading.html", prediction = p, img_path = "/static/" + imgFileName)

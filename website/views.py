@@ -1,11 +1,43 @@
-from flask import Blueprint, render_template, request
-from flask_login import login_required, current_user
+from flask import Blueprint, render_template, request, Response
+from flask_login import login_user, login_required, logout_user, current_user
+from flask_bcrypt import Bcrypt
 
 from .ml_models import skin, chatbot, food
 
 import requests
+import cv2
+import datetime
+import os
+
+global capture
+capture=0 
 
 views = Blueprint('views', __name__)
+
+# ----- general function -----
+def gen_frames():  # generate frame by frame from camera
+    camera = cv2.VideoCapture(0)
+    global capture
+    while True:
+        success, frame = camera.read() 
+        if success:    
+            if(capture):
+                capture=0
+                now = datetime.datetime.now().isoformat(sep=" ", timespec="seconds")
+                p = os.path.sep.join(['website\static', "shot_{}.png".format(str(now).replace(":",''))])
+                cv2.imwrite(p, frame)
+                print('Saving camera image here')
+                
+            try:
+                ret, buffer = cv2.imencode('.jpg', cv2.flip(frame,1))
+                frame = buffer.tobytes()
+                yield (b'--frame\r\n'
+                       b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+            except Exception as e:
+                pass
+                
+        else:
+            pass
 
 # ----- general routes -----
 
@@ -109,13 +141,84 @@ def diagnose_symptoms():
 # Linfeng's Part ===============================================
 
 @views.route("/nutrition-analyser", methods=['GET', 'POST'])
+@login_required
 def nutrition_analyser():
+	camera = cv2.VideoCapture(0)
 	return render_template("models/nutrition-analyser.html")
 
-@views.route("/submit-nutrition", methods = ['GET', 'POST'])
-def analyse_nutrition():
+@views.route('/video_feed')
+def video_feed():
+    print('here')
+    return Response(gen_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
+
+# GET/POST method for prediction by Camera
+@views.route("/submit-nutrition-capture", methods = ['GET', 'POST'])
+def analyse_nutrition_capture():
+	# When submitting
 	if request.method == 'POST':
+		print("Nutrition Analyser prediction ongoing ================ ")
+
+		# Get image from form
+		print("Obtaining image given.....")
+		global capture
+		capture=1
+
+		now = datetime.datetime.now().isoformat(sep=" ", timespec="seconds")
+		img_path = "website/static/" + "shot_{}.png".format(str(now).replace(":",''))
+		print("Image Path: ", img_path)
+
+		# # Store the image in a temporary variable to be passed into the docker
+		# # in docker, requesting files will return a immutablemultidict. use .getlist('upload_file') which will return the files in a list
+		# files = {'upload_file':open(img_path,'rb')}
+		# print("file: ", files)
+
+		# print("Model is now predicting image....")
+		# print("Passing image to docker....")
+		# # Request post with the url link to the docker and attach the file
+		# dockerresults = requests.post("http://127.0.0.1:5000/nutrition-analyser-model",files=files)
+		# # Resuls will be a string
+		# print("from docker",dockerresults)		
+
+	return render_template("models/nutrition-analyser.html", img_link = img_path)
+
+# GET/POST method for prediction by Camera
+@views.route("/submit-nutrition-capture-predict", methods = ['GET', 'POST'])
+def analyse_nutrition_capture_predict():
+	# When submitting
+	if request.method == 'POST':
+		print("Nutrition Analyser prediction ongoing ================ ")
+
+		# Get image from form
+		print("Obtaining image given.....")
+		img_path = request.form.get('image_path')
+		print("Image Path: ", img_path)
+		print("- Successfully obtained Image -")
+
+		# Store the image in a temporary variable to be passed into the docker
+		# in docker, requesting files will return a immutablemultidict. use .getlist('upload_file') which will return the files in a list
+		files = {'upload_file':open(img_path,'rb')}
+		print("file: ", files)
+
+		print("Model is now predicting image....")
+		print("Passing image to docker....")
+		# Request post with the url link to the docker and attach the file
+		dockerresults = requests.post("http://127.0.0.1:5000/nutrition-analyser-model",files=files)
+		# Resuls will be a string
+		print("from docker",dockerresults)		
+
+	return render_template("models/nutrition-analyser.html", prediction = dockerresults.text, img_path = img_path[8:])
+
+# GET/POST method for prediction by File Upload
+@views.route("/submit-nutrition-upload", methods = ['GET', 'POST'])
+def analyse_nutrition_upload():
+	# When submitting
+	if request.method == 'POST':
+		print("Nutrition Analyser prediction ongoing ================ ")
+
+		# Get image from form
+		print("Obtaining image given.....")
 		img = request.files['my_image']
+		print("- Successfully obtained Image -")
 
 		# Create Image path to store and retrieve
 		# Use random number to allow same-image upload
@@ -123,10 +226,22 @@ def analyse_nutrition():
 		img_path = "website/static/" + img.filename
 		print("Image Path: ", img_path)
 		img.save(img_path)
+		print("- Sucessfully Saved Image to static folder -")
 
-		p = food.predict_label(img_path)
+		# Store the image in a temporary variable to be passed into the docker
+		# in docker, requesting files will return a immutablemultidict. use .getlist('upload_file') which will return the files in a list
+		files = {'upload_file':open(img_path,'rb')}
+		print("file: ", files)
 
-	return render_template("models/nutrition-analyser.html", prediction = p, img_path = "/static/" + img.filename)
+		print("Model is now predicting image....")
+		print("Passing image to docker....")
+		# Request post with the url link to the docker and attach the file
+		dockerresults = requests.post("http://127.0.0.1:5000/nutrition-analyser-model",files=files)
+		# Resuls will be a string
+		print("from docker",dockerresults)
+		print("from docker result",dockerresults.text)			
+
+	return render_template("models/nutrition-analyser.html", prediction = dockerresults.text, img_path = "/static/" + img.filename)
 
 
 @views.route("/burn-grading", methods=['GET', 'POST'])

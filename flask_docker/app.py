@@ -94,7 +94,7 @@ class chatbot:
         label2id = {v: k for k, v in id2label.items()}
 
         model = AutoModelForTokenClassification.from_pretrained(
-            "",
+            "chatbot",
             num_labels=23,
             id2label=id2label,
             label2id=label2id,
@@ -118,7 +118,6 @@ class chatbot:
         return token_classifier(text)
 
 # ----- model routes -----
-
 
 @app.route("/")
 def hello_world():
@@ -201,12 +200,13 @@ def returnnutritionanalysermodel():
 
 # Deborah's Part =====================================================
 
-@app.route("/submit-diagnosis", methods = ['GET', 'POST'])
-def diagnose_symptoms():
-	if request.method == 'POST':
-		symptom_text = request.form['symptom']
-		result = chatbot.predict_diagnosis(symptom_text)
-	return result
+@app.route("/chatbot-diagnosis", methods = ['GET', 'POST'])
+def returnchatbotmodel():
+    if request.method == 'POST':
+        symptom = request.data
+        print(symptom)
+        result = chatbot.predict_diagnosis(symptom)
+    return result
 
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0')

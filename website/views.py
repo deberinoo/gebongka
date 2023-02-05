@@ -1,8 +1,8 @@
 from flask import Blueprint, render_template, request, Response
-from flask_login import login_user, login_required, logout_user, current_user
+from flask_login import login_required, logout_user, current_user
 from flask_bcrypt import Bcrypt
 
-from .ml_models import skin, chatbot, food
+from .ml_models import skin, chatbot, food, burn
 
 import requests
 import cv2
@@ -132,9 +132,18 @@ def chatbot_diagnosis():
 def diagnose_symptoms():
 	if request.method == 'POST':
 		symptom = request.form['symptom']
-		result = chatbot.predict_diagnosis(symptom)[0]['entity_group']
-		result = result.replace("_", " ").capitalize()
-		print(result)
+
+		# data = {'symptom': symptom}
+		# docker_results = requests.post("http://127.0.0.1:5000/chatbot-diagnosis", data=data)
+		# print("from docker", docker_results.text)
+		# result = chatbot.predict_diagnosis(docker_results)[0]['entity_group']
+
+		print("symptom is", len(symptom))
+		try:
+			result = chatbot.predict_diagnosis(symptom)[0]['entity_group']
+			result = "I have detected that you are experiencing: " + result.replace("_", " ").capitalize()
+		except:
+			result = "Sorry, I didn't get that. Please try again."
 
 	return render_template("models/chatbot-diagnosis.html", symptom=symptom, result=result)
 

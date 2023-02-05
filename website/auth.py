@@ -42,7 +42,7 @@ def register():
         db.session.commit()
         login_user(new_user)
         flash('Account created!', category='success')
-        return redirect(url_for('views.profile'))
+        return redirect(url_for('views.index'))
     
     return render_template('auth/register.html', form=form)
 

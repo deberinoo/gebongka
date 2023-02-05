@@ -1,9 +1,11 @@
+import os
 from transformers import AutoModelForTokenClassification, AutoTokenizer, pipeline
 
 from keras.applications.imagenet_utils import preprocess_input
 from keras.models import load_model
 import keras.utils as image
 import numpy as np
+import torch
 
 from .models import SkinConditionHistory
 from . import db
@@ -95,12 +97,15 @@ class burn:
 
 class chatbot:
     def load_classifier():
+        os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
+        device = torch.device("cpu")
+
         label_names = ['B-COUGH', 'I-COUGH', 'B-BREATHLESSNESS', 'I-BREATHLESSNESS', 'B-DIZZINESS', 'I-DIZZINESS', 'B-HEADACHE', 'I-HEADACHE', 'B-CHILLS', 'I-CHILLS', 'B-CHEST_PAIN', 'I-CHEST_PAIN', 'B-BACK_PAIN', 'I-BACK_PAIN', 'B-MUSCLE_PAIN', 'I-MUSCLE_PAIN', 'B-JOINT_PAIN', 'I-JOINT_PAIN', 'B-NECK_PAIN', 'I-NECK_PAIN', 'B-STOMACH_PAIN', 'I-STOMACH_PAIN', 'O']
         id2label = { i: label for i, label in enumerate(label_names) }
         label2id = {v: k for k, v in id2label.items()}
 
         model = AutoModelForTokenClassification.from_pretrained(
-            "website/model/chatbot",
+            "flask_docker/chatbot",
             num_labels=23,
             id2label=id2label,
             label2id=label2id,
@@ -114,7 +119,7 @@ class chatbot:
             "token-classification", model=model, 
             tokenizer=tokenizer,
             aggregation_strategy="first",
-            device=0
+            device=-1
         )
         
         return token_classifier

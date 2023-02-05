@@ -260,8 +260,8 @@ def burn_grading():
 @views.route("/submit-grading", methods = ['GET', 'POST'])
 def grade_burn():
 
-	p = ""
 	imgFileName = ""
+	dockres = ""
 	if request.method == 'POST':
 		print("Part A")
 		img = request.files['my_image']
@@ -269,8 +269,16 @@ def grade_burn():
 		img_path = "website/static/" + imgFileName
 		img.save(img_path)
 		print("This is image filename ", imgFileName)
-		p = burn.predict_label(img_path)
+		files = {'upload_file':open(img_path,'rb')}
+		print("file: ", files)
 
-		print("This is P ", p)
+		print("Model is now predicting image....")
+		print("Passing image to docker....")
+		# Request post with the url link to the docker and attach the file
+		dockres = requests.post("http://127.0.0.1:5000/burn-grading-model",files=files)
+		# Resuls will be a string
+		print("from docker",dockres.text)
 
-	return render_template("models/burn-grading.html", prediction = p, img_path = "/static/" + imgFileName)
+		# print("This is P ", p)
+
+	return render_template("models/burn-grading.html", prediction = dockres.text, img_path = "/static/" + imgFileName)

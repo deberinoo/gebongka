@@ -8,10 +8,11 @@
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
     
 
-    <!-- <script>
-      var myModal = new bootstrap.Modal(document.getElementById('centralModalDanger'), {})
-        myModal.toggle()
-    </script> -->
+    <script>
+      $('#exampleModalCenter').on('shown.bs.modal', function () {
+          $('#myInput').trigger('focus')
+      })
+    </script>
 </head>
 
 
@@ -23,7 +24,7 @@
       <div class="intro-content">
         <img src="static/images/intro.jpg" alt="image-demo">
         <div class="caption">
-          <h4 class="text-white mb-1">Grading of Burns</h4>
+          <h4 class="text-white mb-1">Burn Grading</h4>
         </div>
       </div>
     </div>
@@ -76,25 +77,27 @@
 </div>
 <br>
 
-<!-- <div class="modal" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">CAUTION! THIS IS 3RD DEGREE BURN</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <p>Modal body text goes here.</p>
+        <p>Please seek medical attention as soon as possible, A third-degree burn is a serious injury that requires immediate medical attention. Don’t wait to visit the emergency room 
+          after a third-degree burn, as they can cause <b>shock</b> and be <b>life-threatening</b> if left untreated. </p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Save changes</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-success">I Understand</button>
       </div>
     </div>
   </div>
-</div> -->
+</div>
 
 
 
@@ -178,10 +181,6 @@
                   <li><strong>Skin grafting or reconstructive surgery </strong> ": For large third-degree burns, a healthcare provider may offer skin grafting to help your wound close. Skin grafting takes healthy 
                     skin from another part of your body to cover your wound. This is a surgical procedure, and there are other possible surgeries that may help repair very severe damage."</li>
                 </ul>
-                <br>
-                <h5 class="card-title card-title-small">What causes it to appear?</h5>
-                <p class="card-text">
-                </p>
                 <br>
               </div>
             </div>
@@ -372,7 +371,6 @@
                 <p class="card-text">
                   To treat a first-degree burn, dermatologists recommend the following tips:
                 </p>
-                <br>
                 <ul>
                   <li>1. <strong>Cool the burn.</strong> Immediately immerse the burn in cool tap water or apply cold, wet compresses. Do this for about 10 minutes or until the pain 
                       subsides.</li>
@@ -383,11 +381,11 @@
                       blisters.</li>
                   <li>4. <strong>Consider taking over-the-counter pain medication.</strong>Acetaminophen or ibuprofen can help relieve the pain and reduce inflammation.</li>
                   <li>5. <strong>Protect the area from the sun.</strong>Once the burn heals, protect the area from the sun by seeking shade, wearing protective clothing or applying a 
-                      broad-spectrum, &nbsp;&nbsp;&nbsp;&nbsp;water-resistant sunscreen with an SPF of 30 or higher. This will help minimize scarring, as the redness from a burn sometimes persists for weeks, 
-                      especially in &nbsp;&nbsp;&nbsp;&nbsp;those with darker skin tones.</li>
+                      broad-spectrum. This will help minimize scarring, as the redness from a burn sometimes persists for weeks, 
+                      especially in those with darker skin tones.</li>
                 </ul>
-                <h4 class="card-title card-title-small"><strong>Frequent asked questions</strong></h4>
                 <br>
+                <h3 class="card-title card-title-small"><strong>Frequent asked questions</strong></h3>
                 <h4 class="card-title card-title-small"><b>How Long Does It Take for a First-Degree Burn to Heal?</b></h4>
                 <p class="card-text">
                   As the skin heals, it may peel. Additionally, it may take three to 20 days for a first-degree burn to heal properly. Healing time may depend on the area affected. 
@@ -395,17 +393,16 @@
                 </p>
                 <br>
                 <h4 class="card-title card-title-small"><b>What Are the Symptoms of a First-Degree Burn?</b></h4>
-                <br>
                 <p class="card-text">
                   The symptoms of first-degree burns are often minor and tend to heal after several days. The most common things you may notice at first are skin redness, pain, and 
                   swelling. The pain and swelling may be mild and your skin may start to peel after a day or so. In contrast, second-degree burns blister and are more painful due to an 
                   increased depth of the burn wound.
                 </p>
                 <br>
-                <p class="card-text">
+                <!-- <p class="card-text">
                   For a first-degree burn that occurs in larger areas of your skin, you may experience an increased level of pain and swelling. You may want to report large wounds to your 
                   doctor. Larger burns may not heal as fast as smaller burns.
-                </p>
+                </p> -->
               </div>
             </div>
           </div>

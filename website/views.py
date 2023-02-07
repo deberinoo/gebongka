@@ -153,7 +153,10 @@ def diagnose_symptoms():
 @login_required
 def nutrition_analyser():
 	camera = cv2.VideoCapture(0)
-	return render_template("models/nutrition-analyser.html")
+
+	# Boolean of image capture
+	capture_bool = 0
+	return render_template("models/nutrition-analyser.html", capture_bool=capture_bool)
 
 @views.route('/video_feed')
 def video_feed():
@@ -171,24 +174,15 @@ def analyse_nutrition_capture():
 		print("Obtaining image given.....")
 		global capture
 		capture=1
+		
+		# Boolean of image capture
+		capture_bool = 1
 
 		now = datetime.datetime.now().isoformat(sep=" ", timespec="seconds")
 		img_path = "website/static/" + "shot_{}.png".format(str(now).replace(":",''))
-		print("Image Path: ", img_path)
+		print("Image Path: ", img_path)	
 
-		# # Store the image in a temporary variable to be passed into the docker
-		# # in docker, requesting files will return a immutablemultidict. use .getlist('upload_file') which will return the files in a list
-		# files = {'upload_file':open(img_path,'rb')}
-		# print("file: ", files)
-
-		# print("Model is now predicting image....")
-		# print("Passing image to docker....")
-		# # Request post with the url link to the docker and attach the file
-		# dockerresults = requests.post("http://127.0.0.1:5000/nutrition-analyser-model",files=files)
-		# # Resuls will be a string
-		# print("from docker",dockerresults)		
-
-	return render_template("models/nutrition-analyser.html", img_link = img_path)
+	return render_template("models/nutrition-analyser.html", img_link = img_path, capture_bool=capture_bool)
 
 # GET/POST method for prediction by Camera
 @views.route("/submit-nutrition-capture-predict", methods = ['GET', 'POST'])
@@ -197,7 +191,10 @@ def analyse_nutrition_capture_predict():
 	if request.method == 'POST':
 		print("Nutrition Analyser prediction ongoing ================ ")
 
-		# Get image from form
+		# Boolean of image capture
+		capture_bool = 0
+
+		# Get image name
 		print("Obtaining image given.....")
 		img_path = request.form.get('image_path')
 		print("Image Path: ", img_path)
@@ -215,7 +212,7 @@ def analyse_nutrition_capture_predict():
 		# Resuls will be a string
 		print("from docker",dockerresults)		
 
-	return render_template("models/nutrition-analyser.html", prediction = dockerresults.text, img_path = img_path[8:])
+	return render_template("models/nutrition-analyser.html", prediction = dockerresults.text, img_path = img_path[8:], capture_bool=capture_bool)
 
 # GET/POST method for prediction by File Upload
 @views.route("/submit-nutrition-upload", methods = ['GET', 'POST'])
@@ -223,6 +220,9 @@ def analyse_nutrition_upload():
 	# When submitting
 	if request.method == 'POST':
 		print("Nutrition Analyser prediction ongoing ================ ")
+
+		# Boolean of image capture
+		capture_bool = 0
 
 		# Get image from form
 		print("Obtaining image given.....")
@@ -250,7 +250,7 @@ def analyse_nutrition_upload():
 		print("from docker",dockerresults)
 		print("from docker result",dockerresults.text)			
 
-	return render_template("models/nutrition-analyser.html", prediction = dockerresults.text, img_path = "/static/" + img.filename)
+	return render_template("models/nutrition-analyser.html", prediction = dockerresults.text, img_path = "/static/" + img.filename, capture_bool=capture_bool)
 
 
 @views.route("/burn-grading", methods=['GET', 'POST'])

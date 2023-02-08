@@ -3,6 +3,7 @@ from flask_login import login_required, current_user
 from flask_bcrypt import Bcrypt
 
 from .models import SkinConditionHistory
+from .models import NutritionAnalyserHistory
 
 past_history = Blueprint("past_history", __name__)
 
@@ -15,8 +16,11 @@ def profile():
 
     # get skin condition history 
     allskinconditionrows = SkinConditionHistory.query.filter_by(username=current_user.username).all()
+    
+    # get nutrition analyser history 
+    allnutritionanalyserrows = NutritionAnalyserHistory.query.filter_by(username=current_user.username).all()
 
-    return render_template("profile.html", SChistory = allskinconditionrows)
+    return render_template("profile.html", SChistory = allskinconditionrows, NAhistory = allnutritionanalyserrows)
 
 @past_history.route('/view-skin-history', methods = ['GET', 'POST'])
 @login_required

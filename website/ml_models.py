@@ -8,6 +8,7 @@ import numpy as np
 import torch
 
 from .models import SkinConditionHistory
+from .models import NutritionAnalyserHistory
 from . import db
 
 from datetime import datetime
@@ -139,3 +140,8 @@ class food:
         p = model.predict(process_image(img_path))
         print("Original Array: ", p)
         return classlist[p]
+
+    def create_history(img_path, food_name, passuser):
+        new_foodhistory = NutritionAnalyserHistory(username=passuser, food_name = food_name, imguploadpath = img_path, dateprediction = str(datetime.now()))
+        db.session.add(new_foodhistory)
+        db.session.commit()

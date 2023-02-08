@@ -251,60 +251,26 @@
 
 				<div class="list-view list-separate-two list-colored">
 					<ul style="height:200px; overflow:hidden; overflow-y:scroll;">
-						<li class="list-item">
-							<div class="list-media">
-								<i class="icon ion-ios-switch bg-yellow"></i>
-							</div>
-							<div class="list-label">
-								<div class="list-title">Button</div>
-								<div class="list-after"><i class="icon ion-ios-arrow-forward"></i></div>
-							</div>
-						</li>
-						<li class="list-item">
-							<div class="list-media">
-								<i class="icon ion-ios-switch bg-yellow"></i>
-							</div>
-							<div class="list-label">
-								<div class="list-title">Button</div>
-								<div class="list-after"><i class="icon ion-ios-arrow-forward"></i></div>
-							</div>
-						</li>
-						<li class="list-item">
-							<div class="list-media">
-								<i class="icon ion-ios-switch bg-yellow"></i>
-							</div>
-							<div class="list-label">
-								<div class="list-title">Button</div>
-								<div class="list-after"><i class="icon ion-ios-arrow-forward"></i></div>
-							</div>
-						</li>
-						<li class="list-item">
-							<div class="list-media">
-								<i class="icon ion-ios-switch bg-yellow"></i>
-							</div>
-							<div class="list-label">
-								<div class="list-title">Button</div>
-								<div class="list-after"><i class="icon ion-ios-arrow-forward"></i></div>
-							</div>
-						</li>
-						<li class="list-item">
-							<div class="list-media">
-								<i class="icon ion-ios-switch bg-yellow"></i>
-							</div>
-							<div class="list-label">
-								<div class="list-title">Button</div>
-								<div class="list-after"><i class="icon ion-ios-arrow-forward"></i></div>
-							</div>
-						</li>
-						<li class="list-item">
-							<div class="list-media">
-								<i class="icon ion-ios-switch bg-yellow"></i>
-							</div>
-							<div class="list-label">
-								<div class="list-title">Button</div>
-								<div class="list-after"><i class="icon ion-ios-arrow-forward"></i></div>
-							</div>
-						</li>
+						{% if NAhistory %}
+							{%for item in NAhistory %}
+							<li class="list-item">
+								<div class="list-media">
+									<i class="icon ion-ios-arrow-down bg-yellow"></i>
+								</div>
+								<!-- <form action="" method="post" enctype="multipart/form-data" style="width:1000px;"> -->
+									<button style="all:unset; width:1000px;">
+										<div class="list-label">
+											<div class="list-title">{{ item.food_name }}</div>
+											<div class="list-after"><i class="icon ion-ios-arrow-forward"></i></div>
+											<div>
+												{{item.dateprediction|truncate(10, True, '', 0)}}
+											</div>
+										</div>
+									</button>
+								<!-- </form> -->
+							</li>
+							{% endfor %}
+						{% endif %}
 					</ul>
 				</div>
 

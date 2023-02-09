@@ -1,7 +1,7 @@
-from flask import Flask, Blueprint, render_template, request, Response
+from flask import Blueprint, render_template, request, Response
 from flask_login import login_required, current_user
 
-from .ml_models import skin, chatbot
+from .ml_models import skin, food, chatbot
 
 from .models import NutritionInformation
 

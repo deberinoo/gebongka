@@ -3,6 +3,8 @@ from flask_login import login_required, current_user
 
 from .ml_models import skin, chatbot
 
+from .models import NutritionInformation
+
 import requests
 import cv2
 import datetime
@@ -184,6 +186,7 @@ def analyse_nutrition_capture():
 		# Boolean of image capture
 		capture_bool = 1
 
+		# Gettinig image path
 		now = datetime.datetime.now().isoformat(sep=" ", timespec="seconds")
 		img_path = "website/static/" + "shot_{}.png".format(str(now).replace(":",''))
 		print("Image Path: ", img_path)	
@@ -218,7 +221,14 @@ def analyse_nutrition_capture_predict():
 		# Resuls will be a string
 		print("from docker",dockerresults)		
 
-	return render_template("models/nutrition-analyser.html", prediction = dockerresults.text, img_path = img_path[8:], capture_bool=capture_bool)
+		# Nutrition Information from database
+		allnutritioninformationrows = NutritionInformation.query.all()	
+
+		# Creation of save history
+		savehistory = food.create_history(img_path, dockerresults.text, current_user.username)
+		print("Save history results: ", savehistory)
+
+	return render_template("models/nutrition-analyser.html", prediction = dockerresults.text, img_path = img_path[8:], capture_bool=capture_bool, NI=allnutritioninformationrows)
 
 # GET/POST method for prediction by File Upload
 @views.route("/submit-nutrition-upload", methods = ['GET', 'POST'])
@@ -254,9 +264,16 @@ def analyse_nutrition_upload():
 		dockerresults = requests.post("http://127.0.0.1:5000/nutrition-analyser-model",files=files)
 		# Resuls will be a string
 		print("from docker",dockerresults)
-		print("from docker result",dockerresults.text)			
+		print("from docker result",dockerresults.text)
 
-	return render_template("models/nutrition-analyser.html", prediction = dockerresults.text, img_path = "/static/" + img.filename, capture_bool=capture_bool)
+		# Nutrition Information from database
+		allnutritioninformationrows = NutritionInformation.query.all()		
+
+		# Creation of save history
+		savehistory = food.create_history(img_path, dockerresults.text, current_user.username)
+		print("Save history results: ", savehistory)	
+
+	return render_template("models/nutrition-analyser.html", prediction = dockerresults.text, img_path = "/static/" + img.filename, capture_bool=capture_bool, NI=allnutritioninformationrows)
 
 
 @views.route("/burn-grading", methods=['GET', 'POST'])

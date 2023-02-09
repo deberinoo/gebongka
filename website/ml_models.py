@@ -131,7 +131,7 @@ class chatbot:
             "Cough": ["While an occasional cough is normal, a cough that persists may be a sign of a medical problem.",
                       "Common causes of coughs include: Common cold, Influenza, Inhaling an irritant (such as smoke, dust, chemicals or a foreign body)",
                       "To treat a cough, you can drink lots of fluids, swallow some honey, or consider over the counter options."],
-            "Back pain": ["cause of back pain", "remedy"]
+            "Back pain": ["cause of back pain", "remedy", "meow"]
         }
         return diagnosis_dict[diagnosis]
 

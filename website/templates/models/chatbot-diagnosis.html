@@ -1,5 +1,28 @@
 {% extends "base.html" %}
 
+{% block scripts %}
+<script type="text/javascript">
+	$(document).ready(function() {
+		var socket = io.connect()
+		socket.on('connect', function() {
+			socket.send("User connected!");
+			socket.send("Healthcare Chatbot: Hello, what symptoms are you experiencing today?");
+		});
+
+		socket.on('message', function(msg) {
+			$('#messages').append('<li>' + msg + '</li>');
+			console.log('Received message' + msg);
+		});
+
+		$('#sendBtn').on('click', function () {
+			socket.send($('#myMessage').val());
+			$('#myMessage').val('');
+			console.log('Sent message' + $('#myMessage').val());
+		});
+	})
+</script>
+{% endblock %}
+
 {% block body %}
 
 <!-- navbar -->
@@ -34,107 +57,29 @@
 	<div class="chat">
 		<div class="container">
 
-			<!-- chat people -->
-			<div class="chat-people">
-				<div class="chat-item text-small">
-					<div class="chat-date"><span id="time1"></span></div>
-					<div class="chat-text">
-						<p>Hello! What symptoms are you experiencing now?</p>
-					</div>
-					<div class="triangle angle-left"></div>
-				</div>
-			</div>
-			<!-- end chat people -->
+			<!-- testing with socketio -->
+			<ul id="messages">
+			</ul>
 
-			<!-- separator -->
-			<div class="separator-large"></div>
-			<!-- end separator -->
-
-			{% if symptom %}
-			<!-- my chat -->
-			<div class="my-chat" id="user-chat">
-				<div class="chat-item text-small bg-my-chat">
-					<div class="chat-date"><span id="time2"></span></div>
-					<div class="chat-info-seen"></div>
-					<div class="chat-text">
-						<p id="user-text">{{ symptom }}</p>
-					</div>
-					<div class="triangle angle-right"></div>
-				</div>
-			</div>
-			<!-- end my chat -->
-
-			<!-- separator -->
-			<div class="separator-large"></div>
-			<!-- end separator -->
-
-			<!-- chat people -->
-			<div class="chat-people" id="chatbot-reply" style="visibility:hidden;">
-				<div class="chat-item text-small">
-					<div class="chat-date"><span id="time3"></span></div>
-					<div class="chat-text">
-						<p>{{ result }}</p>
-					</div>
-					<div class="triangle angle-left"></div>
-				</div>
-			</div>
-			<!-- end chat people -->
-			
-			{% else %}
-
-			{% endif %}
-		</div>
-
-		<!-- separator -->
-		<div class="separator-large"></div>
-		<!-- end separator -->
-
-		<div class="chat-form">
-			<form action="/submit-diagnosis" method="post" class="form-fill form-icon-inset">
-				<div class="form-wrapper">
-					<div class="input-wrap">
-						<input class="pl-0 pr-0" type="text" name="symptom" placeholder="Type Message">
-						<div class="button-icon button-send">
-							<button type="submit" class="fabutton">
-								<i class="fa-solid fa-paper-plane"></i>
-							</button>
+			<div class="chat-form">
+				<div class="form-fill form-icon-inset">
+					<div class="form-wrapper">
+						<div class="input-wrap">
+							<input class="pl-0 pr-0" type="text" id="myMessage" name="symptom" placeholder="Type Message">
+							<div class="button-icon button-send">
+								<button id="sendBtn" type="submit" class="fabutton">
+									<i class="fa-solid fa-paper-plane"></i>
+								</button>
+							</div>
 						</div>
 					</div>
 				</div>
-			</form>
+			</div>
 		</div>
-
 	</div>
 	<!-- end chat -->
 
 </div>
 <!-- end pages wrapper -->
 
-{% endblock %}
-
-{% block scripts %}
-<script>
-	window.onload = getTime;
-	
-	function getTime() {
-		var dt = new Date();
-		var current_time = dt.getHours() + ":" + dt.getMinutes()
-		document.getElementById('time1').innerHTML = current_time;
-		document.getElementById('time2').innerHTML = current_time;
-		document.getElementById('time3').innerHTML = current_time;
-	}
-
-	function setUserText() {
-		document.getElementById('user-text').innerHTML = document.getElementById("symptom").value;
-		console.log(document.getElementById('user-text').innerHTML);
-		console.log(document.getElementById('symptom').value);
-	}
-
-	const myTimeout = setTimeout(delayChatbotReply, 3000);
-
-	function delayChatbotReply() {
-		var reply = document.getElementById('chatbot-reply');
-		reply.style.visibility = 'visible';
-	}
-</script>
 {% endblock %}

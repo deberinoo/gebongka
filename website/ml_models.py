@@ -97,9 +97,6 @@ class burn:
 
 class chatbot:
     def load_classifier():
-        os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
-        device = torch.device("cpu")
-
         label_names = ['B-COUGH', 'I-COUGH', 'B-BREATHLESSNESS', 'I-BREATHLESSNESS', 'B-DIZZINESS', 'I-DIZZINESS', 'B-HEADACHE', 'I-HEADACHE', 'B-CHILLS', 'I-CHILLS', 'B-CHEST_PAIN', 'I-CHEST_PAIN', 'B-BACK_PAIN', 'I-BACK_PAIN', 'B-MUSCLE_PAIN', 'I-MUSCLE_PAIN', 'B-JOINT_PAIN', 'I-JOINT_PAIN', 'B-NECK_PAIN', 'I-NECK_PAIN', 'B-STOMACH_PAIN', 'I-STOMACH_PAIN', 'O']
         id2label = { i: label for i, label in enumerate(label_names) }
         label2id = {v: k for k, v in id2label.items()}
@@ -128,6 +125,15 @@ class chatbot:
         token_classifier = chatbot.load_classifier()
         return token_classifier(text)
     
+    def map_to_diagnosis(diagnosis):
+        diagnosis_dict = {
+            "Cough": ["While an occasional cough is normal, a cough that persists may be a sign of a medical problem.",
+                      "Common causes of coughs include: Common cold, Influenza, Inhaling an irritant (such as smoke, dust, chemicals or a foreign body)",
+                      "To treat a cough, you can drink lots of fluids, swallow some honey, or consider over the counter options."],
+            "Back pain": ["cause of back pain", "remedy"]
+        }
+        return diagnosis_dict[diagnosis]
+
 class food:
     def predict_label(img_path):
         classlist = ['Chicken Wings','Fish and Chips','French Fries','French Toast','Garlic Bread','Macaroni and Cheese','Pizza','Pork Chop','Spaghetti Carbonara','Steak']

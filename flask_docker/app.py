@@ -6,6 +6,7 @@ from keras.models import load_model
 import keras.utils as image
 from PIL import Image
 import os
+import torch
 
 app = Flask(__name__)
 
@@ -240,8 +241,9 @@ def returnnutritionanalysermodel():
 def returnchatbotmodel():
     if request.method == 'POST':
         symptom = request.data
-        print(symptom)
+        print("symptom input from user:", symptom)
         result = chatbot.predict_diagnosis(symptom)
+        print("docker result:", symptom)
     return result
 
 # Gerald's Part ========================================================

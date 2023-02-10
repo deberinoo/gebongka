@@ -977,6 +977,10 @@ textarea {
 }
 
 /* navbar for chat only */
+.chat {
+    padding-bottom: 20px;
+}
+
 .chat-user {
     position: absolute;
     top: 50%;
@@ -2471,6 +2475,7 @@ margin-bottom: -35px;
 
 /* chat */
 .chat-item {
+    z-index: -1;
     background: #f5f5f5;
     font-size: 13px;
     padding: 10px;

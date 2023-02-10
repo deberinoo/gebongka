@@ -5,7 +5,7 @@ import cv2
 import requests
 from flask import Blueprint, Response, render_template, request
 from flask_login import current_user, login_required
-from flask_socketio import send
+from flask_socketio import send, emit
 
 from .ml_models import chatbot, food, skin
 from .models import NutritionInformation
@@ -131,36 +131,37 @@ def chatbot_diagnosis():
 	return render_template("models/chatbot-diagnosis.html")
 
 def handle_message(msg):
-    # handles chatbot messages
-    print("Received message: " + msg)
-    try:
-        if msg != "User connected!" and msg != "Healthcare Chatbot: Hello, what symptoms are you experiencing today?":
-            send("You: " + msg, broadcast=True)
-            
-            # calls chatbot api
-            result = requests.post("http://127.0.0.1:8000/chatbot-diagnosis-model", json={"data":msg})
-            docker_result = result.json()['response']
-            print("docker result:", docker_result)
+	# handles chatbot messages
+	print("Received message: " + msg)
+	try:
+		if msg != "User connected!" and msg != "Hello, what symptoms are you experiencing today?":
+			# calls chatbot api
+			result = requests.post("http://127.0.0.1:8000/chatbot-diagnosis-model", json={"data":msg})
+			docker_result = result.json()['response']
+			reply(docker_result)
+			print("docker result:", docker_result)
+		else:
+			# sends default messages
+			print("goes here")
+			send(msg, broadcast=True)
+	except Exception as e:
+		print("error: ", e)
+		result = "Healthcare Chatbot: Sorry, I didn't get that. Please try again."
+		send(result, broadcast=True)
+        
+def reply(result):
+	diagnosis = result.replace("_", " ").capitalize()
+	result = "I have detected that you are experiencing - " + diagnosis
+	description = chatbot.map_to_diagnosis(diagnosis)[0]
+	causes = chatbot.map_to_diagnosis(diagnosis)[1]
+	treatment = chatbot.map_to_diagnosis(diagnosis)[2]
+	follow_up = "Any other symptoms?"
 
-            diagnosis = docker_result.replace("_", " ").capitalize()
-            result = "I have detected that you are experiencing - " + diagnosis
-            description = chatbot.map_to_diagnosis(diagnosis)[0]
-            causes = chatbot.map_to_diagnosis(diagnosis)[1]
-            treatment = chatbot.map_to_diagnosis(diagnosis)[2]
-            follow_up = "Any other symptoms?"
-
-            send("Healthcare Chatbot: " + result, broadcast=True)
-            send(description, broadcast=True)
-            send(causes, broadcast=True)
-            send(treatment, broadcast=True)
-            send(follow_up, broadcast=True)
-        else:
-            # sends default messages
-            send(msg, broadcast=True)
-    except Exception as e:
-        print("error: ", e)
-        result = "Healthcare Chatbot: Sorry, I didn't get that. Please try again."
-        send(result, broadcast=True)
+	emit("chat", {"text": result})
+	emit("chat", {"text": description})
+	emit("chat", {"text": causes})
+	emit("chat", {"text": treatment})
+	emit("chat", {"text": follow_up})
 
 # Linfeng's Part ===============================================
 

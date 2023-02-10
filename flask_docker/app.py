@@ -1,4 +1,3 @@
-import json
 from flask import Flask, request, jsonify
 
 from transformers import AutoModelForTokenClassification, AutoTokenizer, pipeline
@@ -97,7 +96,7 @@ class chatbot:
         label2id = {v: k for k, v in id2label.items()}
 
         model = AutoModelForTokenClassification.from_pretrained(
-            "chatbot",
+            "flask_docker/chatbot",
             num_labels=23,
             id2label=id2label,
             label2id=label2id,
@@ -244,7 +243,6 @@ def returnchatbotmodel():
     result = chatbot.predict_diagnosis(symptom['data'])
     docker_result = result[0]['entity_group']
     return jsonify({"response": docker_result})
-    #return jsonify({"hello":"byabya"})
 
 # Gerald's Part ========================================================
 

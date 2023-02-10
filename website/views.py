@@ -1,14 +1,14 @@
-from flask import Blueprint, render_template, request, Response
-from flask_login import login_required, current_user
-
-from .ml_models import skin, food, chatbot
-
-from .models import NutritionInformation
-
-import requests
-import cv2
 import datetime
 import os
+
+import cv2
+import requests
+from flask import Blueprint, Response, render_template, request
+from flask_login import current_user, login_required
+from flask_socketio import send
+
+from .ml_models import chatbot, food, skin
+from .models import NutritionInformation
 
 global capture
 capture=0 
@@ -130,30 +130,37 @@ def loadhistoryskincondition():
 def chatbot_diagnosis():
 	return render_template("models/chatbot-diagnosis.html")
 
-@views.route("/submit-diagnosis", methods = ['GET', 'POST'])
-def diagnose_symptoms():
-	if request.method == 'POST':
-		symptom = request.form['symptom']
+def handle_message(msg):
+    # handles chatbot messages
+    print("Received message: " + msg)
+    try:
+        if msg != "User connected!" and msg != "Healthcare Chatbot: Hello, what symptoms are you experiencing today?":
+            send("You: " + msg, broadcast=True)
+            
+            # calls chatbot api
+            result = requests.post("http://127.0.0.1:8000/chatbot-diagnosis-model", json={"data":msg})
+            docker_result = result.json()['response']
+            print("docker result:", docker_result)
 
-		# using api call
-		# data = {'symptom': symptom}
-		# docker_results = requests.post("http://127.0.0.1:5000/chatbot-diagnosis", data=data)
-		# print("result - docker", docker_results)
-		# print("result - docker text", docker_results.text)
-		# result = chatbot.predict_diagnosis(docker_results.text)[0]['entity_group']
+            diagnosis = docker_result.replace("_", " ").capitalize()
+            result = "I have detected that you are experiencing - " + diagnosis
+            description = chatbot.map_to_diagnosis(diagnosis)[0]
+            causes = chatbot.map_to_diagnosis(diagnosis)[1]
+            treatment = chatbot.map_to_diagnosis(diagnosis)[2]
+            follow_up = "Any other symptoms?"
 
-		# using chatbot model locally
-		try:
-			result = chatbot.predict_diagnosis(symptom)[0]['entity_group']
-			diagnosis = result.replace("_", " ").capitalize()
-			result = "I have detected that you are experiencing: " + diagnosis
-			print(diagnosis)
-		except:
-			result = "Sorry, I didn't get that. Please try again."
-			diagnosis = ""
-			result = ""
-
-	return render_template("models/chatbot-diagnosis.html", symptom=symptom, diagnosis=diagnosis, result=result)
+            send("Healthcare Chatbot: " + result, broadcast=True)
+            send(description, broadcast=True)
+            send(causes, broadcast=True)
+            send(treatment, broadcast=True)
+            send(follow_up, broadcast=True)
+        else:
+            # sends default messages
+            send(msg, broadcast=True)
+    except Exception as e:
+        print("error: ", e)
+        result = "Healthcare Chatbot: Sorry, I didn't get that. Please try again."
+        send(result, broadcast=True)
 
 # Linfeng's Part ===============================================
 

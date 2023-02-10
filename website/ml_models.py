@@ -1,17 +1,14 @@
-import os
-from transformers import AutoModelForTokenClassification, AutoTokenizer, pipeline
+from datetime import datetime
 
+import keras.utils as image
 from keras.applications.imagenet_utils import preprocess_input
 from keras.models import load_model
-import keras.utils as image
-import numpy as np
-import torch
+from transformers import (AutoModelForTokenClassification, AutoTokenizer,
+                          pipeline)
 
-from .models import SkinConditionHistory
-from .models import NutritionAnalyserHistory
 from . import db
+from .models import NutritionAnalyserHistory, SkinConditionHistory
 
-from datetime import datetime
 
 def process_image(img_path):
     i = image.load_img(img_path, target_size=(128,128))
@@ -131,7 +128,37 @@ class chatbot:
             "Cough": ["While an occasional cough is normal, a cough that persists may be a sign of a medical problem.",
                       "Common causes of coughs include: Common cold, Influenza, Inhaling an irritant (such as smoke, dust, chemicals or a foreign body)",
                       "To treat a cough, you can drink lots of fluids, swallow some honey, or consider over the counter options."],
-            "Back pain": ["cause of back pain", "remedy", "meow"]
+            "Breathlessness": ["Breathlessness — known medically as dyspnea — is often described as an intense tightening in the chest, air hunger, difficulty breathing, breathlessness or a feeling of suffocation.",
+                               "Possible causes of breathlessness include: Asthma, carbon monoxide poisoning, heart attack, low blood pressure, or an allergic reaction.",
+                               "To relieve shortness of breath, practicing pursed lip breathing, sitting forward, or pointing a small handheld fan toward your face may help."],
+            "Dizziness": ["Dizziness is a term used to describe a range of sensations, such as feeling faint, woozy, weak or unsteady. Dizziness that creates the false sense that you or your surroundings are spinning or moving is called vertigo.",
+                          "Dizziness has many possible causes, including inner ear disturbance, motion sickness and medication effects. Sometimes it's caused by an underlying health condition, such as poor circulation, infection or injury.",
+                          "When you feel dizzy, sit or lie down immediately. Drink enough fluids, eat a healthy diet, get enough sleep and avoid stress."],
+            "Headache": ["A headache is a pain that occurs in the temples, scalp or neck.",
+                         "Headaches can manifest as a symptom of another health disorder, such as an infection, medication overuse, high blood pressure, and stroke.",
+                         "Most headaches are easily treated with over-the-counter medications, including: Aspirin, Ibuprofen, and Acetaminophen. You can also rest in a quiet, dark room and try hot or cold compresses to your head and neck."],
+            "Chills": ["Chills are a sign that your body is trying to regulate its core temperature. You may shiver, shake, have chattering teeth or goosebumps.",
+                       "Health conditions such as bacterial infections, cancers, low blood sugar, panic attacks may cause chills."
+                       "Layering clothes or getting to a warm place can make cold chills go away. You can also drink hot beverages to raise your internal body temperature."],
+            "Chest pain": ["Chest pain appears in many forms, ranging from a sharp stab to a dull ache. Sometimes chest pain feels crushing or burning. In certain cases, the pain travels up the neck, into the jaw, and then spreads to the back or down one or both arms.",
+                           "Chest pain can stem from a heart problem, but other possible causes include a lung infection, muscle strain, a rib injury, or a panic attack. Some of these are serious conditions and need medical attention.",
+                           "Drugs used to treat some of the most common causes of chest pain include: Artery relaxers, Aspirin, and blood thinners."],
+            "Back pain": ["Back pain can range from a muscle aching to a shooting, burning or stabbing sensation. Also, the pain can radiate down a leg. Bending, twisting, lifting, standing or walking can make it worse.", 
+                          "Conditions commonly linked to back pain include: Muscle or ligament strain, Bulging or ruptured disks, arthritis, and osteoporosis.",
+                          "Continue your activities as much as you can with back pain. Try light activity, such as walking. Stop activity that increases pain, but don't avoid activity out of fear of pain. If home treatments aren't working after several weeks, your health care provider might recommend stronger medications or other therapies."
+                          ],
+            "Muscle pain": ["Muscle aches, also known as myalgia, can be felt in any area of the body that has muscles. Depending on the cause, the discomfort may be mild or extremely severe.",
+                            "Common causes of muscle pain include: muscle tension in one or more areas of the body, overusing the muscle during physical activity. Medical conditions such as fibromyalgia, infections and autoimmune disorders can also cause muscle pain.",
+                            "Some measures you can take to relieve muscle discomfort from injuries and overuse include: resting the area of the body where you're experiencing aches and pains, taking an over-the-counter pain reliever such as ibuprofen, and applying ice to the affected area."],
+            "Joint pain": ["Joint discomfort is common and usually felt in the hands, feet, hips, knees, or spine. Pain may be constant or it can come and go. Sometimes the joint can feel stiff, achy, or sore.",
+                           "The most common causes of chronic pain in joints are: osteoarthritis, gout, viral infections and tendinitis.",
+                           "To ease joint pain, you can try simple at-home treatments such as applying a heating pad or ice on the affected area, or light exercise such as walking and swimming."],
+            "Neck pain": ["Neck pain, sometimes called cervicalgia, is pain in or around your spine beneath your head. Your neck is also known as your cervical spine. Neck pain is a common symptom of many different injuries and medical conditions.",
+                          "Neck pain has many potential causes, including: Injury, like whiplash, physical strain, aging, and mental stress.",
+                          "Neck pain can be managed by taking pain medications and muscle relaxers, taking a hot shower or placing a hot towel on the site of the pain."],
+            "Stomach pain": ["Stomach pain is discomfort or other uncomfortable sensations that you feel in your belly area.",
+                             "Causes of stomach pain include: irritable bowel syndrome (IBS), food poisoning, food allergies, or gas.",
+                             "You can treat your stomach pain by resting your bowel, only eating easy-to-digest foods like crackers or bananas. In addition, drink plenty of water to stay hydrated."],
         }
         return diagnosis_dict[diagnosis]
 

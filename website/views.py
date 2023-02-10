@@ -134,34 +134,32 @@ def handle_message(msg):
 	# handles chatbot messages
 	print("Received message: " + msg)
 	try:
-		if msg != "User connected!" and msg != "Hello, what symptoms are you experiencing today?":
-			# calls chatbot api
-			result = requests.post("http://127.0.0.1:8000/chatbot-diagnosis-model", json={"data":msg})
-			docker_result = result.json()['response']
-			reply(docker_result)
-			print("docker result:", docker_result)
-		else:
-			# sends default messages
-			print("goes here")
-			send(msg, broadcast=True)
+		# calls chatbot api
+		result = requests.post("http://127.0.0.1:8000/chatbot-diagnosis-model", json={"data":msg})
+		docker_result = result.json()['response']
+		reply(docker_result)
+		print("docker result:", docker_result)
 	except Exception as e:
 		print("error: ", e)
-		result = "Healthcare Chatbot: Sorry, I didn't get that. Please try again."
-		send(result, broadcast=True)
+		reply(result)
         
 def reply(result):
-	diagnosis = result.replace("_", " ").capitalize()
-	result = "I have detected that you are experiencing - " + diagnosis
-	description = chatbot.map_to_diagnosis(diagnosis)[0]
-	causes = chatbot.map_to_diagnosis(diagnosis)[1]
-	treatment = chatbot.map_to_diagnosis(diagnosis)[2]
-	follow_up = "Any other symptoms?"
+	try:
+		diagnosis = result.replace("_", " ").capitalize()
+		result = "I have detected that you are experiencing - " + diagnosis
+		description = chatbot.map_to_diagnosis(diagnosis)[0]
+		causes = chatbot.map_to_diagnosis(diagnosis)[1]
+		treatment = chatbot.map_to_diagnosis(diagnosis)[2]
+		follow_up = "Any other symptoms?"
 
-	emit("chat", {"text": result})
-	emit("chat", {"text": description})
-	emit("chat", {"text": causes})
-	emit("chat", {"text": treatment})
-	emit("chat", {"text": follow_up})
+		emit("chat", {"text": result})
+		emit("chat", {"text": description})
+		emit("chat", {"text": causes})
+		emit("chat", {"text": treatment})
+		emit("chat", {"text": follow_up})
+	except:
+		result = "Sorry, I didn't get that. Please try again."
+		emit("chat", {"text": result})
 
 # Linfeng's Part ===============================================
 

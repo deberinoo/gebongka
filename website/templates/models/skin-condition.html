@@ -2,6 +2,19 @@
 
 {% block body %}
 
+<head>
+  <link rel="stylesheet" href="static/css/font-awesome.min.css">
+  <link rel="stylesheet" href="static/css/uploadBurn.css">
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+  
+
+  <script>
+    $('#exampleModalCenter').on('shown.bs.modal', function () {
+        $('#myInput').trigger('focus')
+    })
+  </script>
+</head>
+
 <!-- navbar -->
 <div class="navbar">
   <div class="left">
@@ -17,8 +30,8 @@
 <!-- end navbar -->
 
 <div class="page-wrapper">
-
-	<!-- intro app -->
+  
+  <!-- intro app -->
 	<div class="intro-app">
 		<div class="container">
 			<div class="intro-content">
@@ -31,29 +44,94 @@
 	</div>
 
   <!-- separator -->
-	<div class="separator-large"></div>
-	<!-- end separator -->
+  <div class="separator-large"></div>
+  <!-- end separator -->
+
 
   <div class="container">
-    <div class="row">      
+    <div class="row d-flex justify-content-center">
+      {% if capture_bool == 0 %}
+      <div class="img">
+        <img src="{{url_for('views.video_feed')}}" height="300px" alt="video-demo">
+      </div>
+      {% else %}
+      <div class="img">
+        <img src="{{img_link2}}" height="300px" alt="capture_image">
+        <p style="color: white; margin-bottom: 10px;" align="center"><b>Click on submit to display information</b></p>
+      </div>
+      {% endif %}
+    </div>
+    <div class="row d-flex justify-content-center">
+      {% if capture_bool == 1 %}
+      <form action="/skin-condition-analyser" method="post" enctype="multipart/form-data" class="mr-5">
+        <div class="form-group">
+          <div class="col">
+            <div class="row">
+              <input type="submit" class="btn btn-danger" style="color: white;" value="Retake"/>
+            </div>
+          </div>
+        </div>
+      </form>
+      <form action="/submit-skin-condition-capture-predict" method="post" enctype="multipart/form-data" class="row d-flex justify-content-center">
+        <div class="form-group">
+          <div class="col">
+            <div class="row">
+              <input type="submit" class="btn btn-success" value="Submit"/>
+              <input type="hidden" class="btn btn-success" value="{{img_link}}" name="image_path"/>
+            </div>
+          </div>
+        </div>
+      </form>
+      {% else %}
+      <form action="/submit-skin-condition-capture" method="post" enctype="multipart/form-data" class="mr-5">
+        <div class="form-group">
+          <div class="col">
+            <div class="row">
+              <input type="submit" class="btn btn-warning" style="color: white;" value="Capture" name="click"/>
+            </div>
+          </div>
+        </div>
+      </form>
+      <form action="/submit-skin-condition-capture-predict" method="post" enctype="multipart/form-data" class="row d-flex justify-content-center">
+        <div class="form-group">
+          <div class="col">
+            <div class="row">
+              <input type="submit" class="btn btn-success" value="Submit"/>
+              <input type="hidden" class="btn btn-success" value="{{img_link}}" name="image_path"/>
+            </div>
+          </div>
+        </div>
+      </form>
+      {% endif %}
+    </div>
+    <div class="row">
       <div class="col-12">
         <form action="/submit-skin" method="post" enctype="multipart/form-data">
           <div class="form-group">
-            <label class="control-label col-4" for="pwd">Upload Your Image:</label>
+            <label class="control-label col-4 text-white" for="pwd">Upload Your Image:</label>
             <div class="col">
-              <div class="row">
-                <input type="file" class="form-control" name="my_image" id="pwd" style="width: 375px;">
-                <button type="submit" class="btn btn-success">Submit</button>
-              </div>
-            </div>
-          </div>
+                <!-- <input type="file" class="form-control" name="my_image" id="pwd" style="width: 375px;">
+                <button type="submit" class="btn btn-success">Submit</button> -->
+                <!-- Upload image input -->
+                <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
+                    <input id="upload" type="file" onchange="readURL(this);" name="my_image" class="form-control border-0">
+                    <label id="upload-label" for="upload" class="font-weight-light text-muted">Choose file</label>
+                    <div class="input-group-append">
+                        <label for="upload" class="btn btn-light m-0 rounded-pill px-4"> <i class="fa fa-cloud-upload mr-2 text-muted"></i><small class="text-uppercase font-weight-bold text-muted">Choose file</small></label>
+                        <button type="submit" class="btn btn-success">Submit</button>
+                    </div>
+                </div>
+                <!-- Uploaded image area -->
+                <p class="font-italic text-white text-center">The image uploaded will be rendered inside the box below.</p>
+                <div class="image-area mt-4"><img id="imageResult" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block">
+          </div> 
         </form>
       </div>
     </div>
     <div class="row d-flex justify-content-center">
       <div class="img">
         {% if prediction1 %}
-        <img src="../{{img_path}}" alt="image-upload">
+        <img src="../{{img_path}}" alt="image-upload" style="width: 300px; height: 200px;">
         {% else %}
         <img src="static/images/file-upload.png" alt="image-upload" style="width: 300px; height: 300px;">
         {% endif %}
@@ -62,6 +140,7 @@
   </div>
 
 </div>
+
 {% if prediction1 %}
 <div class="row d-flex justify-content-center">
   <h1>Top 3 Results</h1>
@@ -77,7 +156,7 @@
         {% if prediction1 == "Actinic Keratosis" %}
         <div class="cards">
           <div class="container">
-            <div class="card card-image card-outline">
+            <div class="card card-image card-outline" style="background-color: #FFFFFF;">
               <div class="card-body">
                 <h5 class="card-title">Actinic Keratosis</h5>
                 <div class="card-date">Top 1</div>
@@ -203,7 +282,7 @@
         {% elif prediction1 == "dermatofibroma"%}
         <div class="cards">
           <div class="container">
-            <div class="card card-image card-outline">
+            <div class="card card-image card-outline" style="background-color: #FFFFFF;">
               <div class="card-body">
                 <h5 class="card-title">Dermatofibroma</h5>
                 <div class="card-date">Top 1</div>
@@ -254,7 +333,7 @@
         {% elif prediction1 == "melanoma"%}
         <div class="cards">
           <div class="container">
-            <div class="card card-image card-outline">
+            <div class="card card-image card-outline" style="background-color: #FFFFFF;">
               <div class="card-body">
                 <h5 class="card-title">Melanoma</h5>
                 <div class="card-date">Top 1</div>
@@ -323,7 +402,7 @@
         {% elif prediction1 == "nevus"%}
         <div class="cards">
           <div class="container">
-            <div class="card card-image card-outline">
+            <div class="card card-image card-outline" style="background-color: #FFFFFF;">
               <div class="card-body">
                 <h5 class="card-title">Nevus</h5>
                 <div class="card-date">Top 1</div>
@@ -385,7 +464,7 @@
         {% else %}
         <div class="cards">
           <div class="container">
-            <div class="card card-image card-outline">
+            <div class="card card-image card-outline" style="background-color: #FFFFFF;">
               <div class="card-body">
                 <h5 class="card-title">Vascular Lesion</h5>
                 <div class="card-date">Top 1</div>
@@ -448,7 +527,7 @@
         {% if prediction2 == "Actinic Keratosis" %}
         <div class="cards">
           <div class="container">
-            <div class="card card-image card-outline">
+            <div class="card card-image card-outline" style="background-color: #FFFFFF;">
               <div class="card-body">
                 <h5 class="card-title">Actinic Keratosis</h5>
                 <div class="card-date">Top 2</div>
@@ -508,7 +587,7 @@
         {% elif prediction2 == "basal cell carcinoma"%}
         <div class="cards">
           <div class="container">
-            <div class="card card-image card-outline">
+            <div class="card card-image card-outline" style="background-color: #FFFFFF;">
               <div class="card-body">
                 <h5 class="card-title">Basal Cell Carcinoma</h5>
                 <div class="card-date">Top 2</div>
@@ -574,7 +653,7 @@
         {% elif prediction2 == "dermatofibroma"%}
         <div class="cards">
           <div class="container">
-            <div class="card card-image card-outline">
+            <div class="card card-image card-outline" style="background-color: #FFFFFF;">
               <div class="card-body">
                 <h5 class="card-title">Dermatofibroma</h5>
                 <div class="card-date">Top 2</div>
@@ -625,7 +704,7 @@
         {% elif prediction2 == "melanoma"%}
         <div class="cards">
           <div class="container">
-            <div class="card card-image card-outline">
+            <div class="card card-image card-outline" style="background-color: #FFFFFF;">
               <div class="card-body">
                 <h5 class="card-title">Melanoma</h5>
                 <div class="card-date">Top 2</div>
@@ -694,7 +773,7 @@
         {% elif prediction2 == "nevus"%}
         <div class="cards">
           <div class="container">
-            <div class="card card-image card-outline">
+            <div class="card card-image card-outline" style="background-color: #FFFFFF;">
               <div class="card-body">
                 <h5 class="card-title">Nevus</h5>
                 <div class="card-date">Top 2</div>
@@ -756,7 +835,7 @@
         {% else %}
         <div class="cards">
           <div class="container">
-            <div class="card card-image card-outline">
+            <div class="card card-image card-outline" style="background-color: #FFFFFF;">
               <div class="card-body">
                 <h5 class="card-title">Vascular Lesion</h5>
                 <div class="card-date">Top 2</div>
@@ -819,7 +898,7 @@
         {% if prediction3 == "Actinic Keratosis" %}
         <div class="cards">
           <div class="container">
-            <div class="card card-image card-outline">
+            <div class="card card-image card-outline" style="background-color: #FFFFFF;">
               <div class="card-body">
                 <h5 class="card-title">Actinic Keratosis</h5>
                 <div class="card-date">Top 3</div>
@@ -879,7 +958,7 @@
         {% elif prediction3 == "basal cell carcinoma"%}
         <div class="cards">
           <div class="container">
-            <div class="card card-image card-outline">
+            <div class="card card-image card-outline" style="background-color: #FFFFFF;">
               <div class="card-body">
                 <h5 class="card-title">Basal Cell Carcinoma</h5>
                 <div class="card-date">Top 3</div>
@@ -945,7 +1024,7 @@
         {% elif prediction3 == "dermatofibroma"%}
         <div class="cards">
           <div class="container">
-            <div class="card card-image card-outline">
+            <div class="card card-image card-outline" style="background-color: #FFFFFF;">
               <div class="card-body">
                 <h5 class="card-title">Dermatofibroma</h5>
                 <div class="card-date">Top 3</div>
@@ -996,7 +1075,7 @@
         {% elif prediction3 == "melanoma"%}
         <div class="cards">
           <div class="container">
-            <div class="card card-image card-outline">
+            <div class="card card-image card-outline" style="background-color: #FFFFFF;">
               <div class="card-body">
                 <h5 class="card-title">Melanoma</h5>
                 <div class="card-date">Top 3</div>
@@ -1065,7 +1144,7 @@
         {% elif prediction3 == "nevus"%}
         <div class="cards">
           <div class="container">
-            <div class="card card-image card-outline">
+            <div class="card card-image card-outline" style="background-color: #FFFFFF;">
               <div class="card-body">
                 <h5 class="card-title">Nevus</h5>
                 <div class="card-date">Top 3</div>
@@ -1127,7 +1206,7 @@
         {% else %}
         <div class="cards">
           <div class="container">
-            <div class="card card-image card-outline">
+            <div class="card card-image card-outline" style="background-color: #FFFFFF;">
               <div class="card-body">
                 <h5 class="card-title">Vascular Lesion</h5>
                 <div class="card-date">Top 3</div>

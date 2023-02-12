@@ -1,6 +1,6 @@
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
+from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 DB_NAME = "database.db"
@@ -12,15 +12,15 @@ def create_app():
     app.config['SECRET_KEY'] = 'secretkey'
     db.init_app(app)
 
-    from .views import views
     from .auth import auth
     from .past_history import past_history
+    from .views import views
 
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
     app.register_blueprint(past_history, url_prefix='/')
 
-    from .models import Users, SkinConditionHistory
+    from .models import SkinConditionHistory, Users
 
     with app.app_context():
         db.create_all()

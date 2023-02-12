@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 
 from transformers import AutoModelForTokenClassification, AutoTokenizer, pipeline
 from keras.applications.imagenet_utils import preprocess_input
@@ -6,7 +6,6 @@ from keras.models import load_model
 import keras.utils as image
 from PIL import Image
 import os
-import torch
 
 app = Flask(__name__)
 
@@ -120,7 +119,6 @@ class chatbot:
         token_classifier = chatbot.load_classifier()
         return token_classifier(text)
 
-# Gerald's Part ============================================
 class burn:
     def predict_label(img_path):
         print("This is Image path: ", img_path)
@@ -198,6 +196,7 @@ def returnskinconditionmodel():
     
     return "Error"
 
+# Lin Feng's Part =====================================================
 
 @app.route("/nutrition-analyser-model", methods=["GET","POST"])
 def returnnutritionanalysermodel():
@@ -237,16 +236,16 @@ def returnnutritionanalysermodel():
 
 # Deborah's Part =====================================================
 
-@app.route("/chatbot-diagnosis", methods = ['GET', 'POST'])
+@app.route("/chatbot-diagnosis-model", methods = ['POST'])
 def returnchatbotmodel():
-    if request.method == 'POST':
-        symptom = request.data
-        print("symptom input from user:", symptom)
-        result = chatbot.predict_diagnosis(symptom)
-        print("docker result:", symptom)
-    return result
+    symptom = request.get_json()
+    print("symptom input from user:", symptom)
+    result = chatbot.predict_diagnosis(symptom['data'])
+    docker_result = result[0]['entity_group']
+    return jsonify({"response": docker_result})
 
 # Gerald's Part ========================================================
+
 @app.route("/burn-grading-model", methods=["GET","POST"])
 def returnBurnGradingModel():
     print("Im about to fo to POST ")
@@ -282,4 +281,4 @@ def returnBurnGradingModel():
     return "Error"
 
 if __name__ == "__main__":
-    app.run(debug=True, host='0.0.0.0')
+    app.run(debug=True, host='0.0.0.0', port=8000)

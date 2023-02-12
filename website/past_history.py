@@ -1,10 +1,8 @@
-from flask import Flask, Blueprint, render_template, request
-from flask_login import login_required, current_user
+from flask import Blueprint, Flask, render_template, request
 from flask_bcrypt import Bcrypt
+from flask_login import current_user, login_required
 
-from .models import SkinConditionHistory
-from .models import NutritionAnalyserHistory
-from .models import BurnGradeHistory
+from .models import NutritionAnalyserHistory, SkinConditionHistory, BurnGradeHistory
 
 past_history = Blueprint("past_history", __name__)
 

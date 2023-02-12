@@ -4,6 +4,7 @@ from flask_bcrypt import Bcrypt
 
 from .models import SkinConditionHistory
 from .models import NutritionAnalyserHistory
+from .models import BurnGradeHistory
 
 past_history = Blueprint("past_history", __name__)
 
@@ -20,7 +21,10 @@ def profile():
     # get nutrition analyser history 
     allnutritionanalyserrows = NutritionAnalyserHistory.query.filter_by(username=current_user.username).all()
 
-    return render_template("profile.html", SChistory = allskinconditionrows, NAhistory = allnutritionanalyserrows)
+    # get burn grading history
+    allburngraderows = BurnGradeHistory.query.filter_by(username=current_user.username).all()
+
+    return render_template("profile.html", SChistory = allskinconditionrows, NAhistory = allnutritionanalyserrows, BGhistory = allburngraderows)
 
 @past_history.route('/view-skin-history', methods = ['GET', 'POST'])
 @login_required
@@ -33,3 +37,14 @@ def viewskinhistory():
         itemdate = request.form.get("itemdate")
         print(itemimgpath)
     return render_template("history-skin-condition.html", passtopone = itemtopone, passtoptwo = itemtoptwo, passtopthree = itemtopthree, passimgpath = itemimgpath, passdate = itemdate)
+
+
+@past_history.route('/view-burn-history', methods = ['GET', 'POST'])
+@login_required
+def viewburngradehistory():
+    if request.method == 'POST':
+        burnGradePred = request.form.get("burnGradePred")
+        itemimgpath = request.form.get("itemimgpath")
+        itemdate = request.form.get("itemdate")
+        print("Burn image path: ",itemimgpath)
+    return render_template("history-burn-grade.html",  passgrade = burnGradePred, passimgpath = itemimgpath, passdate = itemdate)

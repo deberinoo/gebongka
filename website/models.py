@@ -35,4 +35,10 @@ class NutritionInformation(db.Model):
     carbohydrates = db.Column(db.String(50), nullable=False)
     sugars = db.Column(db.String(50), nullable=False)
     calories = db.Column(db.String(50), nullable=False)
-    
+
+class BurnGradeHistory(db.Model, UserMixin):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(20), nullable=False)
+    burnGradePred = db.Column(db.String(100), nullable=False)
+    imguploadpath = db.Column(db.String(200), nullable=False)
+    dateprediction = db.Column(db.String(80), nullable=False)

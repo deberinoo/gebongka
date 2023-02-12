@@ -24,7 +24,7 @@
       <div class="intro-content">
         <img src="static/images/intro.jpg" alt="image-demo">
         <div class="caption">
-          <h4 class="text-white mb-1">Burn Grading</h4>
+          <h4 class="text-white mb-1">Grading Of Burn</h4>
         </div>
       </div>
     </div>
@@ -34,6 +34,61 @@
   <div class="separator-large"></div>
   <!-- end separator -->
   <div class="container">
+    <div class="row d-flex justify-content-center">
+      {% if capture_bool == 0 %}
+      <div class="img">
+        <img src="{{url_for('views.video_feed')}}" height="300px" alt="video-demo">
+      </div>
+      {% else %}
+      <div class="img">
+        <img src="static/images/ImageCaptureIllustration.png" height="300px" alt="capture_image">
+        <p style="color: white; margin-bottom: 10px;" align="center"><b>Click on submit to display information</b></p>
+      </div>
+      {% endif %}
+    </div>
+    <div class="row d-flex justify-content-center">
+      {% if capture_bool == 1 %}
+      <form action="/burn-grading" method="post" enctype="multipart/form-data" class="mr-5">
+        <div class="form-group">
+          <div class="col">
+            <div class="row">
+              <input type="submit" class="btn btn-danger" style="color: white;" value="Retake"/>
+            </div>
+          </div>
+        </div>
+      </form>
+      <form action="/burn_grading_capture_predict" method="post" enctype="multipart/form-data" class="row d-flex justify-content-center">
+        <div class="form-group">
+          <div class="col">
+            <div class="row">
+              <input type="submit" class="btn btn-success" value="Submit"/>
+              <input type="hidden" class="btn btn-success" value="{{img_link}}" name="image_path"/>
+            </div>
+          </div>
+        </div>
+      </form>
+      {% else %}
+      <form action="/burn_grading_capture" method="post" enctype="multipart/form-data" class="mr-5">
+        <div class="form-group">
+          <div class="col">
+            <div class="row">
+              <input type="submit" class="btn btn-warning" style="color: white;" value="Capture" name="click"/>
+            </div>
+          </div>
+        </div>
+      </form>
+      <form action="/burn_grading_capture_predict" method="post" enctype="multipart/form-data" class="row d-flex justify-content-center">
+        <div class="form-group">
+          <div class="col">
+            <div class="row">
+              <input type="submit" class="btn btn-success" value="Submit"/>
+              <input type="hidden" class="btn btn-success" value="{{img_link}}" name="image_path"/>
+            </div>
+          </div>
+        </div>
+      </form>
+      {% endif %}
+    </div>
     <div class="row">
       <div class="col-12">
         <form action="/submit-grading" method="post" enctype="multipart/form-data">

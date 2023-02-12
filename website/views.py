@@ -7,8 +7,10 @@ from flask import Blueprint, Response, render_template, request
 from flask_login import current_user, login_required
 from flask_socketio import send, emit
 
-from .ml_models import chatbot, food, skin
+
+from .ml_models import chatbot, food, skin, burn
 from .models import NutritionInformation
+from .models import BurnGradeHistory
 
 global capture
 capture=0 
@@ -374,11 +376,85 @@ def analyse_nutrition_upload():
 
 	return render_template("models/nutrition-analyser.html", prediction = dockerresults.text, img_path = "/static/" + img.filename, capture_bool=capture_bool, NI=allnutritioninformationrows)
 
+# Gerald's Part ===============================================
 
 @views.route("/burn-grading", methods=['GET', 'POST'])
+@login_required
 def burn_grading():
-	return render_template("models/burn-grading.html")
+	camera = cv2.VideoCapture
 
+	# Boolean of image capture
+	capture_bool = 0
+
+	return render_template("models/burn-grading.html", capture_bool=capture_bool)
+
+@views.route('/videoFeed')
+def videoFeed():
+    print('here')
+    return Response(gen_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
+
+# GET/POST method for prediction by Camera
+@views.route("/submit-burn-grading-capture", methods = ['GET', 'POST'])
+def burn_grading_capture():
+	# When submitting
+	if request.method == 'POST':
+		print("Grade of burn prediction ongoing ================ ")
+
+		# Get image from form
+		print("Obtaining image given.....")
+		global capture
+		capture=1
+		
+		# Boolean of image capture
+		capture_bool = 1
+
+		# Gettinig image path
+		now = datetime.datetime.now().isoformat(sep=" ", timespec="seconds")
+		img_path = "website/static/" + "shot_{}.png".format(str(now).replace(":",''))
+		print("Image Path: ", img_path)	
+
+	return render_template("models/burn-grading.html", img_link = img_path, capture_bool=capture_bool)
+
+# GET/POST method for prediction by Camera
+@views.route("/submit-burn-grading-capture-predict", methods = ['GET', 'POST'])
+def burn_grading_capture_predict():
+	# When submitting
+	if request.method == 'POST':
+		print("Grading burn prediction ongoing ================ ")
+
+		# Boolean of image capture
+		capture_bool = 0
+
+		# Get image name
+		print("Obtaining image given.....")
+		img_path = request.form.get('image_path')
+		print("Image Path: ", img_path)
+		print("- Successfully obtained Image -")
+
+		files = {'upload_file':open(img_path,'rb')}
+		print("file: ", files)
+
+		print("Model is now predicting image....")
+		print("Passing image to docker....")
+		# Request post with the url link to the docker and attach the file
+		dockres = requests.post("http://127.0.0.1:5000/burn-grading-model",files=files)
+		# Resuls will be a string
+		print("from docker",dockres)		
+
+		# Nutrition Information from database
+		allburngradeinformationrows = BurnGradeHistory.query.all()	
+
+		# Creation of save history
+		burnGradHistory = burn.create_burn_history(img_path, dockres.text, current_user.username)
+		print("Save history results: ", burnGradHistory)
+
+	return render_template("models/burn-grading.html", prediction = dockres, img_path = img_path[8:], capture_bool=capture_bool, BI=allburngradeinformationrows)
+
+@views.route("/history-burn-grading")
+def loadhistoryburngrading():
+	return render_template("history-burn-grade.html")
+
+# GET/POST method for prediction by File Upload
 @views.route("/submit-grading", methods = ['GET', 'POST'])
 def grade_burn():
 
@@ -401,6 +477,15 @@ def grade_burn():
 		# Resuls will be a string
 		print("from docker",dockres.text)
 
+		# Burn Information from database
+		allburngradeinformationrows = BurnGradeHistory.query.all()		
+
+		print("this is allburninformation: ", allburngradeinformationrows)
+
+		# Creation of save history
+		img_path2 = "static/" + imgFileName
+		burnGradHistory = burn.create_burn_history(img_path2, dockres.text, current_user.username)
+		print("Save history results: ", burnGradHistory)
 		# print("This is P ", p)
 
-	return render_template("models/burn-grading.html", prediction = dockres.text, img_path = "/static/" + imgFileName)
+	return render_template("models/burn-grading.html", prediction = dockres.text, img_path = "/static/" + imgFileName, BI=allburngradeinformationrows)

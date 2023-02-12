@@ -6,8 +6,9 @@ from keras.models import load_model
 from transformers import (AutoModelForTokenClassification, AutoTokenizer,
                           pipeline)
 
+
 from . import db
-from .models import NutritionAnalyserHistory, SkinConditionHistory
+from .models import NutritionAnalyserHistory, SkinConditionHistory, BurnGradeHistory
 
 
 def process_image(img_path):
@@ -92,6 +93,11 @@ class burn:
                     burnclass = "This is Third degree burn"
             index+=1
         return burnclass
+
+    def create_burn_history(img_path,PredResult,passuser):
+        new_burnhistory = BurnGradeHistory(username=passuser, burnGradePred = PredResult, imguploadpath = img_path, dateprediction = str(datetime.now()))
+        db.session.add(new_burnhistory)
+        db.session.commit()
 
 class chatbot:
     def load_classifier():

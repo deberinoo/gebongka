@@ -2,7 +2,7 @@ from flask import Blueprint, Flask, render_template, request
 from flask_bcrypt import Bcrypt
 from flask_login import current_user, login_required
 
-from .models import NutritionAnalyserHistory, SkinConditionHistory, BurnGradeHistory
+from .models import NutritionAnalyserHistory, SkinConditionHistory, BurnGradeHistory, ChatbotDiagnosisHistory
 
 past_history = Blueprint("past_history", __name__)
 
@@ -22,7 +22,10 @@ def profile():
     # get burn grading history
     allburngraderows = BurnGradeHistory.query.filter_by(username=current_user.username).all()
 
-    return render_template("profile.html", SChistory = allskinconditionrows, NAhistory = allnutritionanalyserrows, BGhistory = allburngraderows)
+    # get burn grading history
+    allchatbotdiagnosisrows = ChatbotDiagnosisHistory.query.filter_by(username=current_user.username).all()
+
+    return render_template("profile.html", SChistory = allskinconditionrows, NAhistory = allnutritionanalyserrows, BGhistory = allburngraderows, CDhistory = allchatbotdiagnosisrows)
 
 @past_history.route('/view-skin-history', methods = ['GET', 'POST'])
 @login_required

@@ -42,3 +42,8 @@ class BurnGradeHistory(db.Model, UserMixin):
     burnGradePred = db.Column(db.String(100), nullable=False)
     imguploadpath = db.Column(db.String(200), nullable=False)
     dateprediction = db.Column(db.String(80), nullable=False)
+
+class ChatbotDiagnosisHistory(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(20), nullable=False)
+    symptoms = db.Column(db.String(255), nullable=False)

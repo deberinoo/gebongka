@@ -131,7 +131,6 @@ def loadhistoryskincondition():
 	return render_template("history-skin-condition.html")
 
 @views.route("/skin-condition-analyser", methods=['GET', 'POST'])
-@login_required
 def skin_condition_analyser():
 	camera = cv2.VideoCapture(0)
 
@@ -228,15 +227,17 @@ def chatbot_diagnosis():
 def handle_message(msg):
 	# handles chatbot messages
 	print("Received message: " + msg)
-	try:
+	# try:
 		# calls chatbot api
-		result = requests.post("http://127.0.0.1:8000/chatbot-diagnosis-model", json={"data":msg})
-		docker_result = result.json()['response']
-		reply(docker_result)
-		print("docker result:", docker_result)
-	except Exception as e:
-		print("error: ", e)
-		reply(result)
+	result = requests.post("http://127.0.0.1:8000/chatbot-diagnosis-model", json={"data":msg})
+	docker_result = result.json()['response']
+	reply(docker_result)
+	print("docker result:", docker_result)
+	savehistory = chatbot.create_history(current_user.username, docker_result.replace("_", " ").capitalize())
+	print(savehistory)
+	# except Exception as e:
+	# 	print("error: ", e)
+	# 	reply(result)
         
 def reply(result):
 	try:

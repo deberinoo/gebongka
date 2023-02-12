@@ -8,7 +8,7 @@ from transformers import (AutoModelForTokenClassification, AutoTokenizer,
 
 
 from . import db
-from .models import NutritionAnalyserHistory, SkinConditionHistory, BurnGradeHistory
+from .models import NutritionAnalyserHistory, SkinConditionHistory, BurnGradeHistory, ChatbotDiagnosisHistory
 
 
 def process_image(img_path):
@@ -167,6 +167,11 @@ class chatbot:
                              "You can treat your stomach pain by resting your bowel, only eating easy-to-digest foods like crackers or bananas. In addition, drink plenty of water to stay hydrated."],
         }
         return diagnosis_dict[diagnosis]
+    
+    def create_history(username, symptoms):
+        chatbot_history = ChatbotDiagnosisHistory(username=username, symptoms=symptoms)
+        db.session.add(chatbot_history)
+        db.session.commit()
 
 class food:
     def predict_label(img_path):

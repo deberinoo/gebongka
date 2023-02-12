@@ -19,7 +19,7 @@
         <div class="col-4">
           <div class="header-profile">
             <div class="container">
-              <img src="static/images/square6.jpg" alt="image-demo">
+              <img src="static/images/user.jpg" alt="image-demo">
             </div>
           </div>
         </div>
@@ -38,9 +38,6 @@
       <ul class="nav nav-fill nav-default" id="myTab" role="tablist">
         <li class="nav-item">
           <a class="nav-link active" id="ports-tab" data-toggle="tab" href="#ports" role="tab" aria-controls="ports" aria-selected="true">Past History</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="collection-tab" data-toggle="tab" href="#collection" role="tab" aria-controls="collection" aria-selected="false">Collection</a>
         </li>
       </ul>
 
@@ -71,7 +68,7 @@
 				<!-- section title -->
 				<div class="section-title">
 					<h3><strong>Skin Condition Identifier</strong></h3>
-					<span class="section-subtitle">Here are your previous predictions...</span>
+					<span class="section-subtitle">Here are your previous predictions</span>
 				</div>
 				<!-- end section title -->
 
@@ -81,7 +78,7 @@
 							{%for item in SChistory|reverse%}
 							<li class="list-item">
 								<div class="list-media">
-									<i class="icon ion-ios-arrow-down bg-blue"></i>
+									<i class="fa-solid fa-magnifying-glass bg-blue"></i>
 								</div>
 								<form action="/view-skin-history" method="post" enctype="multipart/form-data" style="width:1000px;">
 									<button style="all:unset; width:1000px;">
@@ -114,7 +111,7 @@
 				<!-- section title -->
 				<div class="section-title">
 					<h3><strong>Burn Grading</strong></h3>
-					<span class="section-subtitle">Here are your previous predictions...</span>
+					<span class="section-subtitle">Here are your previous predictions</span>
 				</div>
 				<!-- end section title -->
 
@@ -124,7 +121,7 @@
 							{%for item in BGhistory|reverse%}
 							<li class="list-item">
 								<div class="list-media">
-									<i class="icon ion-ios-arrow-down bg-blue"></i>
+									<i class="fa-solid fa-ruler bg-red"></i>
 								</div>
 								<form action="/view-burn-history" method="post" enctype="multipart/form-data" style="width:1000px;">
 									<button style="all:unset; width:1000px;">
@@ -155,66 +152,30 @@
 				<!-- section title -->
 				<div class="section-title">
 					<h3><strong>Chatbot Diagnosis</strong></h3>
-					<span class="section-subtitle">Here are your previous predictions...</span>
+					<span class="section-subtitle">Here are your previous predictions</span>
 				</div>
 				<!-- end section title -->
 
 				<div class="list-view list-separate-two list-colored">
 					<ul style="height:200px; overflow:hidden; overflow-y:scroll;">
-						<li class="list-item">
-							<div class="list-media">
-								<i class="icon ion-ios-switch bg-green"></i>
-							</div>
-							<div class="list-label">
-								<div class="list-title">Button</div>
-								<div class="list-after"><i class="icon ion-ios-arrow-forward"></i></div>
-							</div>
-						</li>
-						<li class="list-item">
-							<div class="list-media">
-								<i class="icon ion-ios-switch bg-green"></i>
-							</div>
-							<div class="list-label">
-								<div class="list-title">Button</div>
-								<div class="list-after"><i class="icon ion-ios-arrow-forward"></i></div>
-							</div>
-						</li>
-						<li class="list-item">
-							<div class="list-media">
-								<i class="icon ion-ios-switch bg-green"></i>
-							</div>
-							<div class="list-label">
-								<div class="list-title">Button</div>
-								<div class="list-after"><i class="icon ion-ios-arrow-forward"></i></div>
-							</div>
-						</li>
-						<li class="list-item">
-							<div class="list-media">
-								<i class="icon ion-ios-switch bg-green"></i>
-							</div>
-							<div class="list-label">
-								<div class="list-title">Button</div>
-								<div class="list-after"><i class="icon ion-ios-arrow-forward"></i></div>
-							</div>
-						</li>
-						<li class="list-item">
-							<div class="list-media">
-								<i class="icon ion-ios-switch bg-green"></i>
-							</div>
-							<div class="list-label">
-								<div class="list-title">Button</div>
-								<div class="list-after"><i class="icon ion-ios-arrow-forward"></i></div>
-							</div>
-						</li>
-						<li class="list-item">
-							<div class="list-media">
-								<i class="icon ion-ios-switch bg-green"></i>
-							</div>
-							<div class="list-label">
-								<div class="list-title">Button</div>
-								<div class="list-after"><i class="icon ion-ios-arrow-forward"></i></div>
-							</div>
-						</li>
+						{% if CDhistory %}
+							{%for item in CDhistory|reverse%}
+							<li class="list-item">
+								<div class="list-media">
+									<i class="fa-solid fa-comment-medical bg-green"></i>
+								</div>
+								<button style="all:unset; width:1000px;">
+									<div class="list-label">
+										<div class="list-title"><strong>Diagnosis: </strong>{{ item.symptoms }}</div>
+										<div class="list-after"><i class="icon ion-ios-arrow-forward"></i></div>
+										<div>
+											{{item.dateprediction|truncate(10, True, '', 0)}}
+										</div>
+									</div>
+								</button>
+							</li>
+							{% endfor %}
+						{% endif %}
 					</ul>
 				</div>
 
@@ -225,7 +186,7 @@
 				<!-- section title -->
 				<div class="section-title">
 					<h3><strong>Nutrition Analyser</strong></h3>
-					<span class="section-subtitle">Here are your previous predictions...</span>
+					<span class="section-subtitle">Here are your previous predictions</span>
 				</div>
 				<!-- end section title -->
 
@@ -235,7 +196,7 @@
 							{%for item in NAhistory %}
 							<li class="list-item">
 								<div class="list-media">
-									<i class="icon ion-ios-arrow-down bg-yellow"></i>
+									<i class="fa-solid fa-clipboard-check bg-yellow"></i>
 								</div>
 								<!-- <form action="" method="post" enctype="multipart/form-data" style="width:1000px;"> -->
 									<button style="all:unset; width:1000px;">

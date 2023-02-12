@@ -2,7 +2,6 @@
 
 {% block body %}
 
-
 <!-- pages wrapper -->
 <div class="pages-wrapper">
 
@@ -170,6 +169,9 @@
 										<div class="list-after"><i class="icon ion-ios-arrow-forward"></i></div>
 										<div>
 											{{item.dateprediction|truncate(10, True, '', 0)}}
+										</div>
+										<div>
+											<a href="{{ url_for('past_history.delete_chatbot_history', id=item.id)}}">Delete</a>
 										</div>
 									</div>
 								</button>

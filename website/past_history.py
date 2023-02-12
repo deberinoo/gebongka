@@ -1,8 +1,7 @@
-from flask import Blueprint, Flask, render_template, request
+from flask import Blueprint, Flask, flash, render_template, request
 from flask_bcrypt import Bcrypt
 from flask_login import current_user, login_required
-
-from .models import NutritionAnalyserHistory, SkinConditionHistory, BurnGradeHistory, ChatbotDiagnosisHistory
+from .ml_models import retrieve_all_history, chatbot
 
 past_history = Blueprint("past_history", __name__)
 
@@ -12,18 +11,8 @@ Bcrypt = Bcrypt(app)
 @past_history.route('/profile')
 @login_required
 def profile():
-
-    # get skin condition history 
-    allskinconditionrows = SkinConditionHistory.query.filter_by(username=current_user.username).all()
     
-    # get nutrition analyser history 
-    allnutritionanalyserrows = NutritionAnalyserHistory.query.filter_by(username=current_user.username).all()
-
-    # get burn grading history
-    allburngraderows = BurnGradeHistory.query.filter_by(username=current_user.username).all()
-
-    # get burn grading history
-    allchatbotdiagnosisrows = ChatbotDiagnosisHistory.query.filter_by(username=current_user.username).all()
+    allskinconditionrows, allburngraderows, allchatbotdiagnosisrows, allnutritionanalyserrows = retrieve_all_history(current_user.username)
 
     return render_template("profile.html", SChistory = allskinconditionrows, NAhistory = allnutritionanalyserrows, BGhistory = allburngraderows, CDhistory = allchatbotdiagnosisrows)
 
@@ -49,3 +38,16 @@ def viewburngradehistory():
         itemdate = request.form.get("itemdate")
         print("Burn image path: ",itemimgpath)
     return render_template("history-burn-grade.html",  passgrade = burnGradePred, passimgpath = itemimgpath, passdate = itemdate)
+
+@past_history.route('/delete-chatbot-history/<int:id>')
+def delete_chatbot_history(id):
+    try:
+        chatbot.delete_history(id)
+        flash("Chatbot Diagnosis History record deleted successfully!")
+        allskinconditionrows, allburngraderows, allchatbotdiagnosisrows, allnutritionanalyserrows = retrieve_all_history(current_user.username)
+        return render_template("profile.html", SChistory = allskinconditionrows, NAhistory = allnutritionanalyserrows, BGhistory = allburngraderows, CDhistory = allchatbotdiagnosisrows)
+    except Exception as e:
+        print("error", e)
+        flash("Whoops! There was a problem deleting the chatbot diagnosis history record. Please try again.")
+        allskinconditionrows, allburngraderows, allchatbotdiagnosisrows, allnutritionanalyserrows = retrieve_all_history(current_user.username)
+        return render_template("profile.html", SChistory = allskinconditionrows, NAhistory = allnutritionanalyserrows, BGhistory = allburngraderows, CDhistory = allchatbotdiagnosisrows)

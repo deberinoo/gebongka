@@ -18,6 +18,21 @@ def process_image(img_path):
     i = preprocess_input(i)
     return i
 
+def retrieve_all_history(username):
+    # get skin condition history 
+    allskinconditionrows = SkinConditionHistory.query.filter_by(username=username).all()
+    
+    # get nutrition analyser history 
+    allnutritionanalyserrows = NutritionAnalyserHistory.query.filter_by(username=username).all()
+
+    # get burn grading history
+    allburngraderows = BurnGradeHistory.query.filter_by(username=username).all()
+
+    # get chatbot diagnosis history
+    allchatbotdiagnosisrows = ChatbotDiagnosisHistory.query.filter_by(username=username).all()
+
+    return allskinconditionrows, allburngraderows, allchatbotdiagnosisrows, allnutritionanalyserrows
+
 class skin:
     def Check_Highest_Prediction(prediction_array):
         print("Put into dic")
@@ -172,6 +187,14 @@ class chatbot:
         chatbot_history = ChatbotDiagnosisHistory(username=username, symptoms=symptoms)
         db.session.add(chatbot_history)
         db.session.commit()
+
+    def delete_history(id):
+        history_to_delete = ChatbotDiagnosisHistory.query.get_or_404(id)
+        try:
+            db.session.delete(history_to_delete)
+            db.session.commit()
+        except:
+            print("error")
 
 class food:
     def predict_label(img_path):

@@ -3,14 +3,14 @@ import os
 
 import cv2
 import requests
-from flask import Blueprint, Response, render_template, request
+from flask import Blueprint, Response, flash, render_template, request
 from flask_login import current_user, login_required
 from flask_socketio import send, emit
 
 
 from .ml_models import chatbot, food, skin, burn
 from .models import NutritionInformation
-from .models import BurnGradeHistory
+from .models import BurnGradeHistory, ChatbotDiagnosisHistory
 
 global capture
 capture=0 

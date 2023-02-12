@@ -49,7 +49,7 @@ def handle_404(err):
 
 @views.route('/')
 def index():
-    return render_template("index.html")
+    return render_template("homepage.html")
 
 @views.route('/features')
 def features():

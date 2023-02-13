@@ -163,15 +163,17 @@
 								<div class="list-media">
 									<i class="fa-solid fa-comment-medical bg-green"></i>
 								</div>
-								<button style="all:unset; width:1000px;">
+								<div style="all:unset; width:1000px;">
 									<div class="list-label">
 										<form action="/delete-chatbot-history" method="post" enctype="multipart/form-data" style="width:1000px;">
-											<div class="list-title"><strong>Diagnosis: </strong>{{ item.symptoms }}</div>
-											<div class="list-after"><button type="submit" class="fabutton"><i class="fa-solid fa-trash-can"></i></button></div>
+											<div class="list-title" style="display: inline-block;"><strong>Diagnosis: </strong>{{ item.symptoms }}</div>
+											<div class="list-after" style="display: inline-block;">
+												<button type="submit" class="fabutton"><i class="fa-solid fa-trash-can"></i></button>
+											</div>
 											<input id="id" name="id" value="{{item.id}}" type="hidden">											
 										</form>
 									</div>
-								</button>
+								</div>
 							</li>
 							{% endfor %}
 						{% endif %}

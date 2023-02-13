@@ -1158,6 +1158,11 @@ textarea {
     color: #333;
 }
 
+.list-after {
+    display: inline-block;
+    float: right;
+}
+
 .list-view .list-item .list-label .list-after {
     margin-left: auto;
 }

@@ -1,22 +1,18 @@
-@import url("https://fonts.googleapis.com/css?family=Playfair+Display:400,700|Roboto:300,400,500,700&display=swap");
+
 /* line 1, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_extends.scss */
 .btn_1, .btn_2, .regervation_part .btn_2:hover {
-  background-image: -webkit-linear-gradient(to right, #649bff, #0070fa, #649bff);
-  background-image: -o-linear-gradient(to right, #649bff, #0070fa, #649bff);
-  background-image: linear-gradient(to right, #649bff, #0070fa, #649bff);
+  background-color: #8b9aff;
 }
 
 /* line 6, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_extends.scss */
 .regervation_part .btn_2 {
-  background-image: -webkit-linear-gradient(to right, #fff, #fff, #fff);
-  background-image: -o-linear-gradient(to right, #fff, #fff, #fff);
-  background-image: linear-gradient(to right, #fff, #fff, #fff);
+  background-color: #8b9aff;
 }
 
 /**************** common css start ****************/
 /* line 3, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_common.scss */
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: "Inter", sans-serif;
   padding: 0;
   margin: 0;
   font-size: 14px;
@@ -104,10 +100,6 @@ input:hover, input:focus {
 }
 
 /* line 48, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_common.scss */
-.padding_top {
-  padding-top: 140px;
-}
-
 @media only screen and (min-width: 992px) and (max-width: 1200px) {
   /* line 48, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_common.scss */
   .padding_top {
@@ -182,11 +174,6 @@ a:hover {
   text-decoration: none;
 }
 
-/* line 87, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_common.scss */
-h1, h2, h3, h4, h5, h6 {
-  color: #242429;
-  font-family: "Playfair Display", serif;
-}
 
 /* line 91, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_common.scss */
 p {
@@ -510,7 +497,7 @@ ul {
   text-transform: capitalize;
   border: 1px solid #e4e6ea;
   border-radius: 2px;
-  font-family: "Playfair Display", serif;
+  font-family: "Inter", serif;
   background-size: 200% auto;
 }
 
@@ -550,12 +537,11 @@ ul {
   display: inline-block;
   padding: 16px 45px;
   text-align: center;
-  font-size: 14px;
+  font-size: 16px;
   color: #fff;
   -o-transition: all .4s ease-in-out;
   -webkit-transition: all .4s ease-in-out;
   transition: all .4s ease-in-out;
-  text-transform: uppercase;
   border-radius: 2px;
   font-family: "Roboto", sans-serif;
   background-size: 200% auto;
@@ -712,7 +698,6 @@ ul {
 .single-blog .tag {
   text-align: left;
   display: inline-block;
-  float: left;
   font-size: 13px;
   font-weight: 300;
   margin-right: 22px;
@@ -2324,9 +2309,8 @@ ul {
 /* line 61, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_menu.scss */
 .main_menu .main-menu-item ul li .nav-link {
   color: #242429;
-  font-size: 14px;
+  font-size: 16px;
   padding: 38px 23px;
-  font-family: "Playfair Display", serif;
   line-height: 13px;
   text-transform: capitalize;
 }
@@ -2498,7 +2482,6 @@ ul {
   height: 935px;
   position: relative;
   overflow: hidden;
-  background-image: url(../img/banner_bg.png);
   background-repeat: no-repeat;
   background-size: 100% 100%;
   background-position: center;
@@ -2508,7 +2491,6 @@ ul {
   /* line 2, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_banner.scss */
   .banner_part {
     background-image: none;
-    background-color: #f7f7f7;
     height: 650px;
   }
 }
@@ -2531,7 +2513,7 @@ ul {
 .banner_part .banner_text .banner_text_iner {
   display: table-cell;
   vertical-align: middle;
-  padding-top: 155px;
+  padding-bottom: 60px;
 }
 
 @media (max-width: 991px) {
@@ -2692,7 +2674,6 @@ ul {
 .about_us {
   position: relative;
   z-index: 99;
-  background-image: url(../img/about_bg.png);
   background-position: left bottom;
   background-repeat: no-repeat;
   background-size: 50% 90%;
@@ -2826,8 +2807,7 @@ ul {
   padding-top: 12px;
   color: #242429;
   width: 50%;
-  float: left;
-  font-family: "Playfair Display", serif;
+  font-family: "Inter", serif;
   position: relative;
   padding-left: 29px;
 }
@@ -2983,7 +2963,7 @@ ul {
 /**************** service_part css start ****************/
 /* line 2, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_feature_part.scss */
 .feature_part {
-  padding: 140px 0 515px;
+  padding: 140px 0 80px;
 }
 
 @media (max-width: 991px) {
@@ -3163,6 +3143,7 @@ ul {
 
 /* line 126, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_feature_part.scss */
 .feature_part .single_feature_part h4 {
+  color: #8b9aff !important;
   font-weight: 600;
   font-size: 20px;
   margin-bottom: 20px;
@@ -3355,7 +3336,7 @@ ul {
 /* line 59, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_review.scss */
 .review_part .client_review_single .client_review_text p {
   font-size: 18px;
-  font-family: "Playfair Display", serif;
+  font-family: "Inter", serif;
   color: #fff;
   line-height: 1.9;
 }
@@ -3419,7 +3400,7 @@ ul {
 
 /* line 109, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_review.scss */
 .review_part h4 span {
-  font-family: "Playfair Display", serif;
+  font-family: "Inter", serif;
   font-size: 14px;
   color: #fff;
   font-weight: 400;
@@ -3609,7 +3590,7 @@ ul {
 .regervation_part .btn_2 {
   margin-top: 10px;
   background-color: #fff !important;
-  font-family: "Playfair Display", serif;
+  font-family: "Inter", serif;
   font-weight: 500;
   color: #242429;
   font-size: 14px;
@@ -3959,10 +3940,6 @@ ul {
 }
 
 /* line 2, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_footer.scss */
-.footer-area {
-  background-color: #f3f6f7;
-}
-
 @media (max-width: 991px) {
   /* line 5, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_footer.scss */
   .footer-area .single-footer-widget {
@@ -5752,7 +5729,7 @@ h1, h2, h3, h4, h5, h6 {
 .blog_part .blog_btn {
   font-size: 14px;
   text-transform: uppercase;
-  font-family: "Playfair Display", serif;
+  font-family: "Inter", serif;
   font-weight: 500;
   margin-top: 20px;
   display: inline-block;
@@ -6033,10 +6010,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* line 2, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_footer.scss */
-.footer-area {
-  background-color: #f3f6f7;
-}
-
 @media (max-width: 991px) {
   /* line 5, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_footer.scss */
   .footer-area .single-footer-widget {

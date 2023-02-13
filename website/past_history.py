@@ -39,15 +39,17 @@ def viewburngradehistory():
         print("Burn image path: ",itemimgpath)
     return render_template("history-burn-grade.html",  passgrade = burnGradePred, passimgpath = itemimgpath, passdate = itemdate)
 
-@past_history.route('/delete-chatbot-history/<int:id>')
-def delete_chatbot_history(id):
+@past_history.route('/delete-chatbot-history', methods = ['GET', 'POST'])
+def delete_chatbot_history():
     try:
-        chatbot.delete_history(id)
-        flash("Chatbot Diagnosis History record deleted successfully!")
-        allskinconditionrows, allburngraderows, allchatbotdiagnosisrows, allnutritionanalyserrows = retrieve_all_history(current_user.username)
+        if request.method == 'POST':
+            id = request.form.get("id")
+            chatbot.delete_history(id)
+            flash("Chatbot Diagnosis History record deleted successfully!", category="info")
+            allskinconditionrows, allburngraderows, allchatbotdiagnosisrows, allnutritionanalyserrows = retrieve_all_history(current_user.username)
         return render_template("profile.html", SChistory = allskinconditionrows, NAhistory = allnutritionanalyserrows, BGhistory = allburngraderows, CDhistory = allchatbotdiagnosisrows)
     except Exception as e:
         print("error", e)
-        flash("Whoops! There was a problem deleting the chatbot diagnosis history record. Please try again.")
+        flash("Whoops! There was a problem deleting the chatbot diagnosis history record. Please try again.", category="info")
         allskinconditionrows, allburngraderows, allchatbotdiagnosisrows, allnutritionanalyserrows = retrieve_all_history(current_user.username)
         return render_template("profile.html", SChistory = allskinconditionrows, NAhistory = allnutritionanalyserrows, BGhistory = allburngraderows, CDhistory = allchatbotdiagnosisrows)

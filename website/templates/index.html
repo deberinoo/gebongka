@@ -1,158 +1,315 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+	<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Gebongka</title>
+    <link rel="icon" href="static/images/favicon.png">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="static/homepage/css/bootstrap.min.css">
+    <!-- animate CSS -->
+    <link rel="stylesheet" href="static/homepage/css/animate.css">
+    <!-- owl carousel CSS -->
+    <link rel="stylesheet" href="static/homepage/css/owl.carousel.min.css">
+    <!-- themify CSS -->
+    <link rel="stylesheet" href="static/homepage/css/themify-icons.css">
+    <!-- flaticon CSS -->
+    <link rel="stylesheet" href="static/homepage/css/flaticon.css">
+    <!-- magnific popup CSS -->
+    <link rel="stylesheet" href="static/homepage/css/magnific-popup.css">
+    <!-- nice select CSS -->
+    <link rel="stylesheet" href="static/homepage/css/nice-select.css">
+    <!-- swiper CSS -->
+    <link rel="stylesheet" href="static/homepage/css/slick.css">
+    <!-- style CSS -->
+    <link rel="stylesheet" href="static/homepage/css/style.css">
 
-{% block body %}
+    <script src="https://kit.fontawesome.com/eb393893ff.js" crossorigin="anonymous"></script>
+	{% block scripts %}
+	{% endblock %}
+</head>
+<body>
+	
+    <!-- fakeloader -->
+    <div class="fakeLoader"></div>
+    <!-- end fakeloader -->
 
-<!-- page wrapper -->
-<div class="page-wrapper">
+    <!--::header part start::-->
+    <header class="main_menu home_menu">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-12">
+                    <nav class="navbar navbar-expand-lg navbar-light">
+                        <a class="navbar-brand" href="/"> <img src="static/images/brand.png" height="100px" alt="logo"> </a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
 
-	<div class="section-title title-large">
-		{% if current_user.is_authenticated %}
-		<h3>Hi {{ current_user.username }}, welcome back!</h3><br>
-		<p>What do you want to do today?</p>
-		{% else %}
-		
-		{% endif %}
-	</div>
+                        <div class="collapse navbar-collapse main-menu-item justify-content-center"
+                            id="navbarSupportedContent">
+                            <ul class="navbar-nav align-items-center">
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="/">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="about.html">About</a>
+                                </li>
+                                {% if current_user.is_authenticated %}
+                                <li class="nav-item">
+                                    <a class="nav-link" href="profile">Profile</a>
+                                </li>
+                                {% else %}
+                                {% endif %}
 
-	<!-- intro app -->
-	<div class="intro-app">
-		<div class="container">
-			<div class="intro-content">
-				<img src="static/images/intro.jpg" alt="image-demo">
-				<div class="caption">
-					<h4 class="text-white mb-1">Welcome to Gebongka Health</h4>
-					<p class="text-white">Start living well with us.</p>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- end intro app -->
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown"
+                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Features
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="skin-condition">Skin Condition Identifier</a>
+                                        <a class="dropdown-item" href="burn-grading">Burn Grading</a>
+                                        <a class="dropdown-item" href="chatbot-diagnosis">Chat bot</a>
+                                        <a class="dropdown-item" href="nutrition-analyser">Nutrition Analyzer</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_1"
+                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        blog
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
+                                        <a class="dropdown-item" href="blog.html">blog</a>
+                                        <a class="dropdown-item" href="single-blog.html">Single blog</a>
+                                    </div>
+                                </li>
 
-	<!-- feature slide -->
-	<div class="feature-slide">
-		<div class="swiper-container swiper-style">
-			<!-- our apps -->
-			<div class="counter">
-				<div class="container">
-					<div class="row">
-						<div class="col-6">
-							<a href="skin-condition">
-								<div class="content bg-grey text-center">
-									<h3 class="color-white"><i class="fa-solid fa-magnifying-glass"></i></h3>
-									<h5 class="color-white">Skin Condition Identifier</h5>
-								</div>
-							</a>
-						</div>
-						<div class="col-6">
-							<a href="burn-grading">
-								<div class="content bg-grey text-center">
-									<h3 class="color-white"><i class="fa-solid fa-ruler"></i></h3>
-									<h5 class="color-white">Burn Grading</h5>
-								</div>
-							</a>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-6">
-							<a href="chatbot-diagnosis">
-								<div class="content bg-grey text-center">
-									<h3 class="color-white"><i class="fa-solid fa-comment-medical"></i></h3>
-									<h5 class="color-white">Chatbot Diagnosis</h5>
-								</div>
-							</a>
-						</div>
-						<div class="col-6">
-							<a href="nutrition-analyser">
-								<div class="content bg-grey text-center">
-									<h3 class="color-white"><i class="fa-solid fa-clipboard-check"></i></h3>
-									<h5 class="color-white">Nutrition Analyser</h5>
-								</div>
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- end our apps -->
-		</div>
-	</div>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="contact.html">Contact</a>
+                                </li>
+                            </ul>
+                        </div>
+                        {% if current_user.is_authenticated %}
+                        <a class="btn_2 d-none d-lg-block" href="{{ url_for('auth.logout') }}">Logout</a>
+                        {% else %}
+                        <a class="btn_2 d-none d-lg-block" href="{{ url_for('auth.login') }}">Sign In</a>
+                        {% endif %}
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+<!-- Header part end-->
 
-	<!-- feature list -->
-	<div class="feature-list">
-		<div class="swiper-container swiper-style-full">
-			<div class="swiper-wrapper">
-				<div class="swiper-slide">
-					<div class="content bg-lightblue">
-						<div class="wrap-icon">
-							<i class="fa-solid fa-magnifying-glass bg-blue"></i>
-						</div>
-						<div class="text">
-							<h5>Skin Condition Identifier</h5>
-							<p>Identification of physical skin conditions</p>
-						</div>
-					</div>
-				</div>
-				<div class="swiper-slide">
-					<div class="content bg-lightred">
-						<div class="wrap-icon">
-							<i class="fa-solid fa-ruler bg-red"></i>
-						</div>
-						<div class="text">
-							<h5>Burn Grading</h5>
-							<p>Grading the degree of burn injuries</p>
-						</div>
-					</div>
-				</div>
-				<div class="swiper-slide">
-					<div class="content bg-lightgreen">
-						<div class="wrap-icon">
-							<i class="fa-solid fa-comment-medical bg-green"></i>
-						</div>
-						<div class="text">
-							<h5>Chatbot Diagnosis</h5>
-							<p>Diagnosis through an interactive chatbot</p>
-						</div>
-					</div>
-				</div>
-				<div class="swiper-slide">
-					<div class="content bg-lightyellow">
-						<div class="wrap-icon">
-							<i class="fa-solid fa-clipboard-check bg-yellow"></i>
-						</div>
-						<div class="text">
-							<h5>Nutrition Analyser</h5>
-							<p>Identify nutrition information of food</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- feature list -->
+<body>
+    <!-- banner part start-->
+    <section class="banner_part">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-5 col-xl-5">
+                    <div class="banner_text">
+                        <div class="banner_text_iner">
+                            {% if current_user.is_authenticated %}
+                            <h1 style="font-size:50px;">Welcome back, </h1><h3 style="font-size:50px;">{{ current_user.username }}</h3>
+                            {% else %}
+                            <h1>Welcome to Gebongka</h1>
+                            {% endif %}
+                            <a href="dashboard" class="btn_2">Go to Dashboard</a>
 
-	<!-- separator -->
-	<div class="separator-large"></div>
-	<!-- end separator -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="banner_img">
+                        <img src="static/homepage/img/hero.svg" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- banner part start-->
 
-	<!-- separator -->
-	<div class="separator-small"></div>
-	<!-- end separator -->
+    <!-- about us part start-->
+    <section class="about_us padding_top">
+        <div class="container">
+            <div class="row justify-content-between align-items-center">
+                <div class="col-md-6 col-lg-6">
+                    <div class="about_us_img">
+                        <img src="static/homepage/img/doctors.svg" alt="">
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-5">
+                    <div class="about_us_text">
+                        <h2>About us</h2>
+                        <p>Gebongka is a mobile application that offers tools to allow users to perform self-assessment at the comfort of their homes.
+                            <br><br>
+                            It aims to make healthcare more accessible to all, while reducing the load on Singapore's healthcare system. 
+                            </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- about us part end-->
 
-	<!-- footer -->
-	<div class="footer">
-		<div class="container">
-			<div class="content-box shadow-sm">
-				<h4 class="mb-1">Gebongka Health</h4>
-				<p class="made-by text-small">Made With <i class="fa-solid fa-heart"></i> Gebongka Team</p>
-			</div>
-		</div>
-	</div>
-	<!-- end footer -->
+    <!-- feature_part start-->
+    <section class="feature_part">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-8">
+                    <div class="section_tittle text-center">
+                        <h2>Our services</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-between align-items-center">
+                <div class="col-lg-3 col-sm-12">
+                    <div class="single_feature">
+                        <div class="single_feature_part">
+                            <a href="skin-condition">
+                                <span class="single_feature_icon"><i class="fa-solid fa-magnifying-glass"></i></span>
+                            <h4>Skin Condition Identifier</h4>
+                            <br><br>
+                            <p>Identification of physical skin conditions</p>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="single_feature">
+                        <div class="single_feature_part">
+                            <a href="burn-grading">
+                                <span class="single_feature_icon"><i class="fa-solid fa-ruler"></i></span>
+                            <h4>Burn Grading</h4>
+                            <br><br>
+                            <p>Grading the degree of burn injuries</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-12">
+                        <div class="single_feature_img">
+                            <img src="static/homepage/img/doctor.svg" alt="">
+                        </div>
+                </div>
+                <div class="col-lg-3 col-sm-12">
+                    <div class="single_feature">
+                        <div class="single_feature_part">
+                            <a href="chatbot-diagnosis">
+                                <span class="single_feature_icon"><i class="fa-solid fa-comment-medical"></i></span>
+                            <h4>Chat bot</h4>
+                            <br><br>
+                            <p>Diagnosis through an interactive chatbot</p>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="single_feature">
+                        <div class="single_feature_part">
+                            <a href="nutrition-analyser">
+                                <span class="single_feature_icon"><i class="fa-solid fa-clipboard-check"></i></span>
+                            <h4>Nutrition Analyzer</h4>
+                            <br><br>
+                            <p>Identify nutrition information of food</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- feature_part start-->
 
-	<!-- separator -->
-	<div class="separator-large"></div>
-	<!-- end separator -->
+    <!-- footer part start-->
+    <footer class="footer-area">
+        <div class="footer section_padding">
+            <div class="container">
+                <div class="row justify-content-between">
+                    <div class="col-xl-2 col-md-4 col-sm-6 single-footer-widget">
+                        <a href="#" class="footer_logo"> <img src="static/images/brand.png" alt="#"> </a>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor </p>
+                        <div class="social_logo">
+                            <a href="#"><i class="ti-facebook"></i></a>
+                            <a href="#"> <i class="ti-twitter"></i> </a>
+                            <a href="#"><i class="ti-instagram"></i></a>
+                            <a href="#"><i class="ti-skype"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-sm-6 col-md-4 single-footer-widget">
+                        <h4>Quick Links</h4>
+                        <ul>
+                            <li><a href="#">About us</a></li>
+                            <li><a href="#">Department</a></li>
+                            <li><a href="#"> Online payment</a></li>
+                            <li><a href="#">Careers</a></li>
+                            <li><a href="#">Department</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-xl-2 col-sm-6 col-md-4 single-footer-widget">
+                        <h4>Explore</h4>
+                        <ul>
+                            <li><a href="#">In the community</a></li>
+                            <li><a href="#">IU health foundation</a></li>
+                            <li><a href="#">Family support </a></li>
+                            <li><a href="#">Business solution</a></li>
+                            <li><a href="#">Community clinic</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-xl-2 col-sm-6 col-md-6 single-footer-widget">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="#">Lights were season</a></li>
+                            <li><a href="#"> Their is let wherein</a></li>
+                            <li><a href="#">which given over</a></li>
+                            <li><a href="#">Without given She</a></li>
+                            <li><a href="#">Isn two signs think</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 col-md-6 single-footer-widget">
+                        <h4>Newsletter</h4>
+                        <p>Seed good winged wherein which night multiply
+                            midst does not fruitful</p>
+                        <div class="form-wrap" id="mc_embed_signup">
+                            <form target="_blank"
+                                action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
+                                method="get" class="form-inline">
+                                <input class="form-control" name="EMAIL" placeholder="Your Email Address"
+                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Your Email Address '"
+                                    required="" type="email">
+                                <button class="click-btn btn btn-default text-uppercase"> <i class="ti-angle-right"></i>
+                                </button>
+                                <div style="position: absolute; left: -5000px;">
+                                    <input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value=""
+                                        type="text">
+                                </div>
 
-</div>
-<!-- end page wrapper -->
+                                <div class="info"></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-{% endblock %}
+    </footer>
+    
+    <!-- jquery plugins here-->
+
+    <script src="static/homepage/js/jquery-1.12.1.min.js"></script>
+    <!-- popper js -->
+    <script src="static/homepage/js/popper.min.js"></script>
+    <!-- bootstrap js -->
+    <script src="static/homepage/js/bootstrap.min.js"></script>
+    <!-- owl carousel js -->
+    <script src="static/homepage/js/owl.carousel.min.js"></script>
+    <script src="static/homepage/js/jquery.nice-select.min.js"></script>
+    <!-- contact js -->
+    <script src="static/homepage/js/jquery.ajaxchimp.min.js"></script>
+    <script src="static/homepage/js/jquery.form.js"></script>
+    <script src="static/homepage/js/jquery.validate.min.js"></script>
+    <script src="static/homepage/js/mail-script.js"></script>
+    <script src="static/homepage/js/contact.js"></script>
+    <!-- custom js -->
+    <script src="static/homepage/js/custom.js"></script>
+</body>
+</html>

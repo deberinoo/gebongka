@@ -51,7 +51,11 @@ def handle_404(err):
 
 @views.route('/')
 def index():
-    return render_template("homepage.html")
+    return render_template("index.html")
+
+@views.route('/dashboard')
+def dashboard():
+    return render_template("dashboard.html")
 
 @views.route('/features')
 def features():

@@ -165,14 +165,11 @@
 								</div>
 								<button style="all:unset; width:1000px;">
 									<div class="list-label">
-										<div class="list-title"><strong>Diagnosis: </strong>{{ item.symptoms }}</div>
-										<div class="list-after"><i class="icon ion-ios-arrow-forward"></i></div>
-										<div>
-											{{item.dateprediction|truncate(10, True, '', 0)}}
-										</div>
-										<div>
-											<a href="{{ url_for('past_history.delete_chatbot_history', id=item.id)}}">Delete</a>
-										</div>
+										<form action="/delete-chatbot-history" method="post" enctype="multipart/form-data" style="width:1000px;">
+											<div class="list-title"><strong>Diagnosis: </strong>{{ item.symptoms }}</div>
+											<div class="list-after"><button type="submit" class="fabutton"><i class="fa-solid fa-trash-can"></i></button></div>
+											<input id="id" name="id" value="{{item.id}}" type="hidden">											
+										</form>
 									</div>
 								</button>
 							</li>

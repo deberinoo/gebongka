@@ -295,9 +295,10 @@ def analyse_nutrition_capture():
 		# Gettinig image path
 		now = datetime.datetime.now().isoformat(sep=" ", timespec="seconds")
 		img_path = "website/static/" + "shot_{}.png".format(str(now).replace(":",''))
+		img_path2 = "static/" + "shot_{}.png".format(str(now).replace(":",''))
 		print("Image Path: ", img_path)	
 
-	return render_template("models/nutrition-analyser.html", img_link = img_path, capture_bool=capture_bool)
+	return render_template("models/nutrition-analyser.html", img_link = img_path, img_link2 = img_path2, capture_bool=capture_bool)
 
 # GET/POST method for prediction by Camera
 @views.route("/submit-nutrition-capture-predict", methods = ['GET', 'POST'])
@@ -442,7 +443,7 @@ def burn_grading_capture_predict():
 		print("Model is now predicting image....")
 		print("Passing image to docker....")
 		# Request post with the url link to the docker and attach the file
-		dockres = requests.post("http://127.0.0.1:5000/burn-grading-model",files=files)
+		dockres = requests.post("http://127.0.0.1:8000/burn-grading-model",files=files)
 		# Resuls will be a string
 		print("from docker",dockres)		
 

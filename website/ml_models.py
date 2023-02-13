@@ -77,6 +77,14 @@ class skin:
         new_skinhistory = SkinConditionHistory(username=passuser, topone = top1, toptwo = top2, topthree = top3, imguploadpath = img_path, dateprediction = str(datetime.now()))
         db.session.add(new_skinhistory)
         db.session.commit()
+    
+    def delete_history(id):
+        history_to_delete = SkinConditionHistory.query.get_or_404(id)
+        try:
+            db.session.delete(history_to_delete)
+            db.session.commit()
+        except:
+            print("error")
 
 class burn:
     def predict_label(img_path):

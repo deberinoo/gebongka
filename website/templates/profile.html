@@ -79,24 +79,30 @@
 								<div class="list-media">
 									<i class="fa-solid fa-magnifying-glass bg-blue"></i>
 								</div>
-								<form action="/view-skin-history" method="post" enctype="multipart/form-data" style="width:1000px;">
-									<button style="all:unset; width:1000px;">
-										<div class="list-label">
+								<div class="list-label">
+									<form action="/view-skin-history" method="post" enctype="multipart/form-data" style="width:840px;">
+										<button style="all:unset; width:800px;">
 											<div class="list-title"><strong>Top 1: </strong>{{item.topone}}</div>
-											<div class="list-after"><i class="icon ion-ios-arrow-forward"></i></div>
-											<div class="col" hidden>
-												<input id="itemtopone" name="itemtopone" value="{{item.topone}}">
-												<input id="itemtoptwo" name="itemtoptwo" value="{{item.toptwo}}">
-												<input id="itemtopthree" name="itemtopthree" value="{{item.topthree}}">
-												<input id="itemimgpath" name="itemimgpath" value="{{item.imguploadpath}}">
-												<input id="itemdate" name="itemdate" value="{{item.dateprediction|truncate(10, True, '', 0)}}">
-											</div>
-											<div>
-												{{item.dateprediction|truncate(10, True, '', 0)}}
-											</div>
+										<div class="list-after"><i class="icon ion-ios-arrow-forward"></i></div>
+										<div class="col" hidden>
+											<input id="itemtopone" name="itemtopone" value="{{item.topone}}">
+											<input id="itemtoptwo" name="itemtoptwo" value="{{item.toptwo}}">
+											<input id="itemtopthree" name="itemtopthree" value="{{item.topthree}}">
+											<input id="itemimgpath" name="itemimgpath" value="{{item.imguploadpath}}">
+											<input id="itemdate" name="itemdate" value="{{item.dateprediction|truncate(10, True, '', 0)}}">
 										</div>
-									</button>
-								</form>
+										</button>
+									</form>
+									<form action="/delete-skin-history" method="post" enctype="multipart/form-data" style="width:50px; padding-right: 10px;">
+										<div class="list-after" style="display: inline-block;">
+											<button type="submit" class="fabutton"><i class="fa-solid fa-trash-can"></i></button>
+										</div>
+										<input id="id" name="id" value="{{item.id}}" type="hidden">											
+									</form>
+									<div>
+										{{item.dateprediction|truncate(10, True, '', 0)}}
+									</div>
+								</div>
 							</li>
 							{% endfor %}
 						{% endif %}

@@ -121,6 +121,14 @@ class burn:
         new_burnhistory = BurnGradeHistory(username=passuser, burnGradePred = PredResult, imguploadpath = img_path, dateprediction = str(datetime.now()))
         db.session.add(new_burnhistory)
         db.session.commit()
+    
+    def delete_history(id):
+        history_to_delete = BurnGradeHistory.query.get_or_404(id)
+        try:
+            db.session.delete(history_to_delete)
+            db.session.commit()
+        except:
+            print("error")
 
 class chatbot:
     def load_classifier():

@@ -1,0 +1,367 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<!-- navbar -->
+<div class="navbar">
+    <div class="left">
+      <a href="" class="link link-back"><i class="icon ion-ios-arrow-back"></i></a>
+    </div>
+    <div class="title">
+      
+    </div>
+    <div class="right">
+      
+    </div>
+</div>
+<!-- end navbar -->
+
+
+<div class="page-wrapper">
+
+	<!-- intro app -->
+	<div class="intro-app">
+		<div class="container">
+			<div class="intro-content">
+				<img src="static/images/intro.jpg" alt="image-demo">
+				<div class="caption">
+					<h4 class="text-white mb-1">Prediction was made on {{passdate}}</h4>
+				</div>
+			</div>
+		</div>
+	</div>
+
+    <!-- separator -->
+	<div class="separator-large"></div>
+    <!-- end separator -->
+
+  <div class="container">
+    <div class="row d-flex justify-content-center">
+      <div class="img">
+        <img src="{{passimgpath}}" alt="image-upload">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row d-flex justify-content-center">
+    <h1>Burn Grade</h1>
+  </div>
+
+<div class="carousel-slider">
+    <div class="swiper-container swiper-navigation">
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-wrapper">
+        {% if passgrade == "This is Third degree burn" %}
+        <div class="swiper-slide">
+          <div class="cards">
+            <div class="container">
+              <div class="card card-image card-outline">
+                <div class="card-body" style="background-color: #FFFFFF;">
+                  <h2 class="card-title " align="center" ><b>3rd Degree Burn</b></h2>
+                  <br>
+                  <h4 class="card-title card-title-small" align="center"></b>What is it?</b></h4>
+                  <p class="card-text" align="center">
+                    Third-degree burns are a <b>serious</b> type of burn that requires immediate medical attention. A burn is damage to your skin or underlying tissue due to extreme temperatures, 
+                    a chemical or a light source. A third-degree burn damages the top layer of your skin (epidermis), the middle layer of your skin (dermis) and the layer of fat underneath 
+                    your skin (hypodermis). A third-degree burn can also damage your sweat glands, hair follicles and nerve endings. You won’t feel immediate pain if you have a third-degree 
+                    burn because the burn destroyed your nerves. This can make you believe that your burn isn’t serious, but it is, and you should see a healthcare provider for treatment.
+                  </p>
+                  <br>
+                  <h4 class="card-title card-title-small"><b></b>What does a third-degree burn look like?</h4>
+                  <p class="card-text">
+                    Features of a third-degree burn include: 
+                    <br>
+                    <ul>
+                      <li>1. skin.</li>
+                      <li>2. Dry skin.</li>
+                      <li>3. Skin discoloration that’s white, black or bright red.</li>
+                      <li>4. Swelling.</li>
+                    </ul>
+                    <br>
+                      A third-degree burn won’t blanch or turn white temporarily when you press on your affected skin. Blanching is common for first- and second-degree burns.
+  
+                      A third-degree burn will likely have features of a second-degree burn around it, including:
+  
+                      <ul>
+                        <li>1. Blisters.</li>
+                        <li>2. Shiny, moist skin.</li>
+                        <li>3. Skin discoloration from a deep red to dark brown.</li>
+                      </ul>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="swiper-slide">
+          <div class="cards">
+            <div class="container">
+              <div class="card card-image card-outline">
+                <div class="card-body" style="background-color: #FFFFFF;">
+                  <h2 class="card-title" align="center"><b>How to Treat a 3rd Degree Burn ?</b></h2>
+                  <br>
+                  <p class="card-text" align="center">
+                    If you have a third-degree burn, visit an emergency department for treatment. While you may not feel pain, the damage to your skin and tissues is severe and requires medical attention. 
+                    Treatment varies for a third-degree burn based on size and location. A healthcare provider may treat a third-degree burn by:
+                  </p>
+                  <br>
+                  <ul>
+                    <li><strong>Cleaning your burn </strong> ": Your provider will clean your skin by removing debris, dead skin and tissue from the burned area. Don’t try to remove anything from your burn before seeing a 
+                      healthcare provider." </li>
+                      <br>
+                    <li><strong>Cleaning your burn </strong> ": After cleaning your burn, your provider will place an antibiotic ointment on your burn and gently cover your burn with a bandage. It’s important to keep 
+                      your burn covered and clean to prevent infections. You should change your bandage at least once daily. Your provider will give you instructions on how to care for and clean your burn."</li>
+                      <br>
+                    <li><strong>Antibiotics </strong> ": You may need antibiotics to prevent or clear an infection from your body. If you have a large third-degree burn, your provider may administer these antibiotics 
+                      intravenously by placing a needle into a vein in your arm to slowly give you the medicine you need. If you have a small third-degree burn, you may take antibiotics by mouth."</li>
+                      <br>
+                    <li><strong>Replacing fluids </strong> ": You may lose blood or bodily fluids from your burn if it’s large or severe. This can lead to shock and be life-threatening if left untreated. A healthcare 
+                      provider may use a needle in your vein to give you fluids that contain electrolytes to replenish what you lost."</li>
+                      <br>
+                    <li><strong>Pain medications </strong> ": While you might not feel pain immediately after your burn, you may feel sore as your body heals. Your provider may suggest over-the-counter pain relievers 
+                      or medication to help you feel more comfortable."</li>
+                      <br>
+                    <li><strong>Skin grafting or reconstructive surgery </strong> ": For large third-degree burns, a healthcare provider may offer skin grafting to help your wound close. Skin grafting takes healthy 
+                      skin from another part of your body to cover your wound. This is a surgical procedure, and there are other possible surgeries that may help repair very severe damage."</li>
+                  </ul>
+                  <br>
+                </div>
+              </div>
+            </div>
+          </div>
+        
+        </div>
+        <!-- <div class="swiper-slide">
+          <div class="cards">
+            <div class="container">
+              <div class="card card-image card-outline">
+                <div class="card-body" style="background-color: #FFFFFF;">
+                  <h2 class="card-title " align="center" ><b>3rd Degree Burn</b></h2>
+                  <br>
+                  <h4 class="card-title card-title-small" align="center"></b>What is it?</b></h4>
+                  <p class="card-text" align="center">
+                    Third-degree burns are a <b>serious</b> type of burn that requires immediate medical attention. A burn is damage to your skin or underlying tissue due to extreme temperatures, 
+                    a chemical or a light source. A third-degree burn damages the top layer of your skin (epidermis), the middle layer of your skin (dermis) and the layer of fat underneath 
+                    your skin (hypodermis). A third-degree burn can also damage your sweat glands, hair follicles and nerve endings. You won’t feel immediate pain if you have a third-degree 
+                    burn because the burn destroyed your nerves. This can make you believe that your burn isn’t serious, but it is, and you should see a healthcare provider for treatment.
+                  </p>
+                  <br>
+                  <h4 class="card-title card-title-small"><b></b>What does a third-degree burn look like?</h4>
+                  <p class="card-text">
+                    Features of a third-degree burn include: 
+                    <br>
+                    <ul>
+                      <li>1. skin.</li>
+                      <li>2. Dry skin.</li>
+                      <li>3. Skin discoloration that’s white, black or bright red.</li>
+                      <li>4. Swelling.</li>
+                    </ul>
+                    <br>
+                      A third-degree burn won’t blanch or turn white temporarily when you press on your affected skin. Blanching is common for first- and second-degree burns.
+  
+                      A third-degree burn will likely have features of a second-degree burn around it, including:
+  
+                      <ul>
+                        <li>1. Blisters.</li>
+                        <li>2. Shiny, moist skin.</li>
+                        <li>3. Skin discoloration from a deep red to dark brown.</li>
+                      </ul>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        
+        </div> -->
+        {% elif passgrade == "This is Second degree burn" %}
+        <div class="swiper-slide">
+          <div class="cards">
+            <div class="container">
+              <div class="card card-image card-outline">
+                <div class="card-body" style="background-color: #FFFFFF;">
+                  <h2 class="card-title " align="center" ><b>2nd Degree Burn</b></h2>
+                  <br>
+                  <h4 class="card-title card-title-small"><b>What is it?</b></h4>
+                  <p class="card-text">
+                    A second-degree burn is a mild to moderate burn, and it’s the most common type. A burn is tissue damage caused by a heat, chemical or light source. A second-degree burn 
+                    damages the outer layer of your skin (epidermis) and the second layer of your skin (dermis). It’s less severe than a third-degree burn. You can treat most second-degree 
+                    burns at home.
+                  </p>
+                  <br>
+                  <h4 class="card-title card-title-small"><b>What does a second-degree burn look like?</b></h4>
+                  <p class="card-text">
+                    Features of a third-degree burn include: 
+                    <br>
+                    <ul>
+                      <li>1. Skin discoloration: deep red to dark brown.</li>
+                      <li>2. Blisters</li>
+                      <li>3. Shiny, moist skin.</li>
+                      <li>4. Pain or discomfort.</li>
+                      <li>5. Swelling.</li>
+                      <li>6. Layers of skin peeling away.</li>
+                    </ul>
+                    <br>
+                    <h4 class="card-title card-title-small"><b>What happens to your skin during a second-degree burn?</b></h4>
+  
+                    During a second-degree burn, a heat, chemical or light source destroys and goes through the first and second layers of your skin. This causes damage to the cells in 
+                    your skin. Cell damage triggers your immune system to activate to prevent further damage to your body. You may experience skin discoloration and swelling, which is a 
+                    sign that your immune system is actively working to heal your injury. As your body repairs itself after a burn, dead skin cells leave your body as your skin peels and 
+                    flakes at the site of your burn.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="cards">
+            <div class="container">
+              <div class="card card-image card-outline">
+                <div class="card-body" style="background-color: #FFFFFF;">
+                  <h2 class="card-title " align="center" ><b>2nd Degree Burn</b></h2>
+                  <br>
+                  <h4 class="card-title card-title-small"><b>How can second-degree burns be prevented?</b></h4>
+                  <p class="card-text">
+                    Burns are preventable. You can <strong>prevent</strong> burns by:
+                  </p>
+                  <br>
+                  <ul>
+                    <li>1. Not touching hot surfaces.</li>
+                    <li>2. Avoiding open flames.</li>
+                    <li>3. Wearing protective gear like gloves when working with hot objects or chemicals.</li>
+                    <li>4. Keeping hot items out of reach of children.</li>
+                    <li>5. Testing the temperature of your child’s food or beverages before giving them to them.</li>
+                    <li>6. Reducing the temperature of the hot water in your home.</li>
+                    <li>7. Covering electrical outlets and making sure live cords are out of reach of children.</li>
+                    <li>8. Wearing sunscreen when you go outside.</li>
+                  </ul>
+                  <br>
+                  <h3 class="card-title card-title-small"><strong>Frequent asked questions</strong></h3>
+                  <br>
+                  <h4 class="card-title card-title-small"><b>Will my skin scar after a second-degree burn?</b></h4>
+                  <p class="card-text">
+                    Scarring is possible with second-degree burns. Not everyone will get a scar after a burn, and scars are more likely if you have a large, more serious burn. 
+                    Your skin may appear lighter or darker than your natural skin tone after a burn. This is usually a long-term change to your skin tone that may fade over time.
+                  </p>
+                  <br>
+                  <p class="card-text">
+                  <h4 class="card-title card-title-small"><b>How long will it take for my second-degree burn to heal?</b></h4>
+                  On average, it can take one week to three weeks for your skin to heal after a second-degree burn. This timeframe can vary based on the size and location of your burn.
+                  </p>
+                  <br>
+                  <p class="card-text">
+                    <h4 class="card-title card-title-small"><b>Should I let my second-degree burn air out?</b></h4>
+                    You should keep your burn covered for the first few days after the event as you let your skin heal. Make sure your blisters stay closed on your skin. If a blister breaks 
+                    open, you should keep your burn covered with a bandage to prevent an infection. If the blister isn’t broken, you can let your burn air out or breathe without a bandage.
+                    </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% else %}
+        <div class="swiper-slide">
+          <div class="cards">
+            <div class="container">
+              <div class="card card-image card-outline">
+                <div class="card-body" style="background-color: #FFFFFF;">
+                  <h2 class="card-title " align="center" ><b>1st Degree Burn</b></h2>
+                  <br>
+                  <h4 class="card-title card-title-small"><b>What is it?</b></h4>
+                  <p class="card-text">
+                    A first-degree burn, also called a superficial burn, only affects the epidermis, or outer layer of skin. The burn site appears red, painful, dry, and absent of 
+                    blisters. Scarring is rare or minimal. The most common type of first-degree burn is mild sunburn.
+                  </p>
+                  <br>
+                  <h4 class="card-title card-title-small"><b>What causes a first-degree burn?</b></h4>
+                  <p class="card-text">
+                    In most cases, first-degree burns are caused by the following:
+                  </p>
+                    <ul>
+                      <li>1. mild sunburn</li>
+                      <li>2. flash burn: a sudden, brief burst of heat</li>
+                      <li>3. Electricity</li>
+                      <li>4. Scalds</li>
+                    </ul>
+                    <br>
+                  <h4 class="card-title card-title-small"><b>How Can First-Degree Burns Be Prevented?</b></h4>
+                  <p>
+                    Most first-degree burns can be prevented if you take the right precautions. Follow these tips to prevent first-degree burns:
+                  </p>
+                  <ul>
+                    <li>1. Wear broad-spectrum sunscreen or sunblock with a sunprotection factor (SPF) of 30 or higher to prevent sunburn.</li>
+                    <li>2. Keep hot cooking pots on the back burners with the handles turned toward the center of the stovetop to prevent accidents. 
+                      Also, be sure to watch young children &nbsp;&nbsp;&nbsp;&nbsp;in the kitchen.</li>
+                    <li>3. A safe water temperature should be at or below 120˚F. Most water heaters have a maximum setting of 140˚F. You can manually 
+                      reset your hot-water tank to have &nbsp;&nbsp;&nbsp;&nbsp;a maximum of 120˚F to avoid burns.</li>
+                      <li>4. Cover all exposed electrical sockets in your home with childproof covers.</li>
+                      <li>5. Unplug appliances that aren’t in use.</li>
+                      <li>6. Place electrical cords where your child cannot reach them.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="cards">
+            <div class="container">
+              <div class="card card-image card-outline">
+                <div class="card-body" style="background-color: #FFFFFF;">
+                  <h2 class="card-title " align="center" ><b>1st Degree Burn</b></h2>
+                  <br>
+                  <h4 class="card-title card-title-small"><b>How to Treat a 1st Degree Burn ?</b></h4>
+                  <p class="card-text">
+                    To treat a first-degree burn, dermatologists recommend the following tips:
+                  </p>
+                  <ul>
+                    <li>1. <strong>Cool the burn.</strong> Immediately immerse the burn in cool tap water or apply cold, wet compresses. Do this for about 10 minutes or until the pain 
+                        subsides.</li>
+                    <li>2. <strong>Apply petroleum jelly two to three times daily.</strong>Do not apply ointments, toothpaste or butter to the burn, as these may cause an infection. 
+                        Do not apply topical 
+                        &nbsp;&nbsp;&nbsp;&nbsp;antibiotics.</li>
+                    <li>3. <strong>Cover the burn with a nonstick, sterile bandage.</strong>If blisters form, let them heal on their own while keeping the area covered. Do not pop the 
+                        blisters.</li>
+                    <li>4. <strong>Consider taking over-the-counter pain medication.</strong>Acetaminophen or ibuprofen can help relieve the pain and reduce inflammation.</li>
+                    <li>5. <strong>Protect the area from the sun.</strong>Once the burn heals, protect the area from the sun by seeking shade, wearing protective clothing or applying a 
+                        broad-spectrum. This will help minimize scarring, as the redness from a burn sometimes persists for weeks, 
+                        especially in those with darker skin tones.</li>
+                  </ul>
+                  <br>
+                  <h3 class="card-title card-title-small"><strong>Frequent asked questions</strong></h3>
+                  <h4 class="card-title card-title-small"><b>How Long Does It Take for a First-Degree Burn to Heal?</b></h4>
+                  <p class="card-text">
+                    As the skin heals, it may peel. Additionally, it may take three to 20 days for a first-degree burn to heal properly. Healing time may depend on the area affected. 
+                    Always consult your doctor if the burn shows signs of infection or becomes worse.                
+                  </p>
+                  <br>
+                  <h4 class="card-title card-title-small"><b>What Are the Symptoms of a First-Degree Burn?</b></h4>
+                  <p class="card-text">
+                    The symptoms of first-degree burns are often minor and tend to heal after several days. The most common things you may notice at first are skin redness, pain, and 
+                    swelling. The pain and swelling may be mild and your skin may start to peel after a day or so. In contrast, second-degree burns blister and are more painful due to an 
+                    increased depth of the burn wound.
+                  </p>
+                  <br>
+                  <!-- <p class="card-text">
+                    For a first-degree burn that occurs in larger areas of your skin, you may experience an increased level of pain and swelling. You may want to report large wounds to your 
+                    doctor. Larger burns may not heal as fast as smaller burns.
+                  </p> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+    </div>
+  </div>
+  <!-- separator -->
+  <div class="separator-large"></div>
+  <!-- end separator -->
+  <!-- separator -->
+  <div class="separator-large"></div>
+  <!-- end separator -->
+
+  {% endblock %}

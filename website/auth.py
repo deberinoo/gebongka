@@ -20,7 +20,7 @@ def login():
             if bcrypt.check_password_hash(user.password, form.password.data):
                 flash('Logged in successfully!', category='success')
                 login_user(user)
-                return redirect(url_for('views.index'))
+                return redirect(url_for('views.dashboard'))
         else:
             flash('Email does not exist.', category='error')
     

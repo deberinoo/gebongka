@@ -194,7 +194,7 @@ textarea {
 }
 
 .input-wrap:last-child {
-    margin-bottom: 0;
+    margin-bottom: 15px;
 }
 
 .custom-select {
@@ -1159,7 +1159,6 @@ textarea {
 }
 
 .list-after {
-    display: inline-block;
     float: right;
 }
 

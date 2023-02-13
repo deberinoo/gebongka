@@ -20,7 +20,7 @@ def create_app():
     app.register_blueprint(auth, url_prefix='/')
     app.register_blueprint(past_history, url_prefix='/')
 
-    from .models import SkinConditionHistory, Users
+    from .models import Users
 
     with app.app_context():
         db.create_all()

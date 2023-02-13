@@ -6,6 +6,9 @@ from website.views import handle_message, reply
 app = create_app()
 socketio = SocketIO(app, logger=True, engineio_logger=True, ping_timeout=5, ping_interval=5)
 
+# Deborah's Part =====================================================
+# socket.io for chatbot feature
+
 @socketio.on('message')
 def chatbot_diagnosis(msg):
     handle_message(msg)

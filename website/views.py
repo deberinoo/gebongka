@@ -3,14 +3,12 @@ import os
 
 import cv2
 import requests
-from flask import Blueprint, Response, flash, render_template, request
+from flask import Blueprint, Response, render_template, request
 from flask_login import current_user, login_required
-from flask_socketio import send, emit
+from flask_socketio import emit
 
-
-from .ml_models import chatbot, food, skin, burn
-from .models import NutritionInformation
-from .models import BurnGradeHistory, ChatbotDiagnosisHistory
+from .ml_models import burn, chatbot, food, skin
+from .models import BurnGradeHistory, NutritionInformation
 
 global capture
 capture=0 
@@ -132,7 +130,7 @@ def obtainskinConditionModel():
 
 @views.route("/history-skin-condition")
 def loadhistoryskincondition():
-	return render_template("history-skin-condition.html")
+	return render_template("models/history-skin-condition.html")
 
 @views.route("/skin-condition-analyser", methods=['GET', 'POST'])
 def skin_condition_analyser():
@@ -231,17 +229,16 @@ def chatbot_diagnosis():
 def handle_message(msg):
 	# handles chatbot messages
 	print("Received message: " + msg)
-	# try:
+	try:
 		# calls chatbot api
-	result = requests.post("http://127.0.0.1:8000/chatbot-diagnosis-model", json={"data":msg})
-	docker_result = result.json()['response']
-	reply(docker_result)
-	print("docker result:", docker_result)
-	savehistory = chatbot.create_history(current_user.username, docker_result.replace("_", " ").capitalize())
-	print(savehistory)
-	# except Exception as e:
-	# 	print("error: ", e)
-	# 	reply(result)
+		result = requests.post("http://127.0.0.1:8000/chatbot-diagnosis-model", json={"data":msg})
+		docker_result = result.json()['response']
+		reply(docker_result)
+		print("docker result:", docker_result)
+		chatbot.create_history(current_user.username, docker_result.replace("_", " ").capitalize())
+	except Exception as e:
+		print("error: ", e)
+		reply(result)
         
 def reply(result):
 	try:
@@ -458,7 +455,7 @@ def burn_grading_capture_predict():
 
 @views.route("/history-burn-grading")
 def loadhistoryburngrading():
-	return render_template("history-burn-grade.html")
+	return render_template("models/history-burn-grade.html")
 
 # GET/POST method for prediction by File Upload
 @views.route("/submit-grading", methods = ['GET', 'POST'])

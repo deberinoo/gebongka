@@ -6,10 +6,12 @@ from keras.models import load_model
 from transformers import (AutoModelForTokenClassification, AutoTokenizer,
                           pipeline)
 
-
 from . import db
-from .models import NutritionAnalyserHistory, SkinConditionHistory, BurnGradeHistory, ChatbotDiagnosisHistory
+from .models import (BurnGradeHistory, ChatbotDiagnosisHistory,
+                     NutritionAnalyserHistory, SkinConditionHistory)
 
+
+# ----- general functions -----
 
 def process_image(img_path):
     i = image.load_img(img_path, target_size=(128,128))
@@ -32,6 +34,8 @@ def retrieve_all_history(username):
     allchatbotdiagnosisrows = ChatbotDiagnosisHistory.query.filter_by(username=username).all()
 
     return allskinconditionrows, allburngraderows, allchatbotdiagnosisrows, allnutritionanalyserrows
+
+# Erika's Part =====================================================
 
 class skin:
     def Check_Highest_Prediction(prediction_array):
@@ -86,6 +90,8 @@ class skin:
         except:
             print("error")
 
+# Gerald's Part ===============================================
+
 class burn:
     def predict_label(img_path):
         model = load_model('website/model/BurnModel.h5')
@@ -129,6 +135,8 @@ class burn:
             db.session.commit()
         except:
             print("error")
+
+# Deborah's Part =====================================================
 
 class chatbot:
     def load_classifier():
@@ -211,6 +219,8 @@ class chatbot:
             db.session.commit()
         except:
             print("error")
+
+# Linfeng's Part ===============================================
 
 class food:
     def predict_label(img_path):

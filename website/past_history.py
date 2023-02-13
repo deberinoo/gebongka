@@ -2,7 +2,7 @@ from flask import Blueprint, Flask, flash, render_template, request
 from flask_bcrypt import Bcrypt
 from flask_login import current_user, login_required
 
-from .ml_models import retrieve_all_history, chatbot, skin, burn, food
+from .ml_models import burn, chatbot, food, retrieve_all_history, skin
 
 past_history = Blueprint("past_history", __name__)
 
@@ -12,9 +12,7 @@ Bcrypt = Bcrypt(app)
 @past_history.route('/profile')
 @login_required
 def profile():
-    
     allskinconditionrows, allburngraderows, allchatbotdiagnosisrows, allnutritionanalyserrows = retrieve_all_history(current_user.username)
-
     return render_template("profile.html", SChistory = allskinconditionrows, NAhistory = allnutritionanalyserrows, BGhistory = allburngraderows, CDhistory = allchatbotdiagnosisrows)
 
 @past_history.route('/view-skin-history', methods = ['GET', 'POST'])
@@ -27,7 +25,7 @@ def viewskinhistory():
         itemimgpath = request.form.get("itemimgpath")
         itemdate = request.form.get("itemdate")
         print(itemimgpath)
-    return render_template("history-skin-condition.html", passtopone = itemtopone, passtoptwo = itemtoptwo, passtopthree = itemtopthree, passimgpath = itemimgpath, passdate = itemdate)
+    return render_template("models/history-skin-condition.html", passtopone = itemtopone, passtoptwo = itemtoptwo, passtopthree = itemtopthree, passimgpath = itemimgpath, passdate = itemdate)
 
 @past_history.route('/delete-skin-history', methods = ['GET', 'POST'])
 def delete_skin_history():
@@ -52,7 +50,7 @@ def viewburngradehistory():
         itemimgpath = request.form.get("itemimgpath")
         itemdate = request.form.get("itemdate")
         print("Burn image path: ",itemimgpath)
-    return render_template("history-burn-grade.html",  passgrade = burnGradePred, passimgpath = itemimgpath, passdate = itemdate)
+    return render_template("models/history-burn-grade.html",  passgrade = burnGradePred, passimgpath = itemimgpath, passdate = itemdate)
 
 @past_history.route('/delete-grade-history', methods = ['GET', 'POST'])
 def delete_burn_history():

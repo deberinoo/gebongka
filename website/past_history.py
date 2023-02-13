@@ -1,7 +1,7 @@
 from flask import Blueprint, Flask, flash, render_template, request
 from flask_bcrypt import Bcrypt
 from flask_login import current_user, login_required
-from .ml_models import retrieve_all_history, chatbot, skin
+from .ml_models import retrieve_all_history, chatbot, skin, food
 
 past_history = Blueprint("past_history", __name__)
 
@@ -65,5 +65,20 @@ def delete_chatbot_history():
     except Exception as e:
         print("error", e)
         flash("Whoops! There was a problem deleting the chatbot diagnosis history record. Please try again.", category="info")
+        allskinconditionrows, allburngraderows, allchatbotdiagnosisrows, allnutritionanalyserrows = retrieve_all_history(current_user.username)
+        return render_template("profile.html", SChistory = allskinconditionrows, NAhistory = allnutritionanalyserrows, BGhistory = allburngraderows, CDhistory = allchatbotdiagnosisrows)
+
+@past_history.route('/delete-nutrition-history', methods = ['GET', 'POST'])
+def delete_nutrition_history():
+    try:
+        if request.method == 'POST':
+            id = request.form.get("id")
+            food.delete_history(id)
+            flash("Nutrition Analysis History record deleted successfully!", category="info")
+            allskinconditionrows, allburngraderows, allchatbotdiagnosisrows, allnutritionanalyserrows = retrieve_all_history(current_user.username)
+        return render_template("profile.html", SChistory = allskinconditionrows, NAhistory = allnutritionanalyserrows, BGhistory = allburngraderows, CDhistory = allchatbotdiagnosisrows)
+    except Exception as e:
+        print("error", e)
+        flash("Whoops! There was a problem deleting the nutrition analysis history record. Please try again.", category="info")
         allskinconditionrows, allburngraderows, allchatbotdiagnosisrows, allnutritionanalyserrows = retrieve_all_history(current_user.username)
         return render_template("profile.html", SChistory = allskinconditionrows, NAhistory = allnutritionanalyserrows, BGhistory = allburngraderows, CDhistory = allchatbotdiagnosisrows)

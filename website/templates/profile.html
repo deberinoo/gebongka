@@ -79,24 +79,50 @@
 								<div class="list-media">
 									<i class="fa-solid fa-magnifying-glass bg-blue"></i>
 								</div>
-								<form action="/view-skin-history" method="post" enctype="multipart/form-data" style="width:1000px;">
-									<button style="all:unset; width:1000px;">
-										<div class="list-label">
+								<div class="list-label">
+									<form action="/view-skin-history" method="post" enctype="multipart/form-data" style="width:840px;">
+										<button style="all:unset; width:800px;">
 											<div class="list-title"><strong>Top 1: </strong>{{item.topone}}</div>
-											<div class="list-after"><i class="icon ion-ios-arrow-forward"></i></div>
-											<div class="col" hidden>
-												<input id="itemtopone" name="itemtopone" value="{{item.topone}}">
-												<input id="itemtoptwo" name="itemtoptwo" value="{{item.toptwo}}">
-												<input id="itemtopthree" name="itemtopthree" value="{{item.topthree}}">
-												<input id="itemimgpath" name="itemimgpath" value="{{item.imguploadpath}}">
-												<input id="itemdate" name="itemdate" value="{{item.dateprediction|truncate(10, True, '', 0)}}">
-											</div>
-											<div>
-												{{item.dateprediction|truncate(10, True, '', 0)}}
+										<div class="list-after"><i class="icon ion-ios-arrow-forward"></i></div>
+										<div class="col" hidden>
+											<input id="itemtopone" name="itemtopone" value="{{item.topone}}">
+											<input id="itemtoptwo" name="itemtoptwo" value="{{item.toptwo}}">
+											<input id="itemtopthree" name="itemtopthree" value="{{item.topthree}}">
+											<input id="itemimgpath" name="itemimgpath" value="{{item.imguploadpath}}">
+											<input id="itemdate" name="itemdate" value="{{item.dateprediction|truncate(10, True, '', 0)}}">
+										</div>
+										</button>
+									</form>
+									<div class="list-after" style="display: inline-block;">
+										<button type="button" data-toggle="modal" data-target="#skinModal" class="fabutton"><i class="fa-solid fa-trash-can" style="width:30px;"></i></button>
+									</div>										
+									<!-- SKIN DELETE Modal --> 
+									<div class="modal fade" id="skinModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+										<div class="modal-dialog modal-dialog-centered" role="document">
+											<div class="modal-content">
+												<div class="modal-header">
+												<h5 class="modal-title" id="exampleModalLongTitle">DELETE</h5>
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+												</div>
+												<form action="/delete-skin-history" method="post" enctype="multipart/form-data">
+													<div class="modal-body">
+														<p><b>Are you sure you want to delete?</b></p>
+													</div>
+													<input id="id" name="id" value="{{item.id}}" type="hidden">	
+													<div class="modal-footer">
+														<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+														<button type="submit" class="btn btn-success">Yes</button>
+													</div>
+												</form>
 											</div>
 										</div>
-									</button>
-								</form>
+									</div>				
+									<div>
+										{{item.dateprediction|truncate(10, True, '', 0)}}
+									</div>
+								</div>
 							</li>
 							{% endfor %}
 						{% endif %}
@@ -122,28 +148,54 @@
 								<div class="list-media">
 									<i class="fa-solid fa-ruler bg-red"></i>
 								</div>
-								<form action="/view-burn-history" method="post" enctype="multipart/form-data" style="width:1000px;">
-									<button style="all:unset; width:1000px;">
-										<div class="list-label">
-											<div class="list-title"><strong>Burn Grade: </strong>{{item.burnGradePred}}</div>
-											<div class="list-after"><i class="icon ion-ios-arrow-forward"></i></div>
-											<div class="col" hidden>
-												<input id="burnGradePred" name="burnGradePred" value="{{item.burnGradePred}}">
-												<input id="itemimgpath" name="itemimgpath" value="{{item.imguploadpath}}">
-												<input id="itemdate" name="itemdate" value="{{item.dateprediction|truncate(10, True, '', 0)}}">
-											</div>
-											<div>
-												{{item.dateprediction|truncate(10, True, '', 0)}}
-											</div>
+								<div class="list-label">
+									<form action="/view-burn-history" method="post" enctype="multipart/form-data" style="width:840px;">
+										<button style="all:unset; width:800px;">
+												<div class="list-title"><strong>Burn Grade: </strong>{{item.burnGradePred}}</div>
+												<div class="list-after"><i class="icon ion-ios-arrow-forward"></i></div>
+												<div class="col" hidden>
+													<input id="burnGradePred" name="burnGradePred" value="{{item.burnGradePred}}">
+													<input id="itemimgpath" name="itemimgpath" value="{{item.imguploadpath}}">
+													<input id="itemdate" name="itemdate" value="{{item.dateprediction|truncate(10, True, '', 0)}}">
+												</div>
+										</button>
+									</form>
+										<div class="list-after" style="display: inline-block;" >
+											<button type="button" data-toggle="modal" data-target="#burnModal" class="fabutton"><i class="fa-solid fa-trash-can" style="width:30px; "> </i></button>
 										</div>
-									</button>
-								</form>
+										<!-- BURN DELETE Modal --> 
+										<div class="modal fade" id="burnModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+											<div class="modal-dialog modal-dialog-centered" role="document">
+												<div class="modal-content">
+													<div class="modal-header">
+													<h5 class="modal-title" id="exampleModalLongTitle">DELETE</h5>
+													<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+														<span aria-hidden="true">&times;</span>
+													</button>
+													</div>
+													<form action="/delete-grade-history" method="post" enctype="multipart/form-data">
+														<div class="modal-body">
+															<p><b>Are you sure you want to delete this burn grade?</b></p>
+														</div>
+														<input id="id" name="id" value="{{item.id}}" type="hidden">	
+														<div class="modal-footer">
+															<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+															<button type="submit" class="btn btn-success">Yes</button>
+														</div>
+													</form>
+												</div>
+											</div>
+										</div>								
+									<div>
+										{{item.dateprediction|truncate(10, True, '', 0)}}
+									</div>
+								</div>
 							</li>
 							{% endfor %}
 						{% endif %}
 					</ul>
 				</div>
-
+				
 				<!-- separator -->
 				<div class="separator-large"></div>
 				<!-- end separator -->
@@ -165,13 +217,33 @@
 								</div>
 								<div style="all:unset; width:1000px;">
 									<div class="list-label">
-										<form action="/delete-chatbot-history" method="post" enctype="multipart/form-data" style="width:1000px;">
 											<div class="list-title" style="display: inline-block;"><strong>Diagnosis: </strong>{{ item.symptoms }}</div>
 											<div class="list-after" style="display: inline-block;">
-												<button type="submit" class="fabutton"><i class="fa-solid fa-trash-can"></i></button>
+												<button type="button" data-toggle="modal" data-target="#chatModal" class="fabutton"><i class="fa-solid fa-trash-can"></i></button>
+											</div>									
+										<!-- CHAT DELETE Modal --> 
+										<div class="modal fade" id="chatModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+											<div class="modal-dialog modal-dialog-centered" role="document">
+												<div class="modal-content">
+													<div class="modal-header">
+													<h5 class="modal-title" id="exampleModalLongTitle">DELETE</h5>
+													<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+														<span aria-hidden="true">&times;</span>
+													</button>
+													</div>
+													<form action="/delete-chatbot-history" method="post" enctype="multipart/form-data">
+														<div class="modal-body">
+															<p><b>Are you sure you want to delete this chat?</b></p>
+														</div>
+														<input id="id" name="id" value="{{item.id}}" type="hidden">	
+														<div class="modal-footer">
+															<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+															<button type="submit" class="btn btn-success">Yes</button>
+														</div>
+													</form>
+												</div>
 											</div>
-											<input id="id" name="id" value="{{item.id}}" type="hidden">											
-										</form>
+										</div>				
 									</div>
 								</div>
 							</li>
@@ -199,17 +271,20 @@
 								<div class="list-media">
 									<i class="fa-solid fa-clipboard-check bg-yellow"></i>
 								</div>
-								<!-- <form action="" method="post" enctype="multipart/form-data" style="width:1000px;"> -->
-									<button style="all:unset; width:1000px;">
-										<div class="list-label">
-											<div class="list-title">{{ item.food_name }}</div>
-											<div class="list-after"><i class="icon ion-ios-arrow-forward"></i></div>
-											<div>
+								<div style="all:unset; width:1000px;">
+									<div class="list-label">
+										<form action="/delete-nutrition-history" method="post" enctype="multipart/form-data" style="width:1000px;">
+											<div class="list-title" style="display: inline-block;"><strong>Food: </strong>{{ item.food_name }}</div>
+											<div class="list-after" style="display: inline-block; margin-left: 10px;">
 												{{item.dateprediction|truncate(10, True, '', 0)}}
 											</div>
-										</div>
-									</button>
-								<!-- </form> -->
+											<div class="list-after" style="display: inline-block;">
+												<button type="submit" class="fabutton"><i class="fa-solid fa-trash-can"></i></button>
+											</div>
+											<input id="id" name="id" value="{{item.id}}" type="hidden">	
+										</form>
+									</div>
+								</div>
 							</li>
 							{% endfor %}
 						{% endif %}

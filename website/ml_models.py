@@ -228,3 +228,11 @@ class food:
         new_foodhistory = NutritionAnalyserHistory(username=passuser, food_name = food_name, imguploadpath = img_path, dateprediction = str(datetime.now()))
         db.session.add(new_foodhistory)
         db.session.commit()
+
+    def delete_history(id):
+        history_to_delete = NutritionAnalyserHistory.query.get_or_404(id)
+        try:
+            db.session.delete(history_to_delete)
+            db.session.commit()
+        except:
+            print("error")

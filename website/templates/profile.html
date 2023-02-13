@@ -271,17 +271,20 @@
 								<div class="list-media">
 									<i class="fa-solid fa-clipboard-check bg-yellow"></i>
 								</div>
-								<!-- <form action="" method="post" enctype="multipart/form-data" style="width:1000px;"> -->
-									<button style="all:unset; width:1000px;">
-										<div class="list-label">
-											<div class="list-title">{{ item.food_name }}</div>
-											<div class="list-after"><i class="icon ion-ios-arrow-forward"></i></div>
-											<div>
+								<div style="all:unset; width:1000px;">
+									<div class="list-label">
+										<form action="/delete-nutrition-history" method="post" enctype="multipart/form-data" style="width:1000px;">
+											<div class="list-title" style="display: inline-block;"><strong>Food: </strong>{{ item.food_name }}</div>
+											<div class="list-after" style="display: inline-block; margin-left: 10px;">
 												{{item.dateprediction|truncate(10, True, '', 0)}}
 											</div>
-										</div>
-									</button>
-								<!-- </form> -->
+											<div class="list-after" style="display: inline-block;">
+												<button type="submit" class="fabutton"><i class="fa-solid fa-trash-can"></i></button>
+											</div>
+											<input id="id" name="id" value="{{item.id}}" type="hidden">	
+										</form>
+									</div>
+								</div>
 							</li>
 							{% endfor %}
 						{% endif %}

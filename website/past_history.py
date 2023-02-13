@@ -1,7 +1,7 @@
 from flask import Blueprint, Flask, flash, render_template, request
 from flask_bcrypt import Bcrypt
 from flask_login import current_user, login_required
-from .ml_models import retrieve_all_history, chatbot, skin
+from .ml_models import retrieve_all_history, chatbot, skin, burn
 
 past_history = Blueprint("past_history", __name__)
 
@@ -52,6 +52,21 @@ def viewburngradehistory():
         itemdate = request.form.get("itemdate")
         print("Burn image path: ",itemimgpath)
     return render_template("history-burn-grade.html",  passgrade = burnGradePred, passimgpath = itemimgpath, passdate = itemdate)
+
+@past_history.route('/delete-grade-history', methods = ['GET', 'POST'])
+def delete_burn_history():
+    try:
+        if request.method == 'POST':
+            id = request.form.get("id")
+            burn.delete_history(id)
+            flash("Burn Grade History record deleted successfully!", category="info")
+            allskinconditionrows, allburngraderows, allchatbotdiagnosisrows, allnutritionanalyserrows = retrieve_all_history(current_user.username)
+        return render_template("profile.html", SChistory = allskinconditionrows, NAhistory = allnutritionanalyserrows, BGhistory = allburngraderows, CDhistory = allchatbotdiagnosisrows)
+    except Exception as e:
+        print("error", e)
+        flash("Whoops! There was a problem deleting the Burn Grade history record. Please try again.", category="info")
+        allskinconditionrows, allburngraderows, allchatbotdiagnosisrows, allnutritionanalyserrows = retrieve_all_history(current_user.username)
+        return render_template("profile.html", SChistory = allskinconditionrows, NAhistory = allnutritionanalyserrows, BGhistory = allburngraderows, CDhistory = allchatbotdiagnosisrows)
 
 @past_history.route('/delete-chatbot-history', methods = ['GET', 'POST'])
 def delete_chatbot_history():

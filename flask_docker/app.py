@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 
-from transformers import AutoModelForTokenClassification, AutoTokenizer, pipeline
+from transformers import TFAutoModelForTokenClassification, AutoTokenizer, pipeline
 from keras.applications.imagenet_utils import preprocess_input
 from keras.models import load_model
 import keras.utils as image
@@ -95,12 +95,13 @@ class chatbot:
         id2label = { i: label for i, label in enumerate(label_names) }
         label2id = {v: k for k, v in id2label.items()}
 
-        model = AutoModelForTokenClassification.from_pretrained(
+        model = TFAutoModelForTokenClassification.from_pretrained(
             "chatbot",
             num_labels=23,
             id2label=id2label,
             label2id=label2id,
-            ignore_mismatched_sizes=True
+            ignore_mismatched_sizes=True,
+            from_pt=True
         )
         tokenizer = AutoTokenizer.from_pretrained("samrawal/bert-base-uncased_clinical-ner")
 

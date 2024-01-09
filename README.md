@@ -1,5 +1,6 @@
 # gebongka health
 created by deborah, erika, lin feng and gerald!
+
 link to hosted website: https://gebongka.onrender.com/ (no longer in use :))
 
 ## Overview
@@ -10,27 +11,30 @@ The Singapore healthcare system faces challenges such as a lack of hospital beds
 
 ## Features
 1. Identification
-  - Description: Helps users identify skin conditions using phone cameras.
-  - AI Elements: Computer Vision, Image Classification.
-  - Datasets: Database of images of various skin diseases/conditions from Kaggle.
+    - Description: Helps users identify skin conditions using phone cameras.
+    - AI Elements: Computer Vision, Image Classification.
+    - Datasets: Database of images of various skin diseases/conditions from Kaggle.
 2. Chatbot Diagnosis
-  - Description: Interactive chatbot for users to consult regarding health issues.
-  - AI Elements: Natural Language Processing (NLP), Deep Learning (Intent Classification, Entity Recognition).
-  - Datasets: Databases of conversational data, symptoms, causes & diagnosis from Kaggle.
+    - Description: Interactive chatbot for users to consult regarding health issues.
+    - AI Elements: Natural Language Processing (NLP), Deep Learning (Intent Classification, Entity Recognition).
+    - Datasets: Databases of conversational data, symptoms, causes & diagnosis from Kaggle.
 3. Grading
-  - Description: Helps identify and grade the degree of burn injuries using phone cameras.
-  - AI Elements: Deep Learning, Convolutional Neural Network (CNN), Image Classification.
-  - Datasets: Skin burn images from Kaggle.
+    - Description: Helps identify and grade the degree of burn injuries using phone cameras.
+    - AI Elements: Deep Learning, Convolutional Neural Network (CNN), Image Classification.
+    - Datasets: Skin burn images from Kaggle.
 4. Nutrition Analyser
-  - Description: Helps users identify food using phone cameras and provides nutrition information.
-  - AI Elements: Computer Vision, Object Detection, Image Classification, Convolutional Neural Network (CNN).
-  - Datasets: Database of images of food and nutrition information.
+    - Description: Helps users identify food using phone cameras and provides nutrition information.
+    - AI Elements: Computer Vision, Object Detection, Image Classification, Convolutional Neural Network (CNN).
+    - Datasets: Database of images of food and nutrition information.
     
 ## How Gebongka Helps
 Reduces waiting time for hospitalization.
+
 Ensures smoother hospitalization by prioritizing emergencies.
+
 Alleviates hospital load by enabling the utilization of resources for more urgent cases.
 
 ## Acknowledgements
 The Gebongka Health team: Deborah, Erika, Gerald, Lin Feng.
+
 Kaggle for providing valuable datasets.

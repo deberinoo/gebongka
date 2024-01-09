@@ -25,7 +25,7 @@ The Singapore healthcare system faces challenges such as a lack of hospital beds
   - Description: Helps users identify food using phone cameras and provides nutrition information.
   - AI Elements: Computer Vision, Object Detection, Image Classification, Convolutional Neural Network (CNN).
   - Datasets: Database of images of food and nutrition information.
-  - 
+    
 ## How Gebongka Helps
 Reduces waiting time for hospitalization.
 Ensures smoother hospitalization by prioritizing emergencies.
